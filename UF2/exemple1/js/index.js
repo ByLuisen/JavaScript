@@ -2,22 +2,22 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     //cookies navegador
-    //crear una cookie de nom user y de contingut Marga1989
+    //crear una cookie de nom cookie y de contingut Marga1989
     //el temps de vida si és per max-age es calcula en segons
 
-    // document.cookie="user=Marga1989; max-age=86400";//temps en GMT
+    // document.cookie="cookie=Marga1989; max-age=86400";//temps en GMT
     //expires: anem a crear la data
     // const d = new Date();//el dia d'avui en milisegons
     // d.setTime(d.getTime() + (3 * 24 * 60 * 60 * 1000));//afegim 3 dies
     // console.log(d.toUTCString())
-    // document.cookie = "user=Marga1989; expires=" + d.toUTCString()
+    // document.cookie = "cookie=Marga1989; expires=" + d.toUTCString()
 
     //expires pero ficant la data directament
 
-    document.cookie = "user=Marga1989; expires=Thu, 18 Dec 2023 12:00:00 UTC";
+    document.cookie = "cookie=Marga1989; expires=Thu, 18 Dec 2023 12:00:00 UTC";
 
-    //esborrem la cookie user
-    // document.cookie = "user=; expires=Thu, 18 Dec 1970 12:00:00 UTC";
+    //esborrem la cookie cookie
+    // document.cookie = "cookie=; expires=Thu, 18 Dec 1970 12:00:00 UTC";
 
     //crear 3 cookies amb temps de vida el que duri la sessió 
     document.cookie = "color = green";
@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(document.cookie)//imprimeixo totes les cookies
 
     //manipular la cookie lletra, com ho faig
-
     //1.- la tornes a crear
     document.cookie = "lletra = normal; max-age = 3600"
 
@@ -39,32 +38,41 @@ document.addEventListener("DOMContentLoaded", function () {
     checkCookie("comptador")
 });
 
-//funció agafada de w2schools
-//em retorna el valor concret de una cookie
-function getCookie(cname) {
-    let name = cname + "="
-    let decodedCookie = decodeURIComponent(document.cookie)
-    let ca = decodedCookie.split(";")
-    for(let i = 0; i < ca.length; i++) {
-        let c = ca[i]
-        while (c.charAt(0) == " "){
-            c = c.substring(1)
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length)
+//Función para comprobar una cookie 
+function checkCookie(cookieName) {
+    let cookie = getCookie(cookieName);
+    if (cookie != "" || isNaN(cookie)) {
+        let num = parseInt(cookie)
+        num++
+        setCookie(cookieName, num.toString(), 365)
+    } else {
+        cookie = prompt("Please enter the name of cookie:", "");
+        if (cookie != "" && cookie != null) {
+            setCookie(cookie, 1, 365);
         }
     }
-    return ""
 }
 
-//mira si tenim una cookie, funció agafada de w3schools tunejada
-function checkCookie(cname) {
-    let valorCookie = getCookie(cname)
-    if (valorCookie == "") {// no existeix
-        document.cookie = "comptador = 1"
-    } else {
-        valorCookie++
-        document.cookie = "comptador" + valorCookie
+//Función para configurar una cookie
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+//Función para obtener una cookie
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
-// document.getElementById("total").innerHTML = getCookie("comptador")
+    return "";
 }
