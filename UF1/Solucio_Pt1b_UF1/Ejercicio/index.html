@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRUEBA 1</title>
+    <link rel="stylesheet" href="./vendor/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>#1 CRONOMETRO</h1>
+        <p id="crono">0:00</p>
+        <button id="btnIniciar" class="btn border">Iniciar</button>
+        <button id="btnParar" class="btn border">Parar</button>
+        <p id="fecha"></p>
+    </div>
+
+    <div class="container">
+        <h1>#2 CONSTRUCCION DE ARRAY</h1>
+        <input type="text" id="introducirValores">
+        <br>
+        <span class="text-danger" id="error"></span>
+        <br>
+        <select id="opciones">
+            <option value="inicio"> Agregar al Inicio</option>
+            <option value="final"> Agregar al Final</option>
+        </select>
+        <p id="valoresArray"></p>
+    </div>
+
+    <div class="container">
+        <h1>#3 FORMULARIO CALCULO EDAD</h1>
+        Nom:<input id="nombre" type="text" class="form-control" minlength="3" maxlength="20">
+        Fecha Nacimiento:<input id="nacimiento" type="date" class="form-control">
+
+        <br>
+        <button id="btnEdad" class="btn border">Calcular Edad</button>
+        <p class="text-danger" id="errorNom"></p>
+        <p class="text-danger" id="errorFec"></p>
+        <p id="años"></p>
+    </div>
+
+    <div class="container">
+        <h1>#4 TEXTAREA CATALA</h1>
+        <textarea id="texto" rows="2" cols="50"></textarea>
+        <p>vocales: <span id="contadorVocales">0</span></p>
+        <p>Longitud texto: <span id="longitudTexto">0</span> caracteres</p>
+        <p>Palabras: <span id="contadorPalabras">0</span></p>
+    </div>
+
+
+
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

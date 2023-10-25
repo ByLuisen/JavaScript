@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- links to Bootstrap -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script> -->
+
+  <!-- Bootstrap local links -->
+  <link rel="stylesheet" href="./vendor/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+  <script type="text/javascript" src="./vendor/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- files CSS -->
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <title>Vueling</title>
+</head>
+
+<body style="background-color: #181A1B;">
+  <!----------------------------------------------------- Navbar ----------------------------------------------------->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-5" style="background-color: #4d4d4d">
+      <div class="container">
+        <a class="navbar-brand me-5" href="index.html"><img src="img/logo.png" alt="vuelingLogo" width="100px"
+            height="33px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="navbar-brand" href="loginRegister.html"><img src="img/usuario.png" alt="vuelingLogo"
+                  width="41px"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" id="vuelos" href="index.html">VUELOS</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!---------------------------------------- BUSCADOR DE VUELOS ------------------------------------------>
+  <section id="buscador">
+    <div class="container-xxl">
+      <div class="row mb-5">
+        <div class="col-xxl-2">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipoVuelo" id="radioIdaVuelta" checked>
+            <label class="form-check-label text-white" for="radioIdaVuelta">
+              Ida y vuelta
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="tipoVuelo" id="radioIda">
+            <label class="form-check-label text-white" for="radioIda">
+              Solo ida
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-2 col-xxl-2">
+          <div class="d-flex justify-content-center align-items-center rounded-top"
+            style="height: 50px; background-color: #FFCC00;">
+            <img class="me-2" src="img/avion.png" alt="avionIcono" width="20px">
+            <span>VUELOS</span>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-5">
+        <div>
+          <div class="form-search rounded-bottom rounded-end p-2" style="background-color: #FFCC00;">
+            <div class="d-flex flex-wrap align-items-center">
+              <div class="d-flex py-1 col-12 col-sm-12 col-md-9 col-lg-5 col-xxl-5">
+                <div class="form-floating w-100">
+                  <select id="aeropuertoOrigen" class="form-select rounded-0" aria-label="Large select example"
+                    role="button">
+                    <option value="0" hidden>Ciudad, país o aeropuerto</option>
+                  </select>
+                  <label for="aeropuertoOrigen">Origen</label>
+                </div>
+                <div class="form-floating w-100">
+                  <select id="aeropuertoDestino" class="form-select rounded-0 " aria-label="Large select example"
+                    role="button">
+                    <option value="0" hidden>Ciudad, país o aeropuerto</option>
+                  </select>
+                  <label for="aeropuertoDestino">Destino</label>
+                </div>
+              </div>
+
+              <div class="d-flex py-1 col-12 col-sm-12 col-md-5 col-lg-3 col-xxl-3">
+                <div class="form-floating w-100">
+                  <input id="ida" class="form-control rounded-0" type="date" readonly />
+                  <label for="ida">Ida</label>
+                </div>
+                <div class="form-floating w-100" style="background-color: #FFFFFF;">
+                  <input id="vuelta" class="form-control rounded-0" type="date" readonly />
+                  <label for="vuelta">Vuelta</label>
+                </div>
+              </div>
+
+              <div class="form-floating col-12 col-sm-12 col-md-4 col-lg-2 col-xxl-2 py-1">
+                <input id="pasajeros" class="form-control rounded-0" type="text" value="1 Pasajero" role="button"
+                  readonly />
+                <label class="recuentoPasajeros" for="pasajeros">1 Adulto, 0 Niños, 0 Bebés</label>
+                <div id="pasajeros-popup" class=" position-absolute bg-white border py-2 d-none"
+                  style="width: 284px ;margin-top: 12px;">
+                  <ul class="list-group list-group-flush px-2">
+                    <li class="list-group-item p-2">
+                      <div class="d-flex">
+                        <div style="flex: 1;">
+                          <p class="fw-bold mb-1">Adultos</p>
+                          <p class="text-secondary w-75" style="font-size: 13px ;line-height: 1.2;">A partir de 16 años
+                            cuando vueles</p>
+                        </div>
+                        <div>
+                          <div class="d-flex">
+                            <img src="img/restar.png" alt="restar" height="34px" role="button" id="restarAdulto">
+                            <h2 class="text-secondary mx-2 lh-1 text-center" style="width: 20px;" id="totalAdulto">1
+                            </h2>
+                            <img src="img/anadir.png" alt="añadir" height="34px" role="button" id="anadirAdulto">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item p-2">
+                      <div class="d-flex">
+                        <div style="flex: 1;">
+                          <p class="fw-bold mb-1">Niños</p>
+                          <p class="text-secondary w-75" style="font-size: 13px ;line-height: 1.2;">2 - 15 años cuando
+                            vueles</p>
+                        </div>
+                        <div>
+                          <div class="d-flex">
+                            <img src="img/restar.png" alt="restar" height="34px" role="button" id="restarNino">
+                            <h2 class="text-secondary mx-2 lh-1 text-center" style="width: 20px;" id="totalNino">0</h2>
+                            <img src="img/anadir.png" alt="añadir" height="34px" role="button" id="anadirNino">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-group-item p-2">
+                      <div class="d-flex">
+                        <div style="flex: 1;">
+                          <p class="fw-bold mb-1">Bebés</p>
+                          <p class="text-secondary w-75" style="font-size: 13px ;line-height: 1.2;">7 días - 23 meses
+                            cuando vueles</p>
+                        </div>
+                        <div>
+                          <div class="d-flex">
+                            <img src="img/restar.png" alt="restar" height="34px" role="button" id="restarBebe">
+                            <h2 class="text-secondary mx-2 lh-1 text-center" style="width: 20px;" id="totalBebe">0</h2>
+                            <img src="img/anadir.png" alt="añadir" height="34px" role="button" id="anadirBebe">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-3 col-lg-2 col-xxl-2 p-2">
+                <button id="buscarVuelo"
+                  class="d-flex align-items-center justify-content-center text-white btn fs-5 rounded-pill w-100"
+                  style="min-height: 50px; background-color: #4D4D4D;">
+                  <span style="flex: 1;">Buscar</span>
+                  <div>
+                    <img src="img/flecha.png" alt="flecha" width="15">
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!---------------------------------------- RESUMEN DEL VUELO ------------------------------------------>
+
+  <div class="container-lg">
+    <div class="row justify-content-center">
+      <div class="col-12 col-xl-11 col-xxl-12">
+        <div id="resumenVuelo" class="bg-white m-5">
+          <div class="mb-3" style="background-color: #F7F7F7;">
+            <div class="p-2">
+              <p id="origenDestinoVuelo" class="m-0 fw-bolder"></p>
+              <p id="infoVuelo" class="m-0"></p>
+            </div>
+          </div>
+          <div class="p-2">
+            <div class="d-flex align-items-end justify-content-center mb-4">
+              <img src="img/ida.png" alt="ida" height="25px">
+              <p class="ms-2 me-3">Ida</p>
+              <h4 id="origen-destino" class="text-secondary"></h4>
+            </div>
+
+            <section id="vuelosIda">
+            </section>
+
+            <section id="vuelosVuelta">
+              <div class="d-flex align-items-end justify-content-center mb-4">
+                <img src="img/vuelta.png" alt="vuelta" height="25px">
+                <p class="ms-2 me-3">Vuelta</p>
+                <h4 id="destino-origen" class="text-secondary"></h4>
+              </div>
+            </section>
+          </div>
+
+          <div class="mb-4">
+            <div class="row text-muted text-center mb-4">
+              <h4 class="fw-normal">¿Cómo quieres vaijar?</h4>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-xxl-3">
+                <div class="border rounded">
+                  <div class="px-4 py-2 text-white rounded-top" style="background-color: #732F96;">
+                    <h4>TimeFlex</h4>
+                    <p>Por si tus planes cambian</p>
+                  </div>
+                  <div class="p-3">
+                    <ul style="list-style: none;">
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>1 pieza de equipaje de mano bajo el asiento</p>
+                          <small class="text-muted">Máx. 40X20X30cm</small>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>1 pieza de equipaje de mano bajo el asiento</p>
+                          <small class="text-muted">Máx. 40X20X30cm</small>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Elección de asiento</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Embarque prioritario</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Cambios de vuelo</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Mostradores exclusivos de facturación</p>
+                          <small class="text-muted">(En aeropuertos principales)</small>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Carril rápido en filtro de seguridad</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>1Cancelación gratuita</p>
+                          <small class="text-muted">(Crédito de vuelo)</small>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div style="background-color: #F3F3F3;">
+                    <input type="radio">
+                  </div>
+                </div>
+                <small>Los precios de las tarifas son por pasajero</small>
+              </div>
+
+              <div class="col-xxl-3">
+                <div class="border rounded">
+                  <div class="px-4 py-2 rounded-top" style="background-color: #FFCC00;">
+                    <h4>Optima</h4>
+                    <p>Tu viaje más cómodo</p>
+                  </div>
+
+                  <div class="p-3">
+                    <ul style="list-style: none;">
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>1 pieza de equipaje de mano bajo el asiento</p>
+                          <small class="text-muted">Máx. 40X20X30cm</small>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>1 pieza de equipaje de mano bajo el asiento</p>
+                          <small class="text-muted">Máx. 40X20X30cm</small>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Elección de asiento</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Embarque prioritario</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Cambios de vuelo</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Mostradores exclusivos de facturación</p>
+                          <small class="text-muted">(En aeropuertos principales)</small>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Carril rápido en filtro de seguridad</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>1Cancelación gratuita</p>
+                          <small class="text-muted">(Crédito de vuelo)</small>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div style="background-color: #F3F3F3;">
+                    <input type="radio">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xxl-3">
+                <div class="border rounded">
+                  <div class="px-4 py-2 rounded-top" style="background-color: #732F96;">
+                    <h4>TimeFlex</h4>
+                    <p>Por si tus planes cambian</p>
+                  </div>
+                  <div class="p-3">
+                    <ul style="list-style: none;">
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>1 pieza de equipaje de mano bajo el asiento</p>
+                          <small class="text-muted">Máx. 40X20X30cm</small>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>1 pieza de equipaje de mano bajo el asiento</p>
+                          <small class="text-muted">Máx. 40X20X30cm</small>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Elección de asiento</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Embarque prioritario</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Cambios de vuelo</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Mostradores exclusivos de facturación</p>
+                          <small class="text-muted">(En aeropuertos principales)</small>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>Carril rápido en filtro de seguridad</p>
+                        </div>
+                      </li>
+                      <li class="d-flex py-2">
+                        <div>
+                          <img src="img/anadir.png" alt="" width="25px">
+                        </div>
+                        <div class="ps-3">
+                          <p>1Cancelación gratuita</p>
+                          <small class="text-muted">(Crédito de vuelo)</small>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div style="background-color: #F3F3F3;">
+                    <input type="radio">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="p-2 d-flex align-items-center" style="background-color: #4D4D4D;">
+            <div class="col-3 col-xxl-3 p-2">
+              <button id="cancelarBillete"
+                class="d-flex align-items-center justify-content-center btn fs-5 rounded-pill w-100"
+                style="min-height: 50px; background-color: #FFCC00;">
+                <div>
+                  <img src="img/flechaIzquierdaN.png" alt="flecha" width="15">
+                </div>
+                <span style="flex: 1;">Cancelar</span>
+              </button>
+            </div>
+            <div class="col-6 col-xxl-6 text-end">
+              <div class="d-flex text-white justify-content-end align-items-start">
+                <div class="mx-2">
+                  <p id="precioIda" class="fw-bold m-0"></p>
+                  <p id="calcularIda" class="m-0"></p>
+                </div>
+                <div class="mx-2">
+                  <p id="precioVuelta" class="fw-bold m-0"></p>
+                  <p id="calcularVuelta" class="m-0"></p>
+                </div>
+                <div>
+                  <span class="text-warning">PRECIO FINAL</span>
+                  <div class="d-flex text-white">
+                    <h3 id="euros" class="fw-bold m-0"></h3>
+                    <p id="centimos" class="fw-bold m-0"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-3 col-xxl-3 p-2">
+              <button id="aceptarBillete"
+                class="d-flex align-items-center justify-content-center btn fs-5 rounded-pill w-100"
+                style="min-height: 50px; background-color: #FFCC00;">
+                <span style="flex: 1;">Continuar</span>
+                <div>
+                  <img src="img/flechaDerechaN.png" alt="flecha" width="15">
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="printingVuelo" class="text-white text-center">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- File JS -->
+  <script type="module" src="./js/index.js"></script>
+</body>
+
+</html>

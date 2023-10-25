@@ -1,0 +1,24 @@
+body * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#indicador{
+	width: 130px;
+	background: #FFCC00;
+	height: 4px;
+	transform: translate(165px);
+	transition: transform 1s;
+}
+
+/* #form-container{
+    border: 1px solid #eb67a3;
+	width: 370px;
+	height: 500px;
+	text-align: center;
+	padding: 20px 0;
+	margin: auto;
+	box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
+} */
+
