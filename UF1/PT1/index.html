@@ -5,64 +5,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PT1</title>
-    <!--Css style-->
-    <link rel="stylesheet" href="./css/estilo.css">
-
-
-    <!--Bootstrap-->
-    <link rel="stylesheet" href="./vendor/bootstrap-5.3.2-dist/css/bootstrap.min.css">
-    <script type="text/javascript" src="./vendor/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
-
+    <title>PRUEBA 1</title>
+    <link rel="stylesheet" href="./vendor/bootstrap-5.0.2-dist/css/bootstrap.min.css">
 </head>
 
 <body>
-    <div>
-        <!--Ejercicio1-->
-        <h1>Ejercicio 1</h1>
-        <div id="crono"></div>
-        <button class="btn btn-dark" id="btnIniciar">Inciar</button>
-        <button class="btn btn-warning" id="btnParar">Parar</button>
-        <div id="fecha"></div>
+    <div class="container">
+        <h1>#1 CRONOMETRO</h1>
+        <p id="crono">0:00</p>
+        <button id="btnIniciar" class="btn border">Iniciar</button>
+        <button id="btnParar" class="btn border">Parar</button>
+        <p id="fecha"></p>
     </div>
 
-    <div>
-        <!--Ejercicio2-->
-        <h1>Ejercicio2</h1>
-        <input id="anyadirValor">
+    <div class="container">
+        <h1>#2 CONSTRUCCION DE ARRAY</h1>
+        <input type="text" id="introducirValores">
+        <br>
+        <span class="text-danger" id="error"></span>
+        <br>
         <select id="opciones">
-            <option value="opcion1">Afegir a l'inici</option>
-            <option value="opcion2">Afegir al final</option>
+            <option value="inicio"> Agregar al Inicio</option>
+            <option value="final"> Agregar al Final</option>
         </select>
-        <div id="mostrarArray"></div>
+        <p id="valoresArray"></p>
     </div>
 
-    <div>
-        <!--Ejercicio3-->
-        <h1>Ejercicio3</h1>
-        <label for="text">Nombre</label>
-        <input type="text" id="nombre">
+    <div class="container">
+        <h1>#3 FORMULARIO CALCULO EDAD</h1>
+        Nom:<input id="nombre" type="text" class="form-control" minlength="3" maxlength="20">
+        Fecha Nacimiento:<input id="nacimiento" type="date" class="form-control">
 
-        <label for="fecha">Fecha de Nacimiento:</label>
-        <input type="date" id="fecha">
+        <br>
+        <button id="btnEdad" class="btn border">Calcular Edad</button>
+        <p class="text-danger" id="errorNom"></p>
+        <p class="text-danger" id="errorFec"></p>
+        <p id="años"></p>
+    </div>
 
-        <button id="btnEdad">Calcular Edad</button>
-        <span id="edad"></span>
+    <div class="container">
+        <h1>#4 TEXTAREA CATALA</h1>
+        <textarea id="texto" rows="2" cols="50"></textarea>
+        <p>vocales: <span id="contadorVocales">0</span></p>
+        <p>Longitud texto: <span id="longitudTexto">0</span> caracteres</p>
+        <p>Palabras: <span id="contadorPalabras">0</span></p>
     </div>
 
 
-    <div>
-        <!--Ejercicio4-->
-        <h1>Ejercicio4</h1>
-        <textarea id="area"></textarea>
-        <p class="m-0">vocales:</p>
-        <p id="vocales"></p>
-        <p class="m-0">caracteres totales: </p>
-        <p id="caracteres totales"></p>
-        <p class="m-0">paraules:</p>
-        <p id="paraules"></p>
-    </div>
-    <!--files JS-->
+
     <script src="./js/index.js"></script>
 </body>
 
