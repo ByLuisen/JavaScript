@@ -1,24 +1,39 @@
 body * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-#indicador{
-	width: 130px;
+#indicador {
+	width: 230px;
 	background: #FFCC00;
+	opacity: 100%;
 	height: 4px;
-	transform: translate(165px);
-	transition: transform 1s;
+	margin-top: 4px;
+	transition: transform 0.7s;
 }
 
-/* #form-container{
-    border: 1px solid #eb67a3;
-	width: 370px;
-	height: 500px;
-	text-align: center;
+#form-container {
+	width: 470px;
+	height: 900px;
+	position: relative;
 	padding: 20px 0;
 	margin: auto;
-	box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
-} */
+	overflow: hidden;
+}
 
+#signin,
+#signup {
+	max-width: 500px;
+	position: absolute;
+	top: 80px;
+	transition: transform 0.7s;
+}
+
+#signin {
+	left: 0;
+}
+
+#signup {
+	left: 500px;
+}

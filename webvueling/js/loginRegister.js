@@ -1,22 +1,7 @@
 import * as auth from './auth.js';
 
-
-let loginForm = document.getElementById("signin");
-var registerForm = document.getElementById("signup");
-var indicador = document.getElementById("indicador");
-
-document.getElementById('login').addEventListener('click', login)
-function register() {
-    registerForm.style.transform = "translateX(0px)";
-    loginForm.style.transform = "translateX(0px)";
-    indicador.style.transform = "translateX(165px)";
-}
-
-function login() {
-    registerForm.style.transform = "translateX(370px)";
-    loginForm.style.transform = "translateX(370px)";
-    indicador.style.transform = "translateX(10px)";
-}
+document.getElementById('login').addEventListener('click', auth.login)
+document.getElementById('register').addEventListener('click', auth.register)
 
 //-------------------------------------EVENTOS PAGINA DE LOGIN -----------------------------------------
 

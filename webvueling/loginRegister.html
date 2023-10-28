@@ -52,31 +52,31 @@
 
     <!---------------------------------------- Formulario de inicio de sesión ------------------------------------------>
     <div class="container">
-        <div id="form-container" class="row col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 mb-5">
+        <div id="form-container" class="row col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 p-0">
             <div style="color: #FFCC00;">
-                <div class="d-flex">
-                    <h2 id="login">Iniciar Sesión</h2>
-                    <h2 id="register" class="ms-4">Registrarse</h2>
+                <div class="d-flex text-center justify-content-between px-3">
+                    <h2 id="login" style="width: 192px;">Iniciar Sesión</h2>
+                    <h2 id="register" style="width: 192px;">Registrarse</h2>
                 </div>
                 <hr id="indicador">
             </div>
-            
+
             <div id="signin">
                 <div class="form-signin m-auto rounded-3 mb-5" style="background-color: #3A3A3A;">
 
                     <div class="p-5">
-                        <div class="form-floating mb-3">
+                        <div class="form-floating">
                             <input type="text" class="form-control border-2" id="loginEmail" autocomplete="email"
                                 placeholder="name@example.com">
                             <label for="loginEmail" class="text-secondary">Email</label>
-                            <p style="color:red; margin:0" id="errorLoginEmail"> </p>
+                            <p style="color:red; margin:0; height: 23px;" id="errorLoginEmail"> </p>
                         </div>
 
-                        <div class="form-floating mb-3">
+                        <div class="form-floating">
                             <input type="password" class="form-control border-2" id="loginPassword"
                                 autocomplete="current-password" placeholder="Password">
                             <label for="loginPassword" class="text-secondary">Contraseña</label>
-                            <p style="color:red; margin:0" id="errorLoginPassword"> </p>
+                            <p style="color:red; margin:0; height: 23px;" id="errorLoginPassword"> </p>
                         </div>
 
                         <div class="form-check text-start mb-4">
@@ -100,47 +100,47 @@
                 <div class="form-signup rounded-3" style="background-color: #3A3A3A;">
 
                     <div class="p-5">
-                        <div class="form-floating mb-3">
+                        <div class="form-floating">
                             <input type="text" class="form-control border-2" id="signUpName" autocomplete="given-name"
                                 placeholder="Name Example">
                             <label for="signUpName" class="text-secondary">Nombre</label>
-                            <p style="color:red; margin:0" id="errorName"></p>
+                            <p style="color:red; margin:0; height: 23px;" id="errorName"></p>
                         </div>
-                        
-                        <div class="form-floating mb-3">
+
+                        <div class="form-floating">
                             <input type="text" class="form-control border-2" id="signUpLastN" autocomplete="family-name"
                                 placeholder="Last Example">
                             <label for="signUpLastN" class="text-secondary">Apellidos</label>
-                            <p style="color:red; margin:0" id="errorApellidos"></p>
+                            <p style="color:red; margin:0; height: 23px;" id="errorApellidos"></p>
                         </div>
 
-                        <div class="form-floating mb-3">
+                        <div class="form-floating">
                             <input type="text" class="form-control border-2" id="signUpEmail" autocomplete="email"
                                 placeholder="name@example.com">
                             <label for="signUpEmail" class="text-secondary">Email</label>
-                            <p style="color:red; margin:0" id="errorEmail"></p>
+                            <p style="color:red; margin:0; height: 23px;" id="errorEmail"></p>
                         </div>
 
                         <div class="form-floating">
                             <input type="password" class="form-control border-2" id="signUpPassword"
                                 placeholder="Password">
                             <label for="signUpPassword" class="text-secondary">Contraseña</label>
-                            <p style="color:red; margin:0" class="m-0" id="errorPass"></p>
+                            <p style="color:red; margin:0;" class="m-0" id="errorPass"></p>
                             <p style="color: #bdbdbd; margin: 0">(Mínimo 5 caracteres)</p>
                         </div>
 
-                        <div class="form-floating mb-3">
+                        <div class="form-floating">
                             <input type="password" class="form-control border-2" id="signUpRPassword"
                                 placeholder="Repeated password">
                             <label for="signUpRepeatedPassword" class="text-secondary">Repetir contraseña</label>
-                            <p style="color:red; margin:0" id="errorRPass"></p>
+                            <p style="color:red; margin:0; height: 23px;" id="errorRPass"></p>
                         </div>
 
-                        <div class="form-floating mb-3">
+                        <div class="form-floating">
                             <input type="text" class="form-control border-2" id="signUpDNI" maxlength="9"
                                 placeholder="DNI">
                             <label for="signUpDNI" class="text-secondary">DNI</label>
-                            <p style="color:red; margin:0" id="errorDNI"></p>
+                            <p style="color:red; margin:0; height: 23px;" id="errorDNI"></p>
                         </div>
 
                         <div class="form-check text-start my-3">

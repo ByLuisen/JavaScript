@@ -1,6 +1,24 @@
 export let usuaris = ["usu01", "usu02", "usu03"]
 export let contrasenyes = ["pass01", "pass02", "pass03"]
 
+//-------------------------------------- ANIMCACIONES -----------------------------------------
+
+let loginForm = document.getElementById("signin");
+var registerForm = document.getElementById("signup");
+var indicador = document.getElementById("indicador");
+
+export function login() {
+    registerForm.style.transform = "translateX(0px)";
+    loginForm.style.transform = "translateX(0px)";
+    indicador.style.transform = "translateX(0px)";
+}
+
+export function register() {
+    registerForm.style.transform = "translateX(-500px)";
+    loginForm.style.transform = "translateX(-500px)";
+    indicador.style.transform = "translateX(218px)";
+}
+
 //--------------------------------------FUNCIONES LOGIN-----------------------------------------
 export function validarUsuario(email, pass) {
     if (usuaris.includes(email)) {
