@@ -1,7 +1,7 @@
 export let usuaris = ["usu01", "usu02", "usu03"]
 export let contrasenyes = ["pass01", "pass02", "pass03"]
 
-//-------------------------------------- ANIMCACIONES -----------------------------------------
+//-------------------------------------- ANIMACIONES -----------------------------------------
 
 let loginForm = document.getElementById("signin");
 var registerForm = document.getElementById("signup");
@@ -86,6 +86,7 @@ export function validarNombre() {
         document.getElementById("signUpName").style.borderColor = "red"
         flag = false;
     } else {
+        document.getElementById("signUpName").value = nombre.trim()
         document.getElementById("errorName").innerHTML = ""
         document.getElementById("signUpName").style.borderColor = "grey"
         flag = true
@@ -106,6 +107,7 @@ export function validarApellidos() {
         document.getElementById("signUpLastN").style.borderColor = "red"
         flag = false;
     } else {
+        document.getElementById("signUpLastN").value = apellidos.trim()
         document.getElementById("errorApellidos").innerHTML = ""
         document.getElementById("signUpLastN").style.borderColor = "grey"
         flag = true

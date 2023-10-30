@@ -1,3 +1,8 @@
+/**
+   * @file Manages the configuration settings for the widget.
+   * @author Luis Enrique
+*/
+
 export let aeropuertos = ['Barcelona España BCN', 'Agadir Marruecos AGA', 'Alicante España ALC',
     'Almería España LEI', 'Amán Jordania AMM', 'Ámsterdam Países Bajos AMS']
 export let selectOrigen = document.getElementById("aeropuertoOrigen")
@@ -5,46 +10,55 @@ export let selectDestino = document.getElementById("aeropuertoDestino")
 export let horasIda = ["10:30", "14:00"]
 export let horasVuelta = ["20:00", "22:20"]
 
+/**
+   * Determina el volumen de un cilindro con la altura y radio especificado
+   * @param {number} radio -  El radio de los círculos laterales del cilindro
+   * @param {number} altura - La altura del cilindro
+   * @return {number}
+*/
 export function generarPlantillaVuelos() {
-    plantillaVuelos(horasIda, 'vuelosIda')
-    plantillaVuelos(horasVuelta, 'vuelosVuelta')
+    plantillaVuelos(horasIda, 'vuelosIda', 'Ida')
+    plantillaVuelos(horasVuelta, 'vuelosVuelta', 'Vuelta')
 }
 
-export function plantillaVuelos(arrayHoras, contenedorId) {
+export function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
     let contenedor = document.getElementById(contenedorId);
 
     for (let hora of arrayHoras) {
         let nuevaDiv = document.createElement('div');
         nuevaDiv.className = 'col-12 mb-3 d-flex p-4 align-items-center border border-success rounded';
         nuevaDiv.style.backgroundColor = '#F7F7F7';
+        let precioAleatorio = (Math.random() * 151).toFixed(2)
+        let euros = precioAleatorio.split('.')[0]
+        let centimos = precioAleatorio.split('.')[1]
 
         nuevaDiv.innerHTML = `
     <div class="col-2 col-xxl-1 d-flex">
-        <img src="img/vuelta.png" alt="ida" height="25px">
-        <p class="ms-2 m-0">Vuelta</p>
+        <img src="img/${tipoVuelo}.png" alt="${tipoVuelo}" height="25px">
+        <p class="ms-2 m-0">${tipoVuelo}</p>
     </div>
     <div class="col-2 text-center">
-        <p class="fechaVuelta m-0 fw-bold text-secondary"></p>
+        <p class="fecha${tipoVuelo} m-0 fw-bold text-secondary"></p>
     </div>
     <div class="col-5 col-xxl-6 d-flex justify-content-between">
         <div class="col-xxl-2"></div>
         <div class="d-flex">
-            <p class="m-0 fw-bold">${hora}</p>
+            <p class="m-0 fw-bold me-2">${hora}</p>
             <p class="destino m-0"></p>
         </div>
-        <div class="d-flex me-4">
-            <p class="origen m-0"></p>
+        <div class="d-flex">
+            <p class="origen m-0 me-2"></p>
             <p class="m-0 fw-bold">${hora}</p>
         </div>
         <div class="col-xxl-2"></div>
     </div>
-    <div class="col-3 col-xxl-3 d-flex justify-content-center align-items-center rounded-pill col-2"
-        style="height: 40px; background-color: #FFCC00;" role="button">
+    <button class="${tipoVuelo}Escogida btn col-3 col-xxl-3 d-flex justify-content-center align-items-center rounded-pill"
+        style="height: 45px; background-color: #FFCC00;">
         <div class="d-flex">
-            <h3 class="fw-bold m-0">28</h3>
-            <p class="m-0 fw-bold">99 EUR</p>
+            <h3 class="fw-bold m-0">${euros}</h3>
+            <p class="m-0 fw-bold">${centimos} EUR</p>
         </div>
-    </div>
+    </button>
 `;
 
         contenedor.appendChild(nuevaDiv);
@@ -265,6 +279,12 @@ export function calcularPrecioFinal(vueloIda) {
     document.getElementById('precioIda').innerHTML = "Precio ida " + precioIdaTotal + " EUR"
     document.getElementById("euros").innerHTML = precioTotal.toFixed(2).split('.')[0]
     document.getElementById("centimos").innerHTML = precioTotal.toFixed(2).split('.')[1] + " EUR"
+}
+
+export function deshabilitarImagenes() {
+    deshabilitarImagen("restarNino")
+    deshabilitarImagen("restarBebe")
+    deshabilitarImagen("restarAdulto")
 }
 
 export function deshabilitarImagen(imgId) {

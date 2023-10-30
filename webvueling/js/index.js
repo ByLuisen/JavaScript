@@ -4,10 +4,7 @@ import { Viaje } from "./clases/viaje.js";
 // Al cargar la pagina
 document.addEventListener("DOMContentLoaded", function () {
     flight.inicializarSelects()
-    flight.deshabilitarImagen("restarNino")
-    flight.deshabilitarImagen("restarBebe")
-    flight.deshabilitarImagen("restarAdulto")
-    flight.generarPlantillaVuelos()
+    flight.deshabilitarImagenes()
 });
 
 //-------------------------------------EVENTOS BUSCADOR DE VUELOS -----------------------------------------
@@ -73,6 +70,7 @@ document.getElementById('buscarVuelo').addEventListener('click', function () {
     let select1 = document.getElementById('aeropuertoOrigen').value
     let select2 = document.getElementById('aeropuertoDestino').value
     if (select1 != 0 && select2 != 0) {
+        flight.generarPlantillaVuelos()
         flight.resumirVuelo()
         document.getElementById('resumenVuelo').classList.replace('d-none', 'd-block')
     } else if (select1 == 0) {
@@ -82,6 +80,13 @@ document.getElementById('buscarVuelo').addEventListener('click', function () {
 
     }
 })
+
+let vuelosIdas = document.getElementsByClassName('IdaEscogida')
+vuelosIdas.forEach(function (vuelo) {
+    vuelo.addEventListener('click', function() {
+        
+    })
+});
 
 document.getElementById('cancelarBillete').addEventListener('click', function () {
     window.location.href = 'index.html';
