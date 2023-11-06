@@ -63,9 +63,22 @@ document.getElementById('prepararPedido').addEventListener('click', function () 
         document.getElementById('errorLimitArticles').innerHTML = ""
         const confirmation = confirm('¿Desea proceder a la facturación?')
         if (confirmation) {
-            window.open('resumenPedido.html')
+            document.getElementById('formulario2').classList.replace('d-block', 'd-none')
+            mostrarFecha()
+            mostrarArticulosSeleccionados(articulosEscogidos)
+            document.getElementById('resumenCompra').classList.replace('d-none', 'd-block')
         }
     }
+})
+
+// Al hacer clic al boton cerrarVentana se cerrara la ventana actual
+document.getElementById('cerrarVentana').addEventListener('click', function () {
+    window.close()
+})
+
+// Al hacer clic al botón imprimirVentana se dara la opción de poder imprimir la ventana
+document.getElementById('imprimirVentana').addEventListener('click', function () {
+    window.print()
 })
 
 /*
@@ -173,4 +186,28 @@ function mostrarArticulosSeleccionados(articulosEscogidos) {
             contenedor.appendChild(nuevaP)
         }
     }
+}
+
+// Funcion para mostrar fecha
+function mostrarFecha() {
+    let fechaActual = new Date()
+    fechaFormateada(fechaActual)
+    setInterval(function () {
+        var fechaActual = new Date();
+        fechaFormateada(fechaActual)
+    }, 1000)
+}
+
+/**
+ * Función para formatear la fecha
+ * @param {*} fechaActual La fecha actual
+ */
+function fechaFormateada(fechaActual) {
+    let diaSetmana = ["diumenge", "dilluns", "dimarts", "dimecres", "dijous", "divendres", "dissabte"];
+    let mes = ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"];
+
+    let fechaFormateada = "Avui és " + diaSetmana[fechaActual.getDay()] + " dia " + fechaActual.getDate() + " de/d' " + mes[fechaActual.getMonth()] + " de " +
+        fechaActual.getFullYear() + ", " + fechaActual.getHours() + ":" + fechaActual.getMinutes() + ":" + fechaActual.getSeconds();
+
+    document.getElementById("dataAvui").innerHTML = fechaFormateada;
 }
