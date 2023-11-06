@@ -1,11 +1,11 @@
-export class Viaje {
+class Viaje {
     #origen
     #destino
     #fechaIda
     #fechaVuelta
     #pasajeros
 
-    constructor(origen, destino, fechaIda, fechaVuelta, pasajeros){
+    constructor(origen, destino, fechaIda, fechaVuelta, pasajeros) {
         this.#origen = origen
         this.#destino = destino
         this.#fechaIda = fechaIda
@@ -28,9 +28,9 @@ export class Viaje {
     get pasajeros() {
         return this.#pasajeros
     }
-    
+
     printing() {
         return `Origen: ${this.#origen}, Destino: ${this.#destino}, Fecha ida: ${this.#fechaIda}, 
-                Fecha vuelta: ${this.#fechaVuelta}, Pasajeros: ${this.#pasajeros}` 
+                Fecha vuelta: ${this.#fechaVuelta}, Pasajeros: ${this.#pasajeros}`
     }
 }

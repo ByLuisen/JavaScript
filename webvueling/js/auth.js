@@ -1,5 +1,5 @@
-export let usuaris = ["usu01", "usu02", "usu03"]
-export let contrasenyes = ["pass01", "pass02", "pass03"]
+let usuaris = ["usu01", "usu02", "usu03"]
+let contrasenyes = ["pass01", "pass02", "pass03"]
 
 //-------------------------------------- ANIMACIONES -----------------------------------------
 
@@ -7,20 +7,20 @@ let loginForm = document.getElementById("signin");
 var registerForm = document.getElementById("signup");
 var indicador = document.getElementById("indicador");
 
-export function login() {
+function login() {
     registerForm.style.transform = "translateX(0px)";
     loginForm.style.transform = "translateX(0px)";
     indicador.style.transform = "translateX(0px)";
 }
 
-export function register() {
+function register() {
     registerForm.style.transform = "translateX(-500px)";
     loginForm.style.transform = "translateX(-500px)";
     indicador.style.transform = "translateX(218px)";
 }
 
 //--------------------------------------FUNCIONES LOGIN-----------------------------------------
-export function validarUsuario(email, pass) {
+function validarUsuario(email, pass) {
     if (usuaris.includes(email)) {
         document.getElementById("errorLoginEmail").innerHTML = ""
         document.getElementById("loginEmail").style.borderColor = "grey"
@@ -43,7 +43,7 @@ export function validarUsuario(email, pass) {
     }
 }
 
-export function validarLoginEmail(email) {
+function validarLoginEmail(email) {
     let flag = false
     if (email == "") {
         document.getElementById("errorLoginEmail").innerHTML = "Debes completar este campo"
@@ -57,7 +57,7 @@ export function validarLoginEmail(email) {
     return flag
 }
 
-export function validarLoginPassword(pass) {
+function validarLoginPassword(pass) {
     let flag = false
     if (pass == "") {
         document.getElementById("errorLoginPassword").innerHTML = "Debes completar este campo"
@@ -73,7 +73,7 @@ export function validarLoginPassword(pass) {
 
 //--------------------------------------FUNCIONES REGISTRO-----------------------------------------
 
-export function validarNombre() {
+function validarNombre() {
     let nombre = document.getElementById("signUpName").value
     let patron = /^[\p{L}' ]+$/u;
     let flag = false
@@ -94,7 +94,7 @@ export function validarNombre() {
     return flag
 }
 
-export function validarApellidos() {
+function validarApellidos() {
     let apellidos = document.getElementById("signUpLastN").value
     let patron = /^[\p{L}' ]+$/u;
     let flag = false
@@ -115,7 +115,7 @@ export function validarApellidos() {
     return flag
 }
 
-export function validarSignUpEmail() {
+function validarSignUpEmail() {
     let email = document.getElementById("signUpEmail").value
     let patron = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/
     let flag = false
@@ -135,7 +135,7 @@ export function validarSignUpEmail() {
     return flag
 }
 
-export function validarContraseña() {
+function validarContraseña() {
     let password = document.getElementById("signUpPassword").value
     let patron = /^[a-z0-9]+$/i
     let flag = false
@@ -155,7 +155,7 @@ export function validarContraseña() {
     return flag
 }
 
-export function validarContraseñaRepe() {
+function validarContraseñaRepe() {
     let rPassword = document.getElementById("signUpRPassword").value
     let password = document.getElementById("signUpPassword").value
     let flag = false
@@ -175,7 +175,7 @@ export function validarContraseñaRepe() {
     return flag
 }
 
-export function validarDni() {
+function validarDni() {
     let dni = document.getElementById("signUpDNI").value
     let patron = /^\d{8}[a-zA-Z]$/;
     let flag = false
@@ -201,7 +201,7 @@ export function validarDni() {
     return flag
 }
 
-export function verificaDNI() {
+function verificaDNI() {
     let dni = document.getElementById("signUpDNI").value
     let lletra = dni[8]
     let num = dni.slice(0, 8)

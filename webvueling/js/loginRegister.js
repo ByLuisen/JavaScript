@@ -1,7 +1,5 @@
-import * as auth from './auth.js';
-
-document.getElementById('login').addEventListener('click', auth.login)
-document.getElementById('register').addEventListener('click', auth.register)
+document.getElementById('login').addEventListener('click', login)
+document.getElementById('register').addEventListener('click', register)
 
 //-------------------------------------EVENTOS PAGINA DE LOGIN -----------------------------------------
 
@@ -9,46 +7,46 @@ document.getElementById("loginBtn").addEventListener("click", function () {
     document.getElementById("loginInfo").innerHTML = ""
     let email = document.getElementById("loginEmail").value
     let pass = document.getElementById("loginPassword").value
-    let campo1 = auth.validarLoginEmail(email)
-    let campo2 = auth.validarLoginPassword(pass)
+    let campo1 = validarLoginEmail(email)
+    let campo2 = validarLoginPassword(pass)
     if (campo1 && campo2) {
-        auth.validarUsuario(email, pass)
+        validarUsuario(email, pass)
     }
 })
 
 //-------------------------------------EVENTOS PAGINA DE REGISTRO -----------------------------------------
 
 //verifico el nombre de registro
-document.getElementById("signUpName").addEventListener("blur", auth.validarNombre)
+document.getElementById("signUpName").addEventListener("blur", validarNombre)
 
 //verifico los apellidos de registro
-document.getElementById("signUpLastN").addEventListener("blur", auth.validarApellidos)
+document.getElementById("signUpLastN").addEventListener("blur", validarApellidos)
 
 //verifico el email de registro
-document.getElementById("signUpEmail").addEventListener("blur", auth.validarSignUpEmail)
+document.getElementById("signUpEmail").addEventListener("blur", validarSignUpEmail)
 
 //verifico la contraseña de registro
-document.getElementById("signUpPassword").addEventListener("blur", auth.validarContraseña)
+document.getElementById("signUpPassword").addEventListener("blur", validarContraseña)
 
 //verifico si las contraseñas coinciden de registro
-document.getElementById("signUpRPassword").addEventListener("blur", auth.validarContraseñaRepe)
+document.getElementById("signUpRPassword").addEventListener("blur", validarContraseñaRepe)
 
 //verifico el DNI de registro
-document.getElementById("signUpDNI").addEventListener("blur", auth.validarDni)
+document.getElementById("signUpDNI").addEventListener("blur", validarDni)
 
 document.getElementById("signUpBtn").addEventListener("click", function () {
     document.getElementById("signUpInfo").innerHTML = ""
-    let campo1 = auth.validarNombre()
-    let campo2 = auth.validarApellidos()
-    let campo3 = auth.validarSignUpEmail()
-    let campo4 = auth.validarContraseña()
-    let campo5 = auth.validarContraseñaRepe()
-    let campo6 = auth.validarDni()
+    let campo1 = validarNombre()
+    let campo2 = validarApellidos()
+    let campo3 = validarSignUpEmail()
+    let campo4 = validarContraseña()
+    let campo5 = validarContraseñaRepe()
+    let campo6 = validarDni()
     if (campo1 && campo2 && campo3 && campo4 && campo5 && campo6) {
         let email = document.getElementById("signUpEmail").value
         let pass = document.getElementById("signUpPassword").value
-        auth.usuaris.push(email)
-        auth.contrasenyes.push(pass)
+        usuaris.push(email)
+        contrasenyes.push(pass)
         document.getElementById("signUpInfo").innerHTML = "USUARIO REGISTRADO CORRECTAMENTE"
     }
 })

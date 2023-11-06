@@ -3,12 +3,12 @@
    * @author Luis Enrique
 */
 
-export let aeropuertos = ['Barcelona España BCN', 'Agadir Marruecos AGA', 'Alicante España ALC',
+let aeropuertos = ['Barcelona España BCN', 'Agadir Marruecos AGA', 'Alicante España ALC',
     'Almería España LEI', 'Amán Jordania AMM', 'Ámsterdam Países Bajos AMS']
-export let selectOrigen = document.getElementById("aeropuertoOrigen")
-export let selectDestino = document.getElementById("aeropuertoDestino")
-export let horasIda = ["10:30", "14:00"]
-export let horasVuelta = ["20:00", "22:20"]
+let selectOrigen = document.getElementById("aeropuertoOrigen")
+let selectDestino = document.getElementById("aeropuertoDestino")
+let horasIda = ["10:30", "14:00"]
+let horasVuelta = ["20:00", "22:20"]
 
 /**
    * Determina el volumen de un cilindro con la altura y radio especificado
@@ -16,12 +16,12 @@ export let horasVuelta = ["20:00", "22:20"]
    * @param {number} altura - La altura del cilindro
    * @return {number}
 */
-export function generarPlantillaVuelos() {
+function generarPlantillaVuelos() {
     plantillaVuelos(horasIda, 'vuelosIda', 'Ida')
     plantillaVuelos(horasVuelta, 'vuelosVuelta', 'Vuelta')
 }
 
-export function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
+function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
     let contenedor = document.getElementById(contenedorId);
 
     for (let hora of arrayHoras) {
@@ -65,7 +65,7 @@ export function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
     }
 }
 
-export function inicializarSelects() {
+function inicializarSelects() {
     for (let i = 0; i < aeropuertos.length; i++) {
         let optionOrigen = document.createElement("option");
         optionOrigen.value = aeropuertos[i].split(" ")[0];
@@ -76,7 +76,7 @@ export function inicializarSelects() {
     }
 }
 
-export function estadoCalendarioVuelta() {
+function estadoCalendarioVuelta() {
     let radioIdaVuelta = document.getElementById("radioIdaVuelta")
     let radioIda = document.getElementById("radioIda")
     let calendarioVuelta = document.getElementById("vuelta")
@@ -88,7 +88,7 @@ export function estadoCalendarioVuelta() {
     }
 }
 
-export function ocultarAeropuerto(select1Id, select2Id) {
+function ocultarAeropuerto(select1Id, select2Id) {
     let opcionSeleccionado = document.getElementById(select1Id).value
     let select = document.getElementById(select2Id)
     for (const option of select.options) {
@@ -106,7 +106,7 @@ export function ocultarAeropuerto(select1Id, select2Id) {
     }
 }
 
-export function aeropuertosOK() {
+function aeropuertosOK() {
     let aeropuertoOrigen = document.getElementById("aeropuertoOrigen").value
     let aeropuertoDestino = document.getElementById("aeropuertoDestino").value
     if (aeropuertoOrigen == 0) {
@@ -117,11 +117,11 @@ export function aeropuertosOK() {
 }
 
 // Deshabilitar la edición del campo de entrada
-export function deshabilitarEdicion(event) {
+function deshabilitarEdicion(event) {
     event.preventDefault()
 }
 
-export function inicializarCalendarios() {
+function inicializarCalendarios() {
     let hoySeisMesesDepues = new Date()
     hoySeisMesesDepues.setMonth(hoySeisMesesDepues.getMonth() + 6)
     let fechaHoySeisMesesDespues = hoySeisMesesDepues.toISOString().split('T')[0]
@@ -129,7 +129,7 @@ export function inicializarCalendarios() {
     inicializarCalendarioVuelta(fechaHoySeisMesesDespues)
 }
 
-export function inicializarCalendarioIda(maxDate) {
+function inicializarCalendarioIda(maxDate) {
     let ida = document.getElementById("ida")
     ida.readOnly = false
     let fechaHoy = new Date().toISOString().split('T')[0]
@@ -138,7 +138,7 @@ export function inicializarCalendarioIda(maxDate) {
     ida.setAttribute('max', maxDate)
 }
 
-export function inicializarCalendarioVuelta(maxDate) {
+function inicializarCalendarioVuelta(maxDate) {
     let vuelta = document.getElementById("vuelta")
     vuelta.readOnly = false
     let fechaIda = new Date(document.getElementById("ida").value)
@@ -149,7 +149,7 @@ export function inicializarCalendarioVuelta(maxDate) {
     vuelta.setAttribute('max', maxDate)
 }
 
-export function actualizarCalendarioVuelta(fechaIda) {
+function actualizarCalendarioVuelta(fechaIda) {
     vuelta.setAttribute('min', fechaIda.toISOString().split('T')[0])
     let valorMaximo = document.getElementById("ida").getAttribute('max')
     let fechaMaxima = new Date(valorMaximo)
@@ -162,25 +162,25 @@ export function actualizarCalendarioVuelta(fechaIda) {
     }
 }
 
-export function actualizarFechaMinima(fechaIda) {
+function actualizarFechaMinima(fechaIda) {
     vuelta.setAttribute('min', fechaIda.toISOString().split('T')[0])
 }
 
-export function resumirVuelo() {
+function resumirVuelo() {
     origenDestinoVuelo()
     let soloIda = tipoVuelo()
     numeroPasajeros()
     fechaVuelo(soloIda)
     calcularPrecioFinal(soloIda)
 }
-export function origenDestinoVuelo() {
+function origenDestinoVuelo() {
     let origen = obtenerAeropuerto('aeropuertoOrigen', 'origen')
     let destino = obtenerAeropuerto('aeropuertoDestino', 'destino')
     document.getElementById('origenDestinoVuelo').innerHTML = origen + " - " + destino
     document.getElementById('origen-destino').innerHTML = origen + " - " + destino
     document.getElementById('destino-origen').innerHTML = destino + " - " + origen
 }
-export function obtenerAeropuerto(idSelect, idClass) {
+function obtenerAeropuerto(idSelect, idClass) {
     let select = document.getElementById(idSelect);
     let ciudad = select.value
     let aeropuerto = select.options[select.selectedIndex].text.split(" ")
@@ -191,7 +191,7 @@ export function obtenerAeropuerto(idSelect, idClass) {
 
     return ciudad
 }
-export function tipoVuelo() {
+function tipoVuelo() {
     let radioIdaVuelta = document.getElementById("radioIdaVuelta")
     let radioIda = document.getElementById("radioIda")
     let mensaje
@@ -210,13 +210,13 @@ export function tipoVuelo() {
     return flag
 }
 
-export function numeroPasajeros() {
+function numeroPasajeros() {
     let numPasajeros = document.getElementById('pasajeros').value
     let mensaje = " | " + numPasajeros + " | "
     document.getElementById('infoVuelo').innerHTML += mensaje
 }
 
-export function fechaVuelo(soloIda) {
+function fechaVuelo(soloIda) {
     const mesesAbreviados = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
     let ida = new Date(document.getElementById('ida').value)
     let fechaIda = ida.getDate() + " " + mesesAbreviados[ida.getMonth()]
@@ -238,7 +238,7 @@ export function fechaVuelo(soloIda) {
     }
 }
 
-export function calcularPrecioFinal(vueloIda) {
+function calcularPrecioFinal(vueloIda) {
     // let numPasajeros = document.getElementById('pasajeros').value.split(" ")[0]
     let numAdultos = document.getElementById('totalAdulto').textContent
     let numNino = document.getElementById('totalNino').textContent
@@ -281,26 +281,26 @@ export function calcularPrecioFinal(vueloIda) {
     document.getElementById("centimos").innerHTML = precioTotal.toFixed(2).split('.')[1] + " EUR"
 }
 
-export function deshabilitarImagenes() {
+function deshabilitarImagenes() {
     deshabilitarImagen("restarNino")
     deshabilitarImagen("restarBebe")
     deshabilitarImagen("restarAdulto")
 }
 
-export function deshabilitarImagen(imgId) {
+function deshabilitarImagen(imgId) {
     var imagen = document.getElementById(imgId);
     imagen.disabled = true;
     imagen.style.opacity = "0.2";
     imagen.style.pointerEvents = "none"; /* La imagen no responderá a eventos de ratón */
 }
-export function habilitarImagen(imgId) {
+function habilitarImagen(imgId) {
     var imagen = document.getElementById(imgId);
     imagen.disabled = false;
     imagen.style.opacity = "1";
     imagen.style.pointerEvents = "auto"; /* La imagen responderá a eventos de ratón */
 }
 
-export function actualizarCantidad(elementoId, cantidad, min, max) {
+function actualizarCantidad(elementoId, cantidad, min, max) {
     let elemento = document.getElementById(`total${elementoId}`);
     let num = parseInt(elemento.textContent) + cantidad;
 
@@ -324,7 +324,7 @@ export function actualizarCantidad(elementoId, cantidad, min, max) {
     }
 }
 
-export function actualizarValuePasajeros(cantidad) {
+function actualizarValuePasajeros(cantidad) {
     let elemento = document.getElementById('pasajeros')
     let num = parseInt(elemento.value.split(' ')[0]) + cantidad
     let value = ""
@@ -336,7 +336,7 @@ export function actualizarValuePasajeros(cantidad) {
     elemento.value = value
 }
 
-export function actualizarLabelPasajeros() {
+function actualizarLabelPasajeros() {
     let totalAdultos = document.getElementById('totalAdulto').textContent
     let totalNinos = document.getElementById('totalNino').textContent
     let totalBebes = document.getElementById('totalBebe').textContent

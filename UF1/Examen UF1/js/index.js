@@ -2,6 +2,7 @@
    * @file Controla el funcionamiento del documento index.html
    * @author Luis Enrique
 */
+'use strict'
 
 //Declarar variables
 let select = document.getElementById('articles')
@@ -27,6 +28,8 @@ document.getElementById('numeroArticles').addEventListener('blur', function () {
     //Si devuelve true se deshabilita el boton
     if (flag) {
         botonIntroduir.disabled = false
+    } else if (!flag) {
+        botonIntroduir.disabled = true
     }
 })
 
@@ -57,8 +60,11 @@ document.getElementById('prepararPedido').addEventListener('click', function () 
     } else if (contador > maxArticles) {
         document.getElementById('errorLimitArticles').innerHTML = `El número d'articles escogit no pot ser més gran de ${maxArticles}`
     } else {
-        window.open('resumenPedido.html')
         document.getElementById('errorLimitArticles').innerHTML = ""
+        const confirmation = confirm('¿Desea proceder a la facturación?')
+        if (confirmation) {
+            window.open('resumenPedido.html')
+        }
     }
 })
 
