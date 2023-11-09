@@ -1,82 +1,112 @@
-'use strict'
+'use strict';
 
-const express = require('express')
-const bodyParser = require('body-parser')
+const express = require('express');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const cors = require('cors')
+const cors = require('cors');
 
-const app = express()
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // DEJO ENTRAR A LAS RUTAS DESDE FUERA, EVITO ERROR CORS
-app.use(cors())
+app.use(cors());
 
-////// AIXÒ ÉS NOU I SERIA PER TREBALLAR AMB MYSQL
-////// COMPTE: hem d'instal·lar mysql per a Node Express amb npm i -S mysql
-////// declarem els paràmetres de connexió (millor si l’usuari de connexió no és root sinó un usuari específic per aquesta BBDD
-////// i amb permissos restringits
-var connection = mysql.createConnection({
+// declarem els paràmetres de connexió
+var pool = mysql.createPool({
+    connectionLimit: 10,
     host: 'localhost',
     database: 'testm06',
     user: 'root',
     password: ''
 });
-/////// fem servir la BBDD que tenim
-app.get('/api/login', function (req, res) {
-    ////// provem de connectar-nos i capturar possibles errors
-    connection.connect(function (err) {
-        console.log(err);
-        if (err) {
-            console.error('Error connecting: ' + err.stack);
-            return;
-        }
-        console.log('Connected as id ' + connection.threadId);
-    });
-    connection.query('SELECT * FROM users', function (error, results, field) {
-        if (error) {
-            res.status(400).send({ error: true, resultats: null, message: "Hi ha un error amb la teva consulta" })
-        } else {
-            res.status(200).send({ error: false, resultats: results, message: "Perfecte!!!" })
-        }
-    });
-})
 
-app.post('/api/logininsert', function (req, res) {
-    const { username, userpass } = req.body;
-    ////// provem de connectar-nos i capturar possibles errors
-    connection.connect(function (err) {
-        console.log(err);
+app.get('/api/login', function (req, res) {
+    // Adquirir una conexión desde el pool
+    pool.getConnection(function (err, connection) {
         if (err) {
-            console.error('Error connecting: ' + err.stack);
-            return;
+            console.error('Error adquiriendo conexión del pool: ' + err.stack);
+            return res.status(500).send({ error: true, message: 'Error en la conexión a la base de datos' });
         }
-        console.log('Connected as id ' + connection.threadId);
+
+        // Consultar la base de datos para obtener todos los usuarios
+        connection.query('SELECT * FROM users', function (error, results, field) {
+            // Liberar la conexión de vuelta al pool
+            connection.release();
+
+            if (error) {
+                res.status(400).send({ error: true, resultats: null, message: "Hi ha un error amb la teva consulta" });
+            } else {
+                res.status(200).send({ error: false, resultats: results, message: "Perfecte!!!" });
+            }
+        });
     });
-    connection.query('SELECT * FROM users WHERE username = ?', [username], function (selectError, selectResults, selectFields) {
+});
+
+app.post('/api/logininsert', (req, res) => {
+    const { username, userpass } = req.body;
+
+    // Adquirir una conexión desde el pool
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            console.error('Error adquiriendo conexión del pool: ' + err.stack);
+            return res.status(500).send({ error: true, message: 'Error en la conexión a la base de datos' });
+        }
+
+        // Consultar la base de datos para verificar la existencia del usuario
+        checkUserExistence(username, res, connection);
+    });
+});
+
+// Función para manejar errores
+const handleDatabaseError = (err, res, message, connection) => {
+    console.error(`Error en la base de datos: ${err.message}`);
+    res.status(500).send({ error: true, message: message || 'Error en la base de datos' });
+
+    // Liberar la conexión de vuelta al pool
+    if (connection) {
+        connection.release();
+    }
+};
+
+// Función para verificar la existencia del usuario
+const checkUserExistence = (username, res, connection) => {
+    connection.query('SELECT * FROM users WHERE username = ?', [username], (selectError, selectResults) => {
         if (selectError) {
-            console.error('Error en la consulta de selección: ' + selectError.message);
-            return res.status(500).send({ error: true, message: 'Error en la consulta de selección' });
+            handleDatabaseError(selectError, res, 'Error en la consulta de selección', connection);
+            return;
         }
 
         // Verifica si ya existe un usuario con el mismo nombre de usuario
         if (selectResults.length > 0) {
             console.log('El usuario ya existe en la base de datos');
-            return res.status(409).send({ error: true, message: 'El usuario ya existe en la base de datos' });
+            res.status(409).send({ error: true, message: 'El usuario ya existe en la base de datos' });
+
+            // Liberar la conexión de vuelta al pool
+            connection.release();
+            return;
         }
 
         // Si no hay resultados, procede con la inserción
-        connection.query('INSERT INTO users (username, userpass) VALUES (?, ?)', [username, userpass], function (insertError, insertResults, insertFields) {
-            if (insertError) {
-                console.error('Error en la consulta de inserción: ' + insertError.message);
-                return res.status(500).send({ error: true, message: 'Error en la consulta de inserción' });
-            }
-
-            res.status(200).send({ error: false, message: 'Usuario insertado correctamente en la base de datos' });
-        });
+        insertUser(username, res, connection);
     });
-})
+};
+
+// Función para realizar la inserción del usuario
+const insertUser = (username, userpass, res, connection) => {
+    connection.query('INSERT INTO users (username, userpass) VALUES (?, ?)', [username, userpass], (insertError) => {
+        if (insertError) {
+            handleDatabaseError(insertError, res, 'Error en la consulta de inserción', connection);
+            return;
+        }
+
+        res.status(200).send({ error: false, message: 'Usuario insertado correctamente en la base de datos' });
+
+        // Liberar la conexión de vuelta al pool
+        connection.release();
+    });
+};
 
 app.listen(3000, () => {
-    console.log('Aquesta és la nostra API-REST que corre en http://localhost:3000')
-})
+    console.log('Aquesta és la nostra API-REST que corre en http://localhost:3000');
+});
