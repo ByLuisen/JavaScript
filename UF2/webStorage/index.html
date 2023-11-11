@@ -27,8 +27,8 @@
     <div class="container h-100">
         <div class="row justify-content-center align-items-center h-100">
             <div class="col-8 position-relative">
-                <h1 class="text-white position-absolute" style="font-size: 70px; text-shadow: 4px 4px black;">WEB STORAGE</h1>
-                <div class="p-4" style="border: 5px solid black;">
+                <div class="p-4" style="border: 5px solid black; background-color: white;">
+                    <h1 class="text-white position-absolute" style="font-size: 70px; text-shadow: 4px 4px black; top: -4rem; left: 2rem;">WEB STORAGE</h1>
                     <p>This example is designed to demonstrate usage of the W3C Web Storage API. It should work as far
                         back as IE8. Choose custom background colours, logos and fonts from the below drop down menus,
                         then try closing and reopening the page — you will find that your choices are remembered, as
@@ -37,27 +37,27 @@
                         the storage changes reported.</p>
                     <div class="d-flex">
                         <div class="mt-auto">
-                            <img src="img/firefoxos.png" alt="Firefox">
+                            <img>
                         </div>
                         <div class="ms-auto w-75 text-end" style="margin-right: 100px;">
                             <div class="d-flex align-items-center justify-content-end">
                                 <label for="backgroundColor" class="form-label me-3">Choose background color:</label>
-                                <input type="color" class="form-input ms-3" style="width: 305px;" id="backgroundColor">
+                                <input type="color" class="form-input ms-3" style="width: 305px;" id="bgcolor">
                             </div>
                             <div class="d-flex align-items-center justify-content-end my-3">
                                 <label for="fontStyle" class="form-label me-3 w-75">Choose font style:</label>
-                                <select class="form-select ms-3" id="fontStyle">
-                                    <option value="sans-serif">Sans-serif</option>
-                                    <option value="serif">Serif</option>
+                                <select class="form-select ms-3" id="font">
+                                    <option value="'Open Sans Condensed', sans-serif">Sans-serif</option>
+                                    <option value="'Bitter', serif">Serif</option>
                                     <option value="monospace">Monospace</option>
                                 </select>
                             </div>
                             <div class="d-flex align-items-center justify-content-end">
                                 <label for="image" class="form-label me-3 w-75">Choose image:</label>
                                 <select type="color" class="form-select ms-3" id="image">
-                                    <option value="firefox">Firefox</option>
-                                    <option value="crocodile">Crocodile</option>
-                                    <option value="tortoise">Tortoise</option>
+                                    <option value="img/firefox.png">Firefox</option>
+                                    <option value="img/crocodile.png">Crocodile</option>
+                                    <option value="img/tortoise.png">Tortoise</option>
                                 </select>
 
                             </div>
@@ -67,6 +67,7 @@
             </div>
         </div>
     </div>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
