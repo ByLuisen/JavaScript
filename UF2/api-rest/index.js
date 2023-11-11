@@ -16,6 +16,7 @@ app.use(cors());
 var pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
+    port: 3306,
     database: 'testm06',
     user: 'root',
     password: ''
@@ -54,7 +55,7 @@ app.post('/api/logininsert', (req, res) => {
         }
 
         // Consultar la base de datos para verificar la existencia del usuario
-        checkUserExistence(username, res, connection);
+        checkUserExistence(username, userpass, res, connection);
     });
 });
 
@@ -70,7 +71,7 @@ const handleDatabaseError = (err, res, message, connection) => {
 };
 
 // Función para verificar la existencia del usuario
-const checkUserExistence = (username, res, connection) => {
+const checkUserExistence = (username, userpass, res, connection) => {
     connection.query('SELECT * FROM users WHERE username = ?', [username], (selectError, selectResults) => {
         if (selectError) {
             handleDatabaseError(selectError, res, 'Error en la consulta de selección', connection);
@@ -88,7 +89,7 @@ const checkUserExistence = (username, res, connection) => {
         }
 
         // Si no hay resultados, procede con la inserción
-        insertUser(username, res, connection);
+        insertUser(username, userpass, res, connection);
     });
 };
 
