@@ -78,13 +78,6 @@ document.getElementById('buscarVuelo').addEventListener('click', function () {
     }
 })
 
-let vuelosIdas = document.getElementsByClassName('IdaEscogida')
-vuelosIdas.forEach(function (vuelo) {
-    vuelo.addEventListener('click', function() {
-        
-    })
-});
-
 document.getElementById('cancelarBillete').addEventListener('click', function () {
     window.location.href = 'index.html';
     //history.back()

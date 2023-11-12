@@ -26,7 +26,7 @@ function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
 
     for (let hora of arrayHoras) {
         let nuevaDiv = document.createElement('div');
-        nuevaDiv.className = 'col-12 mb-3 d-flex p-4 align-items-center border border-success rounded';
+        nuevaDiv.className = `col-12 mb-3 d-flex p-4 align-items-center border border-success rounded cardVuelos${tipoVuelo}`;
         nuevaDiv.style.backgroundColor = '#F7F7F7';
         let precioAleatorio = (Math.random() * 151).toFixed(2)
         let euros = precioAleatorio.split('.')[0]
@@ -52,7 +52,7 @@ function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
         </div>
         <div class="col-xxl-2"></div>
     </div>
-    <button class="${tipoVuelo}Escogida btn col-3 col-xxl-3 d-flex justify-content-center align-items-center rounded-pill"
+    <button value="${precioAleatorio}" class="botonVuelos${tipoVuelo} btn col-3 col-xxl-3 d-flex justify-content-center align-items-center rounded-pill"
         style="height: 45px; background-color: #FFCC00;">
         <div class="d-flex">
             <h3 class="fw-bold m-0">${euros}</h3>
@@ -171,6 +171,8 @@ function resumirVuelo() {
     let soloIda = tipoVuelo()
     numeroPasajeros()
     fechaVuelo(soloIda)
+    seleccionarVuelo('Ida')
+    seleccionarOpcionVuelo(seleccionarVuelo('Ida'), seleccionarVuelo('Vuelta'))
     calcularPrecioFinal(soloIda)
 }
 function origenDestinoVuelo() {
@@ -191,6 +193,7 @@ function obtenerAeropuerto(idSelect, idClass) {
 
     return ciudad
 }
+
 function tipoVuelo() {
     let radioIdaVuelta = document.getElementById("radioIdaVuelta")
     let radioIda = document.getElementById("radioIda")
@@ -237,6 +240,28 @@ function fechaVuelo(soloIda) {
         document.getElementById('infoVuelo').innerHTML += fechaIda
     }
 }
+
+function seleccionarVuelo(tipoVuelo) {
+    let botonVuelos = document.getElementsByClassName(`botonVuelos${tipoVuelo}`)
+    Array.from(botonVuelos).forEach(function (boton, index) {
+        boton.addEventListener('click', function () {
+            let cardVuelos = document.getElementsByClassName(`cardVuelos${tipoVuelo}`)
+            Array.from(cardVuelos).forEach(function (card, i) {
+                if (i != index) {
+                    card.classList.add('d-none')
+                }
+            })
+            return boton.value
+        })
+    });
+}
+
+function seleccionarOpcionVuelo(precioIda, precioVuelta = 0) {
+    if (precioIda != undefined) {
+        document.getElementById('opcionesVuelo').classList.replace('d-none', 'd-block')
+    }
+}
+
 
 function calcularPrecioFinal(vueloIda) {
     // let numPasajeros = document.getElementById('pasajeros').value.split(" ")[0]
