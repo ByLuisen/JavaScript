@@ -27,52 +27,84 @@
     <div class="container h-100">
         <div class="row p-0 justify-content-center align-items-center h-100">
             <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+
                 <div class="d-flex">
                     <p id="fechaActual" class="text-white ms-auto" style="height: 24px;"></p>
                 </div>
-                <div>
-                    <h2 id="login" class="text-uppercase text-center" style="color: #FFCC00;">Iniciar Sesión</h2>
-                </div>
-                <div id="signin">
-                    <div class="form-signin m-auto rounded-3 mb-5" style="background-color: #3A3A3A;">
+                <div id="signin" class="d-none">
+                    <div>
+                        <h2 class="text-uppercase text-center" style="color: #FFCC00;">Iniciar Sesión</h2>
+                    </div>
+                    <div>
+                        <div class="form-signin m-auto rounded-3 mb-5" style="background-color: #3A3A3A;">
 
-                        <div class="p-5">
-                            <div class="form-floating">
-                                <input type="text" class="form-control border-2" id="loginEmail" autocomplete="email"
-                                    placeholder="name@example.com">
-                                <label for="loginEmail" class="text-secondary">Email</label>
-                                <p style="color:red; margin:0; height: 23px;" id="errorLoginEmail"> </p>
-                            </div>
+                            <div class="p-5">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control border-2" id="loginEmail"
+                                        autocomplete="email" placeholder="name@example.com">
+                                    <label for="loginEmail" class="text-secondary">Email</label>
+                                    <p style="color:red; margin:0; height: 23px;" id="errorLoginEmail"> </p>
+                                </div>
 
-                            <div class="form-floating">
-                                <input type="password" class="form-control border-2" id="loginPassword"
-                                    autocomplete="current-password" placeholder="Password">
-                                <label for="loginPassword" class="text-secondary">Contraseña</label>
-                                <p style="color:red; margin:0; height: 23px;" id="errorLoginPassword"> </p>
-                            </div>
+                                <div class="form-floating">
+                                    <input type="password" class="form-control border-2" id="loginPassword"
+                                        autocomplete="current-password" placeholder="Password">
+                                    <label for="loginPassword" class="text-secondary">Contraseña</label>
+                                    <p style="color:red; margin:0; height: 23px;" id="errorLoginPassword"> </p>
+                                </div>
 
-                            <div class="text-center mt-4">
-                                <button class="btn btn-warning rounded-pill fs-5 w-50 py-2" id="loginBtn">Iniciar
-                                    sesión</button>
+                                <div class="text-center mt-4">
+                                    <button class="btn btn-warning rounded-pill fs-5 w-50 py-2" id="loginBtn">Iniciar
+                                        sesión</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="text-center p-5">
-                        <h2 id="loginInfo" class="text-white"></h2>
+                </div>
+                <!---------------------------------------- SELECT AEROPUERTOS DESTINO ------------------------------------------>
+                <div id="form" class="form-floating w-100 d-none mt-2">
+                    <select id="cursos" class="form-select rounded-0" aria-label="Large select example" role="button">
+                        <option value="0" hidden>Selecciona un curso</option>
+                    </select>
+                    <label for="cursos">Cursos</label>
+
+                    <div class="text-center mt-4">
+                        <button class="btn btn-warning rounded-pill fs-5 w-25 py-2" id="logout">Logout</button>
+                    </div>
+                </div>
+                <!---------------------------------------- MODAL COOKIE ------------------------------------------>
+
+                <!-- <div class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Antes de continuar tienes que aceptar las cookies</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar cookies</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div id="cookie-overlay" class="overlay"></div>
+                <div id="cookie-popup" class="popup rounded">
+                    <div>
+                        <p>Antes de continuar tienes que aceptar las cookies</p>
+                        <button id="aceptarCookie" class="btn btn-warning mt-3">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="cookie-overlay" class="overlay"></div>
-        <div id="cookie-popup" class="popup rounded">
-            <div>
-                <p>Antes de continuar tienes que aceptar la cookie</p>
-                <button id="aceptarCookie" class="btn btn-warning mt-3">Aceptar</button>
-            </div>
-        </div>
-    </div>
-    <!-- File JS -->
-    <script type="module" src="./js/index.js"></script>
+        <!-- File JS -->
+        <script src="./js/auth.js"></script>
+        <script src="./js/index.js"></script>
 </body>
 
 </html>
