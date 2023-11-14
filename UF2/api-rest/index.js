@@ -19,7 +19,7 @@ app.listen(3000, () => {
 });
 
 // declarem els paràmetres de connexió
-var pool = mysql.createPool({
+const pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
     port: '3307',
@@ -44,6 +44,7 @@ app.get('/api/login', function (req, res) {
     // Adquirir una conexión desde el pool
     pool.getConnection(function (err, connection) {
         if (err) {
+            connection.release();
             console.error('Error adquiriendo conexión del pool: ' + err.stack);
             return res.status(500).send({ error: true, message: 'Error en la conexión a la base de datos' });
         }
@@ -68,6 +69,7 @@ app.post('/api/logininsert', (req, res) => {
     // Adquirir una conexión desde el pool
     pool.getConnection(function (err, connection) {
         if (err) {
+            connection.release();
             console.error('Error adquiriendo conexión del pool: ' + err.stack);
             return res.status(500).send({ error: true, message: 'Error en la conexión a la base de datos' });
         }
@@ -122,6 +124,7 @@ app.post('/api/login', (req, res) => {
     // Adquirir una conexión desde el pool
     pool.getConnection(function (err, connection) {
         if (err) {
+            connection.release();
             console.error('Error adquiriendo conexión del pool: ' + err.stack);
             return res.status(500).send({ error: true, message: 'Error en la conexión a la base de datos' });
         }
@@ -155,6 +158,7 @@ app.post('/api/cursos', function (req, res) {
     // Adquirir una conexión desde el pool
     pool.getConnection(function (err, connection) {
         if (err) {
+            connection.release();
             console.error('Error adquiriendo conexión del pool: ' + err.stack);
             return res.status(500).send({ error: true, message: 'Error en la conexión a la base de datos' });
         }

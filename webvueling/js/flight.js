@@ -175,7 +175,7 @@ function resumirVuelo() {
     numeroPasajeros()
     fechaVuelo(soloIda)
     seleccionarVuelo('Ida')
-    seleccionarOpcionVuelo(seleccionarVuelo('Ida'), seleccionarVuelo('Vuelta'))
+    // seleccionarOpcionVuelo(seleccionarVuelo('Ida'), seleccionarVuelo('Vuelta'))
     calcularPrecioFinal(soloIda)
 }
 function origenDestinoVuelo() {
