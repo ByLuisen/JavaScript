@@ -22,7 +22,10 @@ function generarPlantillaVuelos() {
 }
 
 function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
-    let contenedor = document.getElementById(contenedorId);
+    const contenedor = document.getElementById(contenedorId);
+
+    // Limpiar contenido actual del contenedor
+    contenedor.innerHTML = ""
 
     for (let hora of arrayHoras) {
         let nuevaDiv = document.createElement('div');

@@ -12,11 +12,19 @@ document.getElementById("loginBtn").addEventListener("click", function () {
     let campo1 = validarLoginEmail(email)
     let campo2 = validarLoginPassword(pass)
     if (campo1 && campo2) {
-        if (validarUsuario(email.trim(), pass.trim())) {
-            document.getElementById('signin').classList.replace('d-block', 'd-none')
-            inicializarSelects()
-            document.getElementById('form').classList.replace('d-none', 'd-block')
-        }
+        validarUsuario(email.trim(), pass.trim())
+            .then(success => {
+                // Manejo del éxito
+                localStorage.setItem('loged', true)
+                document.getElementById('signin').classList.replace('d-block', 'd-none');
+                inicializarSelects();
+                document.getElementById('form').classList.replace('d-none', 'd-block');
+            })
+            .catch(error => {
+                // Manejo del error
+                credencialesIncorrectas(error)
+                console.log(error);
+            }); 
     }
 })
 

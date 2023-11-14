@@ -26,7 +26,7 @@
 <body style="background-color: #181A1B;" class="vh-100">
     <div class="container h-100">
         <div class="row p-0 justify-content-center align-items-center h-100">
-            <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <di v class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
 
                 <div class="d-flex">
                     <p id="fechaActual" class="text-white ms-auto" style="height: 24px;"></p>
@@ -35,8 +35,8 @@
                     <div>
                         <h2 class="text-uppercase text-center" style="color: #FFCC00;">Iniciar Sesión</h2>
                     </div>
-                    <div>
-                        <div class="form-signin m-auto rounded-3 mb-5" style="background-color: #3A3A3A;">
+                    <div style="height: 400px;">
+                        <div class="form-signin m-auto rounded-3 mb-2" style="background-color: #3A3A3A;">
 
                             <div class="p-5">
                                 <div class="form-floating">
@@ -59,9 +59,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="errorLogin" class="alert alert-danger m-0 d-none" role="alert">
+                        </div>
                     </div>
                 </div>
-                <!---------------------------------------- SELECT AEROPUERTOS DESTINO ------------------------------------------>
+                <!---------------------------------------- SELECT CURSOS ------------------------------------------>
                 <div id="form" class="form-floating w-100 d-none mt-2">
                     <select id="cursos" class="form-select rounded-0" aria-label="Large select example" role="button">
                         <option value="0" hidden>Selecciona un curso</option>
