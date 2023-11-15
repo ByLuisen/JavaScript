@@ -22,7 +22,6 @@ app.listen(3000, () => {
 const pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
-    port: '3307',
     database: 'vueling',
     user: 'root',
     password: ''
