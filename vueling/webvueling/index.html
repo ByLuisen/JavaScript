@@ -37,9 +37,12 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
+            <li id="iconoUser" class="nav-item">
               <a class="navbar-brand" href="loginRegister.html"><img src="img/usuario.png" alt="vuelingLogo"
                   width="41px"></a>
+            </li>
+            <li id="logout" class="nav-item d-none">
+              <a class="nav-link active" href="loginRegister.html">LOGOUT</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" id="vuelos" href="index.html">VUELOS</a>
@@ -49,6 +52,18 @@
       </div>
     </nav>
   </header>
+  <!---------------------------------------- POPUP COOKIE ------------------------------------------>
+  <div id="cookie-overlay" class="overlay"></div>
+  <div id="cookie-popup" class="popup p-5">
+    <div class="justify-content-center text-white">
+      <h4>Antes de continuar tienes que aceptar las cookies</h4>
+      <div class="mt-5">
+        <button id="aceptarCookie" class="btn btn-warning">Aceptar todas las cookies</button>
+        <button id="rechazarCookie" class="btn btn-warning mx-3">Rechazar cookies</button>
+        <button id="minimaCookie" class="btn btn-warning">Aceptar mínimas</button>
+      </div>
+    </div>
+  </div>
 
   <!---------------------------------------- BUSCADOR DE VUELOS ------------------------------------------>
   <section id="buscador">
@@ -222,7 +237,7 @@
               <p class="ms-2 me-3">Vuelta</p>
               <h4 id="destino-origen" class="text-secondary"></h4>
             </div>
-            
+
             <section id="vuelosVuelta"></section>
           </div>
           <!---------------------------------------- OPCIONES DE VUELO ------------------------------------------>
@@ -455,6 +470,7 @@
   <!-- File JS -->
   <script src="./js/clases/viaje.js"></script>
   <script src="./js/flight.js"></script>
+  <script src="./js/functions.js"></script>
   <script src="./js/index.js"></script>
 </body>
 

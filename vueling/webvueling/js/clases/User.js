@@ -56,4 +56,14 @@ class User {
             password: this.#password
         }
     }
+
+    toRegisterObject() {
+        return {
+            nom: this.#nom,
+            cognom: this.#cognom,
+            email: this.#email,
+            password: this.#password,
+            dni: this.#dni
+        }
+    }
 }

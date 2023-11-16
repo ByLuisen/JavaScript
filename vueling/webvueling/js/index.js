@@ -1,5 +1,15 @@
+'use strict'
 // Al cargar la pagina
 document.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem('loged') != null) {
+        document.getElementById('iconoUser').classList.add('d-none')
+        document.getElementById('logout').classList.replace('d-none', 'd-block')
+    } else {
+        document.getElementById('iconoUser').classList.replace('d-block', 'd-none')
+        document.getElementById('logout').classList.replace('d-block', 'd-none')
+    }
+    existeCookie()
+    contadorVisitas()
     inicializarSelects()
     deshabilitarImagenes()
 });

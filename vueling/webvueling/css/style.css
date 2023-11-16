@@ -4,6 +4,31 @@ body * {
 	box-sizing: border-box;
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 1000;
+}
+
+.popup {
+    position: fixed;
+    top: 90%;
+    left: 50%;
+	width: 100%;
+	height: 200px;
+    transform: translate(-50%, -50%);
+    background: #575050;
+    padding: 20px;
+    text-align: center;
+    display: none;
+    z-index: 1001;
+}
+
 #indicador {
 	width: 230px;
 	background: #FFCC00;

@@ -237,3 +237,12 @@ function verificaDNI() {
     }
     return flag;
 }
+
+// Función para manejar los errores generales
+const handleGeneralError = (err) => {
+    // Imprimir los datos de error en la consola
+    console.error(err);
+
+    // Mostrar mensaje de error al usuario de alguna manera (por ejemplo, una alerta)
+    alert(err.message || 'Error desconocido');
+};

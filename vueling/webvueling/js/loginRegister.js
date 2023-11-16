@@ -1,3 +1,11 @@
+'use strict'
+// Al cargar la pagina
+document.addEventListener("DOMContentLoaded", function () {
+    localStorage.removeItem('loged')
+    existeCookie()
+    contadorVisitas()
+});
+
 document.getElementById('login').addEventListener('click', login)
 document.getElementById('register').addEventListener('click', register)
 
@@ -12,16 +20,16 @@ document.getElementById("loginBtn").addEventListener("click", function () {
         let user = new User(email.trim(), pass.trim())
         validarUsuario(user.toLoginObject())
             .then(success => {
-                sessionStorage.setItem('loged', true)
+                localStorage.setItem('loged', true)
                 credencialesCorrectas()
             })
             .catch(error => {
                 // Manejo del error
                 credencialesIncorrectas(error)
                 console.log(error);
-            }); 
+            });
     }
-    })
+})
 
 //-------------------------------------EVENTOS PAGINA DE REGISTRO -----------------------------------------
 
@@ -54,8 +62,34 @@ document.getElementById("signUpBtn").addEventListener("click", function () {
     if (campo1 && campo2 && campo3 && campo4 && campo5 && campo6) {
         let email = document.getElementById("signUpEmail").value
         let pass = document.getElementById("signUpPassword").value
-        usuaris.push(email)
-        contrasenyes.push(pass)
+        let nombre = document.getElementById("signUpName").value
+        let apellidos = document.getElementById("signUpLastN").value
+        let dni = document.getElementById("signUpDNI").value
+        let newUser = new User(email.trim(), pass.trim(), nombre.trim(), apellidos.trim(), dni.trim())
+
+        console.log(newUser.toRegisterObject())
+
+        fetch('http://localhost:3000/vueling/register', {
+            method: "POST",
+            body: JSON.stringify(newUser.toRegisterObject()),
+            headers: { "Content-type": "application/json; charset=UTF-8" }
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else if (response.status === 409) {
+                    throw new Error('Conflicto: El usuario ya existe en la base de datos');
+                } else {
+                    throw new Error('Error en la solicitud: ' + response.statusText);
+                }
+            })
+            .then(json => {
+                console.log(json);
+                if (!json.error) {
+                    console.log(json.message)
+                }
+            })
+            .catch(handleGeneralError);
         document.getElementById("signUpInfo").innerHTML = "USUARIO REGISTRADO CORRECTAMENTE"
     }
 })

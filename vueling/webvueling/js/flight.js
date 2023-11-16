@@ -1,26 +1,27 @@
 /**
-   * @file Manages the configuration settings for the widget.
+   * @file Fichero de funciones para la página index.js
    * @author Luis Enrique
 */
+'use strict'
 
-let aeropuertos = ['Barcelona España BCN', 'Agadir Marruecos AGA', 'Alicante España ALC',
-    'Almería España LEI', 'Amán Jordania AMM', 'Ámsterdam Países Bajos AMS']
-let selectOrigen = document.getElementById("aeropuertoOrigen")
-let selectDestino = document.getElementById("aeropuertoDestino")
-let horasIda = ["10:30", "14:00"]
-let horasVuelta = ["20:00", "22:20"]
+// Arrays de horas de vuelos
+const horasIda = ["10:30", "14:00"]
+const horasVuelta = ["20:00", "22:20"]
 
 /**
-   * Determina el volumen de un cilindro con la altura y radio especificado
-   * @param {number} radio -  El radio de los círculos laterales del cilindro
-   * @param {number} altura - La altura del cilindro
-   * @return {number}
+   * Genera los billetes de diferentes vuelos
 */
 function generarPlantillaVuelos() {
     plantillaVuelos(horasIda, 'vuelosIda', 'Ida')
     plantillaVuelos(horasVuelta, 'vuelosVuelta', 'Vuelta')
 }
 
+/**
+ * Plantilla que define la estructura del billete de vuelo
+ * @param {array} arrayHoras Array que contine las diferentes horas de los vuelos
+ * @param {string} contenedorId String del contenedor donde se almacenaran los vuelos
+ * @param {string} tipoVuelo String que el tipo de vuelo que es
+ */
 function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
     const contenedor = document.getElementById(contenedorId);
 
@@ -28,10 +29,10 @@ function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
     contenedor.innerHTML = ""
 
     for (let hora of arrayHoras) {
-        let nuevaDiv = document.createElement('div');
+        let nuevaDiv = document.createElement('div'); // creamos un nuevo elemento div
         nuevaDiv.className = `col-12 mb-3 d-flex p-4 align-items-center border border-success rounded cardVuelos${tipoVuelo}`;
         nuevaDiv.style.backgroundColor = '#F7F7F7';
-        let precioAleatorio = (Math.random() * 151).toFixed(2)
+        let precioAleatorio = (Math.random() * 151).toFixed(2) // precio aleatorio
         let euros = precioAleatorio.split('.')[0]
         let centimos = precioAleatorio.split('.')[1]
 
@@ -64,33 +65,77 @@ function plantillaVuelos(arrayHoras, contenedorId, tipoVuelo) {
     </button>
 `;
 
-        contenedor.appendChild(nuevaDiv);
+        contenedor.appendChild(nuevaDiv);// Añadimos el elemento creado al contenedor
     }
 }
 
+/**
+ * Función que carga los selects con los valores extraidos de la base de datos
+ */
 function inicializarSelects() {
-    for (let i = 0; i < aeropuertos.length; i++) {
-        let optionOrigen = document.createElement("option");
-        optionOrigen.value = aeropuertos[i].split(" ")[0];
-        optionOrigen.innerHTML = aeropuertos[i];
-        let optionDestino = optionOrigen.cloneNode(true); // Clona el elemento para el otro select
-        selectOrigen.appendChild(optionOrigen);
-        selectDestino.appendChild(optionDestino);
-    }
+    // Ejercicio 1: Realizar la solicitud al backend
+    fetch('http://localhost:3000/vueling/ciudades')
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                handleServerError(response);
+            }
+        })
+        .then(json => {
+            guardarEnSelect(json)
+        })
+        .catch(error => {
+            console.error('Error general:', error.message)
+        });
 }
 
+// Función para imprimir los datos en un elemento "select"
+const guardarEnSelect = (json) => {
+    // Verificar si el elemento "select" existe en el documento
+
+    const selectOrigen = document.getElementById("aeropuertoOrigen")
+    const selectDestino = document.getElementById("aeropuertoDestino")
+    if (selectOrigen || selectDestino) {
+        // Iterar sobre los objetos en el array
+        json.resultats.forEach((obj) => {
+            // Crear una opción para cada objeto y agregarla al "select"
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    let optionOrigen = document.createElement("option")
+                    optionOrigen.value = obj[key].split(" ")[0]
+                    optionOrigen.innerHTML = obj[key]
+                    let optionDestino = optionOrigen.cloneNode(true) // Clona el elemento para el otro select
+                    selectOrigen.appendChild(optionOrigen)
+                    selectDestino.appendChild(optionDestino)
+                }
+            }
+        });
+    } else {
+        console.log('El elemento "select" no se encontró en el documento.');
+    }
+};
+
+/**
+ * Función que cambia el estado del calendario dependiendo del tipo de vuelo
+ */
 function estadoCalendarioVuelta() {
     let radioIdaVuelta = document.getElementById("radioIdaVuelta")
     let radioIda = document.getElementById("radioIda")
     let calendarioVuelta = document.getElementById("vuelta")
-    if (radioIdaVuelta.checked) {
+    if (radioIdaVuelta.checked) { // Si el radio del IdaVuelta esta chequeado el calendario se muestra
         calendarioVuelta.style.display = "block"
     }
-    if (radioIda.checked) {
+    if (radioIda.checked) { // Si no, no se muestra
         calendarioVuelta.style.display = "none"
     }
 }
 
+/**
+ * Función que oculta los valores de los aeropuertos elegidos
+ * @param {string} select1Id String del select 1 donde se ha seleccioniado el valor
+ * @param {string} select2Id String del select 2 donde se quiere ocultar el valor
+ */
 function ocultarAeropuerto(select1Id, select2Id) {
     let opcionSeleccionado = document.getElementById(select1Id).value
     let select = document.getElementById(select2Id)
@@ -101,11 +146,11 @@ function ocultarAeropuerto(select1Id, select2Id) {
             option.style.display = "block"; // Muestra las otras opciones
         }
     }
-    if (select.value != 0) {
-        inicializarCalendarios()
-        document.getElementById("ida").focus()
-    } else {
-        select.focus()
+    if (select.value != 0) { // Si el valor es diferente de 0 significa que ha seleccionado una opcion
+        inicializarCalendarios() // Se llama a la función para que se inicializen los calendarios
+        document.getElementById("ida").focus() // Y hacemos focus en el calendario de ida
+    } else {// Si no ha seleccionado ninguna opcion hacemos focus al select
+        select.focus() 
     }
 }
 

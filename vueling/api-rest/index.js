@@ -38,10 +38,10 @@ const handleDatabaseError = (err, res, message, connection) => {
     }
 };
 
-// --------------------------------------------------------------Exercici consulta alumnes
+// -------------------------------------------------------------- LOGIN USUARIO
 app.post('/vueling/login', (req, res) => {
     const { email, password } = req.body;
-
+    console.log(req.body)
     // Adquirir una conexión desde el pool
     pool.getConnection(function (err, connection) {
         if (err) {
@@ -74,3 +74,83 @@ const checkUser = (email, password, res, connection) => {
         connection.release();
     });
 };
+
+// --------------------------------------------------------------------------- REGISTRAR USUARIO
+app.post('/vueling/register', (req, res) => {
+    const { nom, cognom, email, password, dni } = req.body;
+    console.log(req.body)
+    // Adquirir una conexión desde el pool
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            connection.release();
+            console.error('Error adquiriendo conexión del pool: ' + err.stack);
+            return res.status(500).send({ error: true, message: 'Error en la conexión a la base de datos' });
+        }
+
+        // Consultar la base de datos para verificar la existencia del usuario
+        checkUserExistence(nom, cognom, email, password, dni, res, connection);
+    });
+});
+
+// Función para verificar la existencia del usuario
+const checkUserExistence = (nom, cognom, email, password, dni, res, connection) => {
+    connection.query('SELECT * FROM users WHERE email = ?', [email], (selectError, selectResults) => {
+        if (selectError) {
+            handleDatabaseError(selectError, res, 'Error en la consulta de selección', connection);
+            return;
+        }
+
+        // Verifica si ya existe un usuario con el mismo nombre de usuario
+        if (selectResults.length > 0) {
+            console.log('El usuario ya existe en la base de datos');
+            res.status(409).send({ error: true, message: 'El usuario ya existe en la base de datos' });
+
+            // Liberar la conexión de vuelta al pool
+            connection.release();
+            return;
+        }
+
+        // Si no hay resultados, procede con la inserción
+        insertUser(nom, cognom, email, password, dni, res, connection);
+    });
+};
+
+// Función para realizar la inserción del usuario
+const insertUser = (nom, cognom, email, password, dni, res, connection) => {
+    connection.query('INSERT INTO users VALUES (?, ?, ?, ?, ?)', [nom, cognom, email, password, dni], (insertError) => {
+        if (insertError) {
+            handleDatabaseError(insertError, res, 'Error en la consulta de inserción', connection);
+            return;
+        }
+
+        res.status(200).send({ error: false, message: 'Usuario insertado correctamente en la base de datos' });
+
+        // Liberar la conexión de vuelta al pool
+        connection.release();
+    });
+};
+
+// --------------------------------------------------------------------------- SELECTS CIUDAD
+app.get('/vueling/ciudades', function (req, res) {
+    // Adquirir una conexión desde el pool
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            connection.release();
+            console.error('Error adquiriendo conexión del pool: ' + err.stack);
+            return res.status(500).send({ error: true, message: 'Error en la conexión a la base de datos' });
+        }
+
+        // Consultar la base de datos para obtener todos los usuarios
+        connection.query('SELECT nom_ciutat FROM ciutats', function (error, results, field) {
+            // Liberar la conexión de vuelta al pool
+            connection.release();
+
+            if (error) {
+                res.status(400).send({ error: true, resultats: null, message: "Hi ha un error amb la teva consulta" });
+            } else {
+                res.status(200).send({ error: false, resultats: results, message: "Perfecte!!!" });
+            }
+        });
+    });
+});
+
