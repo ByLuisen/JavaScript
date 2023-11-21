@@ -25,33 +25,40 @@
 
 <body style="background-color: #181A1B;">
     <div class="container">
-        <div class="row col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4 p-0">
+        <div class="row justify-content-center">
             <!---------------------------------------- Formulario para registrarse ------------------------------------------>
-            <div id="signup" class="justify-content-center">
+            <div id="signup" class="col-12">
                 <div class="form-signup rounded-3">
-
-                    <div class="p-5">
-                        <div class="form-floating">
-                            <input type="text" class="form-control border-2" id="nombre">
-                            <label for="nombre" class="text-secondary">Nombre</label>
-                            <p style="margin:0; height: 23px;" id="successNombre"></p>
+                    <div class="px-5 pt-5" style="margin-left: 400px">
+                        <div class="d-flex align-items-center">
+                            <div class="form-floating w-50">
+                                <input type="text" class="form-control border-2" id="nombre" placeholder="">
+                                <label for="nombre" class="text-secondary">Nombre</label>
+                            </div>
+                            <p style="color: red; margin:0; height: 23px;" id="errorNombre"></p>
                         </div>
+                        <p style="color: white; margin:0; height: 23px;" id="successNombre"></p>
 
-                        <div class="form-floating">
-                            <input type="text" class="form-control border-2" id="edad">
-                            <label for="edad" class="text-secondary">Edad</label>
-                            <p style="margin:0; height: 23px;" id="successEdad"></p>
+                        <div class="d-flex align-items-center">
+                            <div class="form-floating w-50">
+                                <input type="text" class="form-control border-2" id="edad" maxlength="3" placeholder="">
+                                <label for="edad" class="text-secondary">Edad</label>
+                            </div>
+                            <p style="color: red; margin:0; height: 23px;" id="errorEdad"></p>
                         </div>
+                        <p style="color: white; margin:0; height: 23px;" id="successEdad"></p>
 
-                        <div class="form-floating">
-                            <input type="text" class="form-control border-2" id="dni" maxlength="9">
-                            <label for="dni" class="text-secondary">DNI</label>
-                            <p style="margin:0; height: 23px;" id="successDni"></p>
+                        <div class="d-flex align-items-center">
+                            <div class="form-floating w-50">
+                                <input type="text" class="form-control border-2" id="dni" maxlength="9" placeholder="">
+                                <label for="dni" class="text-secondary">DNI</label>
+                            </div>
+                            <p style="color: red; margin:0; height: 23px;" id="errorDni"></p>
                         </div>
-
-                        <div class="text-center mt-4">
-                            <button class="btn btn-warning rounded-pill fs-5 w-50 py-2" id="validar">Validar</button>
-                        </div>
+                        <p style="color: white; margin:0; height: 23px;" id="successDni"></p>
+                    </div>
+                    <div class="text-center w-100">
+                        <button class="btn btn-warning rounded-pill w-25 fs-5 py-2" id="validar">Validar</button>
                     </div>
                 </div>
             </div>
@@ -64,6 +71,7 @@
     <!-- Link to local jquery -->
     <script src="vendor/jquery-3.7.1.min.js"></script>
     <!-- Mi archivo de Jquery -->
+    <script src="js/auth.js"></script>
     <script src="js/index.js"></script>
 </body>
 

@@ -1,25 +1,21 @@
-function validarDni() {
-    let dni = $('#dni').val()
-    let patron = /^\d{8}[a-zA-Z]$/;
-    let flag = false
-    if (dni == '') {
-        document.getElementById("errorDNI").innerHTML = "Debes completar este campo"
-        document.getElementById("signUpDNI").style.borderColor = "red"
-        flag = false;
-    } else if (!patron.test(dni)) {
-        document.getElementById("errorDNI").innerHTML = "El DNI introducido no és correcto"
-        document.getElementById("signUpDNI").style.borderColor = "red"
-        flag = false;
-    } else if (patron.test(dni)) {
-        if (!verificaDNI()) {
-            document.getElementById("errorDNI").innerHTML = "El DNI introducido no es real"
-            document.getElementById("signUpDNI").style.borderColor = "red"
-            flag = false;
-        } else {
-            document.getElementById("errorDNI").innerHTML = ""
-            document.getElementById("signUpDNI").style.borderColor = "grey"
-            flag = true
-        }
+//-------------------------------------EVENTOS PAGINA DE VALIDACIÓN -----------------------------------------
+
+// valida el nombre
+$('#nombre').blur(validarNombre)
+
+// valida la edad
+$('#edad').on('blur', validarEdad)
+
+// valida el dni
+$('#dni').on('blur', validarDni)
+
+$('#validar').on('click', function () {
+    let campo1 = validarNombre()
+    let campo2 = validarEdad()
+    let campo3 = validarDni()
+    if (campo1 && campo2 && campo3) {
+        $('#successNombre').text($('#nombre').val())
+        $('#successEdad').text($('#edad').val())
+        $('#successDni').text($('#dni').val())
     }
-    return flag
-}
+})
