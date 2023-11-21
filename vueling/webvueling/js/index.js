@@ -77,7 +77,6 @@ document.getElementById('buscarVuelo').addEventListener('click', function () {
     let select1 = document.getElementById('aeropuertoOrigen').value
     let select2 = document.getElementById('aeropuertoDestino').value
     if (select1 != 0 && select2 != 0) {
-        generarPlantillaVuelos()
         resumirVuelo()
         document.getElementById('resumenVuelo').classList.replace('d-none', 'd-block')
     } else if (select1 == 0) {

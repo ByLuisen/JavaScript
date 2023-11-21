@@ -11,9 +11,11 @@ const horasVuelta = ["20:00", "22:20"]
 /**
    * Genera los billetes de diferentes vuelos
 */
-function generarPlantillaVuelos() {
+function generarPlantillaVuelos(soloIda) {
     plantillaVuelos(horasIda, 'vuelosIda', 'Ida')
-    plantillaVuelos(horasVuelta, 'vuelosVuelta', 'Vuelta')
+    if (!soloIda) {
+        plantillaVuelos(horasVuelta, 'vuelosVuelta', 'Vuelta')
+    }
 }
 
 /**
@@ -150,7 +152,7 @@ function ocultarAeropuerto(select1Id, select2Id) {
         inicializarCalendarios() // Se llama a la función para que se inicializen los calendarios
         document.getElementById("ida").focus() // Y hacemos focus en el calendario de ida
     } else {// Si no ha seleccionado ninguna opcion hacemos focus al select
-        select.focus() 
+        select.focus()
     }
 }
 
@@ -215,14 +217,15 @@ function actualizarFechaMinima(fechaIda) {
 }
 
 function resumirVuelo() {
-    origenDestinoVuelo()
     let soloIda = tipoVuelo()
+    generarPlantillaVuelos(soloIda)
+    origenDestinoVuelo()
     numeroPasajeros()
     fechaVuelo(soloIda)
-    seleccionarVuelo('Ida')
-    // seleccionarOpcionVuelo(seleccionarVuelo('Ida'), seleccionarVuelo('Vuelta'))
-    calcularPrecioFinal(soloIda)
+    seleccionarOpcionVuelo(soloIda)
+    // calcularPrecioFinal(soloIda)
 }
+
 function origenDestinoVuelo() {
     let origen = obtenerAeropuerto('aeropuertoOrigen', 'origen')
     let destino = obtenerAeropuerto('aeropuertoDestino', 'destino')
@@ -249,12 +252,12 @@ function tipoVuelo() {
     let flag = false
     if (radioIdaVuelta.checked) {
         mensaje = "Ida y vuelta"
-        document.getElementById("vuelosVuelta").style.display = "block";
+        document.getElementById("seccionVuelta").style.display = "block";
         flag = false
     }
     if (radioIda.checked) {
         mensaje = "Solo ida"
-        document.getElementById("vuelosVuelta").style.display = "none";
+        document.getElementById("seccionVuelta").style.display = "none";
         flag = true
     }
     document.getElementById('infoVuelo').innerHTML = mensaje
@@ -290,22 +293,30 @@ function fechaVuelo(soloIda) {
 }
 
 function seleccionarVuelo(tipoVuelo) {
-    let botonVuelos = document.getElementsByClassName(`botonVuelos${tipoVuelo}`)
-    Array.from(botonVuelos).forEach(function (boton, index) {
+    let seleccion = null
+    let botonesVuelos = document.getElementsByClassName(`botonVuelos${tipoVuelo}`)
+    Array.from(botonesVuelos).forEach(function (boton, index) {
         boton.addEventListener('click', function () {
-            let cardVuelos = document.getElementsByClassName(`cardVuelos${tipoVuelo}`)
-            Array.from(cardVuelos).forEach(function (card, i) {
+            let cardsVuelos = document.getElementsByClassName(`cardVuelos${tipoVuelo}`)
+            Array.from(cardsVuelos).forEach(function (card, i) {
                 if (i != index) {
                     card.classList.add('d-none')
                 }
             })
-            return boton.value
+            seleccion = boton.value
         })
-    });
+    })
+    return seleccion
 }
 
-function seleccionarOpcionVuelo(precioIda, precioVuelta = 0) {
-    if (precioIda != undefined) {
+function seleccionarOpcionVuelo(soloIda) {
+    let precio = 0
+    precio += seleccionarVuelo('Ida')
+    if (!soloIda) {
+        precio += seleccionarVuelo('Vuelta')
+    }
+    console.log(precio)
+    if (precio != 0) {
         document.getElementById('opcionesVuelo').classList.replace('d-none', 'd-block')
     }
 }

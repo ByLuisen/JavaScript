@@ -52,18 +52,7 @@
       </div>
     </nav>
   </header>
-  <!---------------------------------------- POPUP COOKIE ------------------------------------------>
-  <div id="cookie-overlay" class="overlay"></div>
-  <div id="cookie-popup" class="popup p-5">
-    <div class="justify-content-center text-white">
-      <h4>Antes de continuar tienes que aceptar las cookies</h4>
-      <div class="mt-5">
-        <button id="aceptarCookie" class="btn btn-warning">Aceptar todas las cookies</button>
-        <button id="rechazarCookie" class="btn btn-warning mx-3">Rechazar cookies</button>
-        <button id="minimaCookie" class="btn btn-warning">Aceptar mínimas</button>
-      </div>
-    </div>
-  </div>
+
 
   <!---------------------------------------- BUSCADOR DE VUELOS ------------------------------------------>
   <section id="buscador">
@@ -231,14 +220,15 @@
             <section id="vuelosIda">
             </section>
 
+            <div id="seccionVuelta">
+              <div class="d-flex align-items-end justify-content-center mb-4">
+                <img src="img/vuelta.png" alt="vuelta" height="25px">
+                <p class="ms-2 me-3">Vuelta</p>
+                <h4 id="destino-origen" class="text-secondary"></h4>
+              </div>
 
-            <div class="d-flex align-items-end justify-content-center mb-4">
-              <img src="img/vuelta.png" alt="vuelta" height="25px">
-              <p class="ms-2 me-3">Vuelta</p>
-              <h4 id="destino-origen" class="text-secondary"></h4>
+              <section id="vuelosVuelta"></section>
             </div>
-
-            <section id="vuelosVuelta"></section>
           </div>
           <!---------------------------------------- OPCIONES DE VUELO ------------------------------------------>
           <div id="opcionesVuelo" class="mb-4 d-none">
