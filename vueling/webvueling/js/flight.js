@@ -7,6 +7,7 @@
 // Arrays de horas de vuelos
 const horasIda = ["10:30", "14:00"]
 const horasVuelta = ["20:00", "22:20"]
+let seleccionado
 
 /**
    * Genera los billetes de diferentes vuelos
@@ -217,12 +218,17 @@ function actualizarFechaMinima(fechaIda) {
 }
 
 function resumirVuelo() {
+    document.getElementById('opcionesVuelo').classList.replace('d-block', 'd-none')
     let soloIda = tipoVuelo()
     generarPlantillaVuelos(soloIda)
     origenDestinoVuelo()
     numeroPasajeros()
     fechaVuelo(soloIda)
-    seleccionarOpcionVuelo(soloIda)
+    seleccionado = 0
+    seleccionarVuelo('Ida', soloIda)
+    if (!soloIda) {
+        seleccionarVuelo('Vuelta', soloIda)
+    }
     // calcularPrecioFinal(soloIda)
 }
 
@@ -292,8 +298,7 @@ function fechaVuelo(soloIda) {
     }
 }
 
-function seleccionarVuelo(tipoVuelo) {
-    let seleccion = null
+function seleccionarVuelo(tipoVuelo, soloIda) {
     let botonesVuelos = document.getElementsByClassName(`botonVuelos${tipoVuelo}`)
     Array.from(botonesVuelos).forEach(function (boton, index) {
         boton.addEventListener('click', function () {
@@ -303,20 +308,17 @@ function seleccionarVuelo(tipoVuelo) {
                     card.classList.add('d-none')
                 }
             })
-            seleccion = boton.value
+            seleccionado++
+            estadoOpcionesVuelo(soloIda)
         })
     })
-    return seleccion
 }
 
-function seleccionarOpcionVuelo(soloIda) {
-    let precio = 0
-    precio += seleccionarVuelo('Ida')
-    if (!soloIda) {
-        precio += seleccionarVuelo('Vuelta')
+function estadoOpcionesVuelo(soloIda) {
+    if (soloIda) {
+        document.getElementById('opcionesVuelo').classList.replace('d-none', 'd-block')
     }
-    console.log(precio)
-    if (precio != 0) {
+    if (seleccionado == 2) {
         document.getElementById('opcionesVuelo').classList.replace('d-none', 'd-block')
     }
 }
