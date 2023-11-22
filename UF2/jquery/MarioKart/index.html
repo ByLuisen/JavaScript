@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Configuración del encabezado de la página -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Enlaces a Bootstrap (localmente) -->
+    <link rel="stylesheet" href="./vendor/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./vendor/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Archivos CSS personalizados -->
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <!-- Título de la página -->
+    <title>Formulario</title>
+</head>
+
+<body style="background-image: url(img/fondo.jpg);">
+    <!-- Contenedor principal de la página -->
+    <div class="container">
+        <!-- Fila para los encabezados "Personajes" y "Objetos" -->
+        <div class="row my-5">
+            <!-- Doble contenedor con encabezados -->
+            <div class="d-flex text-center text-white justify-content-center">
+                <!-- Contenedor "Personajes" -->
+                <div class="me-4">
+                    <h2 class="text-uppercase">Personajes</h2>
+                    <!-- Contenedor de elementos arrastrables para "Personajes" -->
+                    <div id="personajes" class="d-flex flex-wrap align-content-start bg-danger rounded-3" style="width: 400px; height: 400px;">
+                    </div>
+                </div>
+
+                <!-- Contenedor "Objetos" -->
+                <div class="ms-4">
+                    <h2 class="text-uppercase">Objetos</h2>
+                    <!-- Contenedor de elementos arrastrables para "Objetos" -->
+                    <div id="objetos" class="d-flex flex-wrap align-content-start bg-danger rounded-3" style="width: 400px; height: 400px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fila para las imágenes arrastrables -->
+        <div class="row">
+            <!-- Contenedor de imágenes arrastrables -->
+            <div class="d-flex flex-wrap justify-content-center align-items-center">
+                <!-- Imágenes de personajes y objetos -->
+                <div class="personajes">
+                    <img src="img/luigi_th.png" alt="Luigi">
+                </div>
+
+                <div class="objetos">
+                    <img src="img/th_blueShell.png" alt="Blue Shell">
+                </div>
+
+                <div class="personajes">
+                    <img src="img/mario_th.png" alt="Mario">
+                </div>
+
+                <div class="objetos">
+                    <img src="img/th_bullet.png" alt="Bullet">
+                </div>
+
+                <div class="personajes">
+                    <img src="img/peach_th.png" alt="Peach">
+                </div>
+
+                <div class="objetos">
+                    <img src="img/th_multiRedShell.png" alt="Multi Shell">
+                </div>
+
+                <div class="objetos">
+                    <img src="img/th_peel.png" alt="Peel">
+                </div>
+
+                <div class="personajes">
+                    <img src="img/yoshi_th.png" alt="Yoshi">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enlaces a jQuery y jQuery UI (localmente) -->
+    <script src="vendor/jquery-3.7.1.min.js"></script>
+    <script src="vendor/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script>
+
+    <!-- Script personalizado -->
+    <script src="js/index.js"></script>
+</body>
+
+</html>
