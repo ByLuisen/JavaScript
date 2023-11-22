@@ -323,7 +323,6 @@ function estadoOpcionesVuelo(soloIda) {
     }
 }
 
-
 function calcularPrecioFinal(vueloIda) {
     // let numPasajeros = document.getElementById('pasajeros').value.split(" ")[0]
     let numAdultos = document.getElementById('totalAdulto').textContent
