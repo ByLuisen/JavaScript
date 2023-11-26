@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlaces a Bootstrap (localmente) -->
+    <link rel="stylesheet" href="./vendor/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./vendor/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Archivos CSS personalizados -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Lista de ciudades</title>
+</head>
+
+<body>
+    <!-- Contenedor pricipal de la página -->
+    <div class="container">
+        <!-- Fila para diferentes tipos dde botones -->
+        <div class="row">
+            <div class="d-flex justify-content-center my-5">
+                <div>
+                    <button id="addFinal" class="btn border">Añadir al final de la lista</button>
+                    <button id="addInicio" class="btn border">Añadir al inicio de la lista</button>
+                    <button id="delFinal" class="btn border">Eliminar el último elemento</button>
+                    <button id="delInicio" class="btn border">Eliminar el primer elemento</button>
+                    <button id="delPrimerSegundo" class="btn border">Eliminar el primero y el segundo elemento</button>
+                </div>
+            </div>
+        </div>
+        <!-- Fila para listar las ciudades -->
+        <div class="row justify-content-center">
+            <div class="d-flex justify-content-center">
+                <ol id="ciudades">
+                </ol>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Enlaces a jQuery y jQuery UI (localmente) -->
+    <script src="vendor/jquery-3.7.1.min.js"></script>
+    <script src="vendor/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script>
+
+    <!-- Script personalizado -->
+    <script src="js/index.js"></script>
+</body>
+
+</html>
