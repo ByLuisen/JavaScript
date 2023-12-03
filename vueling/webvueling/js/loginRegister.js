@@ -67,29 +67,59 @@ document.getElementById("signUpBtn").addEventListener("click", function () {
         let dni = document.getElementById("signUpDNI").value
         let newUser = new User(email.trim(), pass.trim(), nombre.trim(), apellidos.trim(), dni.trim())
 
-        console.log(newUser.toRegisterObject())
+        /** 
+         * Con XMLHttpRequest
+         */
+        const xhr = new XMLHttpRequest();
+        const url = 'http://localhost:3000/vueling/register';
 
-        fetch('http://localhost:3000/vueling/register', {
-            method: "POST",
-            body: JSON.stringify(newUser.toRegisterObject()),
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else if (response.status === 409) {
-                    throw new Error('Conflicto: El usuario ya existe en la base de datos');
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    document.getElementById("signUpInfo").innerHTML = "USUARIO REGISTRADO CORRECTAMENTE"
+                    const json = JSON.parse(xhr.responseText);
+                    console.log(json);
+                    if (!json.error) {
+                        console.log(json.message);
+                    }
+                } else if (xhr.status === 409) {
+                    console.error('Conflicto: El usuario ya existe en la base de datos');
                 } else {
-                    throw new Error('Error en la solicitud: ' + response.statusText);
+                    console.error('Error en la solicitud: ' + xhr.statusText);
                 }
-            })
-            .then(json => {
-                console.log(json);
-                if (!json.error) {
-                    console.log(json.message)
-                }
-            })
-            .catch(handleGeneralError);
-        document.getElementById("signUpInfo").innerHTML = "USUARIO REGISTRADO CORRECTAMENTE"
+            }
+        };
+
+        const requestBody = JSON.stringify(newUser.toRegisterObject());
+        xhr.send(requestBody);
+
+        /**
+         * Con fecth
+         */
+        // fetch('http://localhost:3000/vueling/register', {
+        //     method: "POST",
+        //     body: JSON.stringify(newUser.toRegisterObject()),
+        //     headers: { "Content-type": "application/json; charset=UTF-8" }
+        // })
+        //     .then(response => {
+        //         if (response.ok) {
+        //             document.getElementById("signUpInfo").innerHTML = "USUARIO REGISTRADO CORRECTAMENTE"
+        //             return response.json();
+        //         } else if (response.status === 409) {
+        //             throw new Error('Conflicto: El usuario ya existe en la base de datos');
+        //         } else {
+        //             throw new Error('Error en la solicitud: ' + response.statusText);
+        //         }
+        //     })
+        //     .then(json => {
+        //         console.log(json);
+        //         if (!json.error) {
+        //             console.log(json.message)
+        //         }
+        //     })
+        //     .catch(handleGeneralError);
     }
 })

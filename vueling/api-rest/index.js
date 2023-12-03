@@ -78,7 +78,7 @@ const checkUser = (email, password, res, connection) => {
 // --------------------------------------------------------------------------- REGISTRAR USUARIO
 app.post('/vueling/register', (req, res) => {
     const { nom, cognom, email, password, dni } = req.body;
-    console.log(req.body)
+
     // Adquirir una conexión desde el pool
     pool.getConnection(function (err, connection) {
         if (err) {
@@ -116,6 +116,7 @@ const checkUserExistence = (nom, cognom, email, password, dni, res, connection) 
 };
 
 // Función para realizar la inserción del usuario
+// INSERT INTO users (password) VALUES (?)
 const insertUser = (nom, cognom, email, password, dni, res, connection) => {
     connection.query('INSERT INTO users VALUES (?, ?, ?, ?, ?)', [nom, cognom, email, password, dni], (insertError) => {
         if (insertError) {
