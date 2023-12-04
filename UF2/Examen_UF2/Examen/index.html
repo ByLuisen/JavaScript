@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlaces a Bootstrap (localmente) -->
+    <link rel="stylesheet" href="./vendor/bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="./vendor/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- File CSS -->
+    <!-- <link rel="stylesheet" href="./css/style.css" /> -->
+    <title>Examen UF2</title>
+</head>
+
+<body>
+    <!-- Contenedor pricipal de la página -->
+    <div class="container">
+        <!-- Fila para diferentes tipos de botones -->
+        <div class="row">
+            <div class="d-flex justify-content-center my-5">
+                <div>
+                    <button id="listar" class="btn border">Llistar</button>
+                    <button id="anyadir" class="btn border btn-danger">Afegir</button>
+                    <button id="eliminar" class="btn border btn-primary">Eliminar</button>
+                </div>
+            </div>
+        </div>
+        <!-- OL PARA LISTAR LOS ANIMALES -->
+        <div class="row justify-content-center">
+            <div class="d-flex justify-content-center">
+                <ol id="animales" class="d-block">
+                </ol>
+            </div>
+        </div>
+
+        <!-- FORMULARIO PARA AÑADIR UN ANIMAL -->
+        <div class="row justify-content-center">
+
+            <div id="formulario" class="col-12 d-none">
+                <div class="form-signup rounded-3">
+                    <div class="px-5" style="margin-left: 400px">
+                        <div class="d-flex align-items-center mb-3">
+                            <!---------------------------------------- INPUT ESPECIE ------------------------------------------>
+                            <div class="form-floating w-50">
+                                <input type="text" class="form-control border-2" id="especie" autocomplete=""
+                                    placeholder="" maxlength="50">
+                                <label for="especie" class="text-secondary">Espècie</label>
+                            </div>
+                            <p style="color:red; margin:0; height: 23px;" id="errorEspecie"> </p>
+                        </div>
+                        <!---------------------------------------- CHECKRADIO MACHO ------------------------------------------>
+                        <div class="d-flex align-items-center">
+                            <div class="form-check w-50">
+                                <input class="form-check-input" type="radio" name="sexe" id="mascle" checked>
+                                <label class="form-check-label" for="radioIdaVuelta">
+                                    Mascle
+                                </label>
+                            </div>
+                        </div>
+                        <!---------------------------------------- CHECKRADIO HEMBRAR ------------------------------------------>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="form-check w-50">
+                                <input class="form-check-input" type="radio" name="sexe" id="femella">
+                                <label class="form-check-label" for="radioIda">
+                                    Femella
+                                </label>
+                            </div>
+                            <p style="color: red; margin:0; height: 23px;" id="errorSexe"></p>
+                        </div>
+
+                        <!---------------------------------------- CALENDARIO IDA ------------------------------------------>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="form-floating w-50">
+                                <input id="naixement" class="form-control rounded-0" type="date" readonly />
+                                <label for="naixement">Any de naixement</label>
+                            </div>
+                            <p style="color: red; margin:0; height: 23px;" id="errorFecha"></p>
+                        </div>
+                        <!---------------------------------------- INPUT PAÍS DE ORIGEN ------------------------------------------>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="form-floating w-50">
+                                <input type="text" class="form-control border-2" id="pais" autocomplete=""
+                                    placeholder="" maxlength="30">
+                                <label for="pais" class="text-secondary">País d'origen</label>
+                            </div>
+                            <p style="color: red; margin:0; height: 23px;" id="errorPais"></p>
+                        </div>
+                        <!---------------------------------------- SELECT CONTINENTES ------------------------------------------>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="form-floating w-50">
+                                <select id="continentes" class="form-select rounded-0" aria-label="Large select example"
+                                    role="button">
+                                </select>
+                                <label for="continentes">Continent</label>
+                            </div>
+                            <p style="color: red; margin:0; height: 23px;" id="errorContinente"></p>
+                        </div>
+                    </div>
+                    <div class="text-center w-100">
+                        <button class="btn btn-warning rounded-pill w-25 fs-5 py-2" id="afegirAnimal" disabled>Afegir
+                            animal</button>
+                    </div>
+                </div>
+                <div id="afegirInfo">
+
+                </div>
+            </div>
+        </div>
+        <div class="row mt-auto">
+            <div class="d-flex align-items-center">
+                <p id="visitas"></p>
+                <button class="ms-5 btn btn-danger fs-5 py-2 d-none" id="eliminarCookie">Eliminar
+                    cookie</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Enlaces a jQuery y jQuery UI (localmente) -->
+    <!-- <script src="vendor/jquery-3.7.1.min.js"></script>
+    <script src="vendor/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script> -->
+
+    <!-- Files JS -->
+    <script src="./js/clases/Animal.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

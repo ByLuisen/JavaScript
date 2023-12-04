@@ -59,7 +59,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-LOzK TABLES `users` WRITE;
+LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES ('nom1','cog1','email1','pass1','39419292Y'),('nom2','cog2','email2','pass2','Y2582136D'),('nom3','cog3','email3','pass3','N2415609C'),('noma','lafdj','luis32@gmail.com','12345','46994853b'),('hola','comoa','lu32@gmail.com','12345','46994853b'),('christian','sastre','christian@gmail.com','12345','46994853b');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
