@@ -1,0 +1,47 @@
+<p>Formularios en Angular</p>
+<form [formGroup]="formContacto" (ngSubmit)="submit()">
+<!--
+  touched: he dejado el control, aunque no haya escrito nada -- untouched
+  dirty: tengo que escribir dentro para que se de cuenta -- pristine
+-->
+
+
+
+
+<p> Nombre:
+  <input type="text" formControlName="nombre">
+   <span *ngIf="this.formContacto.get('nombre')?.errors?.['required'] && this.formContacto.get('nombre')?.touched">
+    El nombre no puede estar vacío
+   </span>
+   <span *ngIf="this.formContacto.get('nombre')?.errors?.['minlength'] && this.formContacto.get('nombre')?.touched">
+    El nombre tiene que tener un mínimo de 5 caracteres
+   </span>
+   <span *ngIf="this.formContacto.get('nombre')?.errors?.['maxlength'] && this.formContacto.get('nombre')?.touched">
+    El nombre tiene que tener un máximo de 20 caracteres
+   </span>
+</p>
+<p> Edad:
+  <input type="text" formControlName="edad">
+  <span *ngIf="this.formContacto.get('edad')?.errors?.['required'] && this.formContacto.get('edad')?.touched">
+    La edad no puede estar vacía
+   </span>
+   <span *ngIf="this.formContacto.get('edad')?.errors?.['pattern'] && this.formContacto.get('edad')?.touched">
+    La edad tiene que ser numérica
+   </span>
+</p>
+<p> Email:
+  <input type="text" formControlName="email">
+  <span *ngIf="this.formContacto.get('email')?.errors?.['required'] && this.formContacto.get('email')?.touched">
+    El email no puede estar vacía
+   </span>
+   <span *ngIf="this.formContacto.get('email')?.errors?.['email'] && this.formContacto.get('email')?.touched">
+    El email no tiene el formato correcto
+   </span>
+   <!-- <span *ngIf="this.formContacto.get('email')?.errors?.['pattern']">
+    El email no tiene el formato correcto
+   </span> -->
+
+</p>
+<button type="submit" [disabled]="formContacto.invalid">Confirma datos</button>
+
+</form>

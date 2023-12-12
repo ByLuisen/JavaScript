@@ -1,0 +1,12 @@
+<p>Todo lo del binding vale en esta version:</p>
+<h1> Esto es HTML</h1>
+<h2>Tu nombre es: {{nombre}}</h2>
+<h2>Tu edad es: {{edad}}</h2>
+<h2>Tu fruta favorita: {{frutas[0]}}</h2>
+<p *ngIf="flag">HOOOOLAAAAAA</p>
+<table>
+  <td *ngFor="let fruta of frutas" >
+    <tr>{{fruta}}</tr>
+  </td>
+</table>
+<button (click)="saludo()">Clicame!!!</button>
