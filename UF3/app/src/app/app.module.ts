@@ -9,20 +9,29 @@ import { Componente2Component } from './componentes/componente2/componente2.comp
 
 
 //cargar a mano
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MayoredadDirective } from './directives/mayoredad.directive';
+import { Componente3Component } from './componentes/componente3/componente3.component';
+import { SoloLetrasDirective } from './directives/solo-letras.directive';
+import { PageNotFoundComponent } from './componentes/page-not-found/page-not-found.component';
+//FormsModule se usa para Template Forms --> [(ngModel)]
 
 
 @NgModule({
   declarations: [
     AppComponent,
     Componente1Component,
-    Componente2Component
+    Componente2Component,
+    MayoredadDirective,
+    Componente3Component,
+    SoloLetrasDirective,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

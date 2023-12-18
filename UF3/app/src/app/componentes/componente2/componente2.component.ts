@@ -1,32 +1,32 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, Validators} from  '@angular/forms';//importaciones obligatorias
+import { FormControl, FormGroup, Validators } from '@angular/forms'; //importaciones obligatorias
 
 @Component({
   selector: 'app-componente2',
   templateUrl: './componente2.component.html',
-  styleUrls: ['./componente2.component.css']
+  styleUrls: ['./componente2.component.css'],
 })
 export class Componente2Component {
+  nom: string = 'Maria';
+  data = new Date();
 
-  formContacto=new FormGroup({
-    nombre:new FormControl('',[
+  formContacto = new FormGroup({
+    nombre: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
-      Validators.maxLength(20)
+      Validators.maxLength(20),
     ]),
-    edad:new FormControl('',[
+    edad: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[0-9]+$')
+      Validators.pattern('^[0-9]+$'),
     ]),
-    email:new FormControl('',[
+    email: new FormControl('', [
       Validators.required,
       //Validators.pattern('/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/')
-      Validators.email //<----es una validación muy débil
-    ]
-    )
-   })
-   submit(){
-
-    console.log(this.formContacto.value.nombre)
-   }
+      Validators.email, //<----es una validación muy débil
+    ]),
+  });
+  submit() {
+    console.log(this.formContacto.value.nombre);
+  }
 }

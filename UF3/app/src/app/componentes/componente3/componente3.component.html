@@ -1,0 +1,98 @@
+<h3>Component 3</h3>
+<h4>Formulari reactiu</h4>
+
+<form [formGroup]="formUsuario" (ngSubmit)="submit()">
+  <p>
+    Nom d’usuari *:
+    <input type="text" formControlName="nombreUsuario">
+    <span *ngIf="nombreUsuario?.hasError('required') && nombreUsuario?.touched">
+      El nom d'usuari és obligatori
+    </span>
+    <span *ngIf="nombreUsuario?.hasError('minlength') && nombreUsuario?.touched">
+      El nom d'usuari ha de tenir un mínim de 6 caràcters
+    </span>
+    <span *ngIf="nombreUsuario?.hasError('pattern') && nombreUsuario?.touched">
+      Només s'admeten lletres en el nom d'usuari
+    </span>
+  </p>
+
+  <p>
+    Contrasenya *:
+    <input type="password" formControlName="contrasena">
+    <span *ngIf="contrasena?.hasError('required') && contrasena?.touched">
+      La contrasenya és obligatòria
+    </span>
+    <span *ngIf="contrasena?.hasError('minlength') && contrasena?.touched">
+      La contrasenya ha de tenir un mínim de 8 caràcters
+    </span>
+    <span *ngIf="contrasena?.hasError('pattern') && contrasena?.touched">
+      La contrasenya ha de contenir lletres i números
+    </span>
+  </p>
+
+  <p>
+    Confirmar contrasenya *:
+    <input type="password" formControlName="confirmarContrasena">
+    <span *ngIf="confirmarContrasena?.hasError('required') && confirmarContrasena?.touched">
+      Confirma la contrasenya
+    </span>
+    <span *ngIf="confirmarContrasena?.hasError('minlength') && confirmarContrasena?.touched">
+      La contrasenya ha de tenir un mínim de 8 caràcters
+    </span>
+    <span *ngIf="confirmarContrasena?.hasError('pattern') && confirmarContrasena?.touched">
+      La contrasenya ha de contenir lletres i números
+    </span>
+    <span *ngIf="confirmarContrasena?.hasError('mustMatch') && confirmarContrasena?.touched">
+      Les contrasenyes no coincideixen
+    </span>
+  </p>
+
+  <p>
+    Correu electrònic *:
+    <input type="text" formControlName="correoElectronico">
+    <span *ngIf="correoElectronico?.hasError('required') && correoElectronico?.touched">
+      El correu electrònic és obligatori
+    </span>
+    <span *ngIf="correoElectronico?.hasError('email') && correoElectronico?.touched">
+      El correu electrònic no té el format correcte
+    </span>
+  </p>
+
+  <p>
+    Estat civil *:
+    <select formControlName="estadoCivil">
+      <option *ngFor="let estado of estadosCiviles" [value]="estado">{{ estado }}</option>
+    </select>
+    <span *ngIf="estadoCivil?.hasError('required') && estadoCivil?.touched">
+      Selecciona un estat civil
+    </span>
+  </p>
+
+  <p>
+    Sexe *:
+    <label><input type="radio" value="Dona" formControlName="sexo"> Dona</label>
+    <label><input type="radio" value="Home" formControlName="sexo"> Home</label>
+    <label><input type="radio" value="Altres" formControlName="sexo"> Altres</label>
+    <span *ngIf="sexo?.hasError('required') && sexo?.touched">
+      Selecciona un sexe
+    </span>
+  </p>
+
+  <p>
+    De què vols rebre informació?:
+    <label *ngFor="let interes of intereses">
+      <input type="checkbox" [formControl]="formContro.get('informacion.' + interes)">
+      {{interes}}
+    </label>
+  </p>
+
+  <p>
+    Acceptar condicions *:
+    <label><input type="checkbox" formControlName="aceptarCondiciones"> Acceptar les condicions</label>
+    <span *ngIf="aceptarCondiciones?.hasError('requiredTrue') && aceptarCondiciones?.touched">
+      Has d'acceptar les condicions
+    </span>
+  </p>
+
+  <button type="submit" [disabled]="formUsuario.invalid">Enviar</button>
+</form>
