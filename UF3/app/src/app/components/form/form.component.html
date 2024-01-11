@@ -1,0 +1,147 @@
+<div class="container">
+
+  <h2 class="mt-5 text-center">Formulari de registre</h2>
+
+  <form [formGroup]="formulari" (ngSubmit)="enviament()" class="mt-5">
+    <fieldset>
+      <!--Nom-->
+      <div class="form-group">
+        <legend class="mt-4">Nom d'usuari* :</legend>
+        <input type="text" class="form-control" id="nomUsuari" placeholder="Nom" formControlName="nomUsuari"
+          appValidarNom>
+
+        <div *ngIf="this.formulari.get('nomUsuari')?.errors?.['required'] && this.formulari.get('nomUsuari')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+        <div *ngIf="this.formulari.get('nomUsuari')?.errors?.['custom'] && this.formulari.get('nomUsuari')?.touched"
+          class="alert alert-danger">Només
+          admet lletres i ha de tenir un mínim de 6 caràcters.
+        </div>
+      </div>
+
+      <!--Contrasenya-->
+      <div class="form-group">
+        <legend class="mt-4">Contrasenya* :</legend>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contrasenya"
+          autocomplete="off" formControlName="contrasenya">
+        <div
+          *ngIf="this.formulari.get('contrasenya')?.errors?.['required'] && this.formulari.get('contrasenya')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+        <div
+          *ngIf="this.formulari.get('contrasenya')?.errors?.['pattern'] && this.formulari.get('contrasenya')?.touched"
+          class="alert alert-danger">
+          Ha de contenir lletres i números i tenir un mínim de 8 caràcters.
+        </div>
+
+      </div>
+
+      <!--Confirmar-->
+      <div class="form-group">
+        <legend class="mt-4">Repeteix la Contrasenya* :</legend>
+        <input type="password" appValidarRepetir=contrasenya class="form-control" id="exampleInputPassword2"
+          placeholder="Repeteix contrasenya" autocomplete="off" formControlName="confirmarContrasenya">
+        <div
+          *ngIf="this.formulari.get('confirmarContrasenya')?.errors?.['required'] && this.formulari.get('confirmarContrasenya')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+        <div
+          *ngIf="this.formulari.get('confirmarContrasenya')?.errors?.['custom'] && this.formulari.get('confirmarContrasenya')?.touched"
+          class="alert alert-danger">
+          Les contrasenyes no coincideixen
+        </div>
+
+      </div>
+
+      <!--Correu electrònic-->
+
+      <div class="form-group">
+        <legend class="mt-4">Correu electrònic* :</legend>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Tu email" formControlName="correuElectronic" appValidarEmail>
+        <div
+          *ngIf="this.formulari.get('correuElectronic')?.errors?.['required'] && this.formulari.get('correuElectronic')?.touched"
+          class="alert alert-danger">Aquest camp és obligatori.
+        </div>
+      </div>
+
+      <!-- Status-->
+      <div class="form-group">
+        <legend class="mt-4">Estat civil *:</legend>
+        <select id="estatCivil" class="form-select" formControlName="estatCivil">
+
+          <option [value]="item" *ngFor="let item of status">
+            {{item}}
+          </option>
+
+        </select>
+        <div *ngIf="this.formulari.get('estatCivil')?.errors?.['required'] && this.formulari.get('estatCivil')?.touched"
+          class="alert alert-danger">Aquest camp és obligatori.
+        </div>
+      </div>
+      <!--Sexe-->
+      <fieldset class="form-group">
+        <legend class="mt-4">Sexe *:</legend>
+        <div class="form-check">
+
+          <div *ngFor="let item of sex">
+            <input formControlName="sexe" type="radio" [value]="item" />
+            <label for="sexo">{{item}}</label>
+          </div>
+
+          <div *ngIf="this.formulari.get('sexe')?.errors?.['required'] && this.formulari.get('sexe')?.touched">Aquest
+            camp
+            és obligatori.
+          </div>
+        </div>
+      </fieldset>
+
+      <!--Informacio-->
+      <div
+        *ngIf="this.formulari.get('acceptarCondicions')?.errors?.['requiredTrue'] && this.formulari.get('acceptarCondicions')?.touched">
+        Has d'acceptar les condicions.</div>
+      <fieldset class="form-group">
+        <legend class="mt-3">De què vols rebre informació?</legend>
+        <div class="form-check" *ngFor="let item of info">
+          <input class="form-check-input" type="checkbox" value="" formControlName="informacio"
+            (change)="recollint(item)">
+          <label class="form-check-label" for="flexCheckDefault">
+            {{ item }}
+          </label>
+        </div>
+
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend class="mt-3">Condicions *</legend>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+            formControlName="acceptarCondicions">
+          <label class="form-check-label" for="flexCheckDefault">
+            Accepta la nostra política de privacitat
+          </label>
+        </div>
+        <div
+          *ngIf="this.formulari.get('acceptarCondicions')?.errors?.['requiredTrue'] && this.formulari.get('acceptarCondicions')?.touched">
+          Has d'acceptar les condicions.</div>
+
+
+      </fieldset>
+
+      <button type="submit" class="btn btn-primary" [disabled]="formulari.invalid">Enviar dades</button>
+    </fieldset>
+  </form>
+
+  <figure>
+    <blockquote class="blockquote">
+      <p class="mb-0" *ngIf="newUser!=null">
+        {{newUser.nomUsuari | uppercase}}
+      </p>
+    </blockquote>
+
+  </figure>
+
+</div>

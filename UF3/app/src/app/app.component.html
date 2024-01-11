@@ -1,15 +1,26 @@
-<!-- <h1> Hola DAW 2!!</h1>
-<app-componente1></app-componente1>
-<app-componente2></app-componente2>
-<app-componente3></app-componente3> -->
-<!-- llamada a los componentes usando routing -->
-<h2>Angular Router App</h2>
-<nav>
-  <ul>
-    <li><a routerLink="/first">First Component</a></li>
-    <li><a routerLink="/second">Second Component</a></li>
-    <li><a routerLink="/third">Third Component</a></li>
-  </ul>
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Exercici Angular</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/formulari">Formulari de registre</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">About</a>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
 </nav>
-<!-- al final del menú es OBLIGATORIO poner router-outlet -->
 <router-outlet></router-outlet>
