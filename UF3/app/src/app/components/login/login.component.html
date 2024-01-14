@@ -1,0 +1,53 @@
+<div class="container">
+
+  <h2 class="mt-5 text-center">Login</h2>
+
+  <form [formGroup]="login" (ngSubmit)="enviament()" class="mt-5">
+    <fieldset>
+      <!--Nom-->
+      <div class="form-group">
+        <legend class="mt-4">Nom d'usuari* :</legend>
+        <input type="text" class="form-control" id="nomUsuari" placeholder="Nom" formControlName="nomUsuari"
+          >
+
+        <div *ngIf="this.login.get('nomUsuari')?.errors?.['required'] && this.login.get('nomUsuari')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+        <div *ngIf="this.login.get('nomUsuari')?.errors?.['pattern'] && this.login.get('nomUsuari')?.touched"
+          class="alert alert-danger">Només
+          admet lletres i números ha de tenir un mínim de 6 caràcters.
+        </div>
+      </div>
+
+      <!--Contrasenya-->
+      <div class="form-group">
+        <legend class="mt-4">Contrasenya* :</legend>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contrasenya"
+          autocomplete="off" formControlName="contrasenya">
+        <div
+          *ngIf="this.login.get('contrasenya')?.errors?.['required'] && this.login.get('contrasenya')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+        <div
+          *ngIf="this.login.get('contrasenya')?.errors?.['pattern'] && this.login.get('contrasenya')?.touched"
+          class="alert alert-danger">
+          Ha de contenir lletres i números i tenir un mínim de 4 caràcters.
+        </div>
+
+      </div>
+
+      <div class="text-center mt-5">
+        <button type="submit" class="btn btn-primary" [disabled]="login.invalid">Login</button>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="text-center mt-3">
+    <p *ngIf="mensaje" [ngClass]="mensaje.includes('Error') ? 'text-danger' : 'text-success'">
+      {{ mensaje }}
+    </p>
+  </div>
+
+</div>

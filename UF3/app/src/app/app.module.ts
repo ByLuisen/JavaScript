@@ -12,6 +12,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { ValidarRepetirDirective } from './directives/validar-repetir.directive';
 import { CookieService } from 'ngx-cookie-service';
 import { EjemplosComponent } from './components/ejemplos/ejemplos.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EjemplosComponent } from './components/ejemplos/ejemplos.component';
     NotfoundComponent,
     ValidarRepetirDirective,
     EjemplosComponent,
+    LoginComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
   providers: [CookieService],
