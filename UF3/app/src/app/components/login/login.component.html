@@ -7,8 +7,7 @@
       <!--Nom-->
       <div class="form-group">
         <legend class="mt-4">Nom d'usuari* :</legend>
-        <input type="text" class="form-control" id="nomUsuari" placeholder="Nom" formControlName="nomUsuari"
-          >
+        <input type="text" class="form-control" id="nomUsuari" placeholder="Nom" formControlName="nomUsuari">
 
         <div *ngIf="this.login.get('nomUsuari')?.errors?.['required'] && this.login.get('nomUsuari')?.touched"
           class="alert alert-danger">
@@ -25,13 +24,11 @@
         <legend class="mt-4">Contrasenya* :</legend>
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contrasenya"
           autocomplete="off" formControlName="contrasenya">
-        <div
-          *ngIf="this.login.get('contrasenya')?.errors?.['required'] && this.login.get('contrasenya')?.touched"
+        <div *ngIf="this.login.get('contrasenya')?.errors?.['required'] && this.login.get('contrasenya')?.touched"
           class="alert alert-danger">
           Aquest camp és obligatori.
         </div>
-        <div
-          *ngIf="this.login.get('contrasenya')?.errors?.['pattern'] && this.login.get('contrasenya')?.touched"
+        <div *ngIf="this.login.get('contrasenya')?.errors?.['pattern'] && this.login.get('contrasenya')?.touched"
           class="alert alert-danger">
           Ha de contenir lletres i números i tenir un mínim de 4 caràcters.
         </div>
@@ -44,10 +41,9 @@
     </fieldset>
   </form>
 
-  <div class="text-center mt-3">
-    <p *ngIf="mensaje" [ngClass]="mensaje.includes('Error') ? 'text-danger' : 'text-success'">
-      {{ mensaje }}
-    </p>
+  <div *ngIf="mensaje" [ngClass]="mensaje.includes('Error') ? 'alert-danger' : 'alert-success'"
+    class="alert mt-3">
+    {{ mensaje }}
   </div>
 
 </div>
