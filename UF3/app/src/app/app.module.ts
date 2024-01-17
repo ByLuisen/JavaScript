@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { EjemplosComponent } from './components/ejemplos/ejemplos.component';
 import { LoginComponent } from './components/login/login.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
+import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ListUsersComponent } from './components/list-users/list-users.component
     EjemplosComponent,
     LoginComponent,
     ListUsersComponent,
+    EditarUsuarioComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
   providers: [CookieService],
