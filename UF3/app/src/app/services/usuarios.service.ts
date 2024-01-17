@@ -11,7 +11,7 @@ export class UsuariosService {
     this.initUsuarios();
   }
   private initUsuarios(): void {
-    for (let i = 0; i < 301; i++) {
+    for (let i = 0; i < 11; i++) {
       this.usuarios.push(new User('usuario' + i, 'con' + i));
     }
   }
@@ -22,4 +22,5 @@ export class UsuariosService {
         u.nomUsuari === user.nomUsuari && u.contrasenya === user.contrasenya
     );
   }
+
 }

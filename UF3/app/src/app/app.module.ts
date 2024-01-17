@@ -13,6 +13,7 @@ import { ValidarRepetirDirective } from './directives/validar-repetir.directive'
 import { CookieService } from 'ngx-cookie-service';
 import { EjemplosComponent } from './components/ejemplos/ejemplos.component';
 import { LoginComponent } from './components/login/login.component';
+import { ListUsersComponent } from './components/list-users/list-users.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LoginComponent } from './components/login/login.component';
     ValidarRepetirDirective,
     EjemplosComponent,
     LoginComponent,
+    ListUsersComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
   providers: [CookieService],
