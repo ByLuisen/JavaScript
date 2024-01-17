@@ -9,6 +9,8 @@ import { JuegoComponent } from './components/juego/juego.component';
 import { DadoComponent } from './components/dado/dado.component';
 import { PanelNumericComponent } from './components/panel-numeric/panel-numeric.component';
 import { SelectorNumericoComponent } from './components/selector-numerico/selector-numerico.component';
+import { CronometroComponent } from './components/cronometro/cronometro.component';
+import { PruebaCronometroComponent } from './components/prueba-cronometro/prueba-cronometro.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SelectorNumericoComponent } from './components/selector-numerico/select
     JuegoComponent,
     DadoComponent,
     PanelNumericComponent,
-    SelectorNumericoComponent
+    SelectorNumericoComponent,
+    CronometroComponent,
+    PruebaCronometroComponent
   ],
   imports: [
     BrowserModule,
