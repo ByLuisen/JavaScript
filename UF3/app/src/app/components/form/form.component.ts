@@ -13,8 +13,9 @@ export class FormComponent {
   sex: string[];
   status: string[];
   info: string[];
-  newUser: User;
+  newUser!: User;
   auxiliarInfo: string[];
+  today: Date;
 
   constructor() {
     this.formulari = new FormGroup({
@@ -38,7 +39,7 @@ export class FormComponent {
     this.status = ['Casat/da', 'Solter/a', 'Divorciat/da'];
     this.info = ['Videojocs', 'Accessoris', 'Novetats del mercat'];
     this.auxiliarInfo = [];
-    this.newUser = new User('', '', '', '', '', '', false);
+    this.today = new Date();
   }
 
   enviament(): void {

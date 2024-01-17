@@ -136,10 +136,10 @@
   </form>
 
   <figure>
-    <blockquote class="blockquote">
-      <p class="mb-0" *ngIf="newUser!=null">
-        {{newUser.nomUsuari | uppercase}}
-      </p>
+    <blockquote class="blockquote" *ngIf="newUser!=null">
+        <pre>{{ newUser.nomUsuari | uppercase }}</pre>
+        <pre>{{ today | date:'short' }}</pre>
+        <pre>{{ 'Texto a duplicar' | slice:0 }}{{ 'Texto a duplicar' }}</pre>
     </blockquote>
 
   </figure>
