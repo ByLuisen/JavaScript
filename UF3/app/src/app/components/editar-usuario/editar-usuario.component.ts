@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/User';
 
@@ -7,18 +7,20 @@ import { User } from 'src/app/model/User';
   templateUrl: './editar-usuario.component.html',
   styleUrls: ['./editar-usuario.component.css']
 })
-export class EditarUsuarioComponent {
+export class EditarUsuarioComponent implements OnInit{
   @Input() usuario!: User;
   mensaje!: string;
-  login: FormGroup;
-
+  login!: FormGroup;
   constructor() {
+  }
+
+  ngOnInit(): void {
     this.login = new FormGroup({
-      nomUsuari: new FormControl('', [
+      nomUsuari: new FormControl(this.usuario.nomUsuari, [
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9 ]{6,}$')
       ]),
-      contrasenya: new FormControl('', [
+      contrasenya: new FormControl(this.usuario.contrasenya, [
         Validators.required,
         Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d).{4,}$/),
       ]),
