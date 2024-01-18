@@ -97,6 +97,7 @@ function listarAnimales() {
             }
         })
         .then(json => {
+            localStorage.setItem('animals', JSON.stringify(json.resultats))
             OlAnimales(json)
         })
         .catch(error => {
@@ -108,10 +109,21 @@ function listarAnimales() {
 const OlAnimales = (json) => {
     // Se vacia el contenido de la lista que hubiese anteriormente
     lista.innerHTML = ""
-    localStorage.setItem('animals', '')
     if (lista) {
         // Iterar sobre los objetos en el array
         // Crear una opción para cada objeto y agregarla al "select"
+        json.resultats.forEach(animal => {
+            let tr = document.createElement('tr')
+            tr.innerHTML = `
+            <th scope="col">${animal['id']}</th>
+            <td>${animal['especie']}</td>
+            <td>${animal['sexe']}</td>
+            <td>${animal['any_naixement']}</td>
+            <td>${animal['pais']}</td>
+            <td>${animal['continent']}</td>
+            `
+            lista.appendChild(tr)
+        });
         for (let index = 0; index < json.resultats.length; index++) {
             let li = document.createElement("li")
             li.className = `d-flex`;
@@ -120,10 +132,6 @@ const OlAnimales = (json) => {
             Nacimiento: ${json.resultats[index]['any_naixement']}, País: ${json.resultats[index]['pais']}, Continente: ${json.resultats[index]['continent']},
             <button class="botonEliminar ms-5 btn btn-danger fs-5 py-2 d-none" value="${json.resultats[index]['id']}">Eliminar
                     animal</button>`
-            let animal = localStorage.getItem('animals') + `Id: ${json.resultats[index]['id']}, Especie: ${json.resultats[index]['especie']}, Sexo: ${json.resultats[index]['sexe']}, 
-            Nacimiento: ${json.resultats[index]['any_naixement']}, País: ${json.resultats[index]['pais']}, Continente: ${json.resultats[index]['continent']}`
-            localStorage.setItem('animals', animal)
-            lista.appendChild(li)
         }
     } else {
         console.log('El elemento "select" no se encontró en el documento.');
