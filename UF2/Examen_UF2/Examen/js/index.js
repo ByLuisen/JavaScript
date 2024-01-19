@@ -18,11 +18,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función que cuenta las visitas
     contadorVisitas()
     //Función que lista los animales
-    listarAnimales()
+    getAnimales()
 })
 
 /** Cuando se clica al botón listar se llama a la función que lista los animales */
-document.getElementById('listar').addEventListener('click', listarAnimales)
+document.getElementById('listar').addEventListener('click', function () {
+    document.getElementById('tablaAnimales').classList.replace('d-none', 'd-block')
+    document.getElementById('formulario').classList.replace('d-block', 'd-none')
+    document.getElementById('imprimir').innerHTML = "";
+    getAnimales()
+})
 
 /** Cuando se clica al botón afegir se añade los animales */
 document.getElementById('anyadir').addEventListener('click', anyadirAnimal)
@@ -39,7 +44,34 @@ document.getElementById("eliminarCookie").addEventListener("click", function () 
     setCookie('visitas', 1, -1);
 })
 
-document.getElementById("eliminar").addEventListener("click", eliminarAnimal)
+document.getElementById("eliminar").addEventListener("click", function () {
+    document.getElementById('imprimir').innerHTML = "";
+    document.getElementById('formulario').classList.replace('d-block', 'd-none')
+    document.getElementById('tablaAnimales').classList.replace('d-none', 'd-block')
+    getAnimales(true)
+})
+
+document.getElementById('imprimirLocalStorage').addEventListener('click', function () {
+    document.getElementById('imprimir').innerHTML = "";
+    const animalsArray = JSON.parse(localStorage.getItem('animals'));
+
+    // Verificar si el array existe y no es nulo
+    if (animalsArray) {
+        // Iterar sobre cada objeto en el array
+        animalsArray.forEach(animal => {
+            // Iterar sobre las propiedades del objeto
+            for (const key in animal) {
+                if (Object.hasOwnProperty.call(animal, key)) {
+                    // Imprimir cada valor en el elemento con id 'imprimir'
+                    document.getElementById('imprimir').innerHTML += `
+                    ${key}: ${animal[key]};
+                `;
+                }
+            }
+            document.getElementById('imprimir').innerHTML += `<br>`;
+        });
+    }
+})
 
 document.getElementById("afegirAnimal").addEventListener("click", function () {
     let especie = document.getElementById('especie').value
@@ -70,6 +102,7 @@ document.getElementById("afegirAnimal").addEventListener("click", function () {
             }
         })
         .catch(handleGeneralError);
+    getAnimales()
 })
 
 // Función para manejar los errores generales
@@ -84,9 +117,7 @@ const handleGeneralError = (err) => {
 /**
  * Función que carga los selects con los valores extraidos de la base de datos
  */
-function listarAnimales() {
-    document.getElementById('animales').classList.replace('d-none', 'd-block')
-    document.getElementById('formulario').classList.replace('d-block', 'd-none')
+function getAnimales(eliminar = false) {
     // Ejercicio 1: Realizar la solicitud al backend
     fetch('http://localhost:3000/animales/listar')
         .then(response => {
@@ -98,7 +129,7 @@ function listarAnimales() {
         })
         .then(json => {
             localStorage.setItem('animals', JSON.stringify(json.resultats))
-            OlAnimales(json)
+            listarAnimales(json, eliminar)
         })
         .catch(error => {
             console.error('Error general:', error.message)
@@ -106,7 +137,7 @@ function listarAnimales() {
 }
 
 // Función para imprimir los datos en un elemento "select"
-const OlAnimales = (json) => {
+const listarAnimales = (json, eliminar = false) => {
     // Se vacia el contenido de la lista que hubiese anteriormente
     lista.innerHTML = ""
     if (lista) {
@@ -120,19 +151,15 @@ const OlAnimales = (json) => {
             <td>${animal['sexe']}</td>
             <td>${animal['any_naixement']}</td>
             <td>${animal['pais']}</td>
-            <td>${animal['continent']}</td>
+            <td>${animal['continent']}</td>  
             `
+            if (eliminar) {
+                tr.innerHTML += `
+                <button class="btn btn-danger fs-5 py-2" onclick="eliminarAnimal(${animal['id']})">Eliminar animal</button>
+                `
+            }
             lista.appendChild(tr)
         });
-        for (let index = 0; index < json.resultats.length; index++) {
-            let li = document.createElement("li")
-            li.className = `d-flex`;
-            li.value = json.resultats[index]['id']
-            li.innerHTML = `Id: ${json.resultats[index]['id']}, Especie: ${json.resultats[index]['especie']}, Sexo: ${json.resultats[index]['sexe']}, 
-            Nacimiento: ${json.resultats[index]['any_naixement']}, País: ${json.resultats[index]['pais']}, Continente: ${json.resultats[index]['continent']},
-            <button class="botonEliminar ms-5 btn btn-danger fs-5 py-2 d-none" value="${json.resultats[index]['id']}">Eliminar
-                    animal</button>`
-        }
     } else {
         console.log('El elemento "select" no se encontró en el documento.');
     }
@@ -140,7 +167,8 @@ const OlAnimales = (json) => {
 
 function anyadirAnimal() {
     // Se vacia el contenido de la lista que hubiese anteriormente
-    document.getElementById('animales').classList.replace('d-block', 'd-none')
+    document.getElementById('imprimir').innerHTML = "";
+    document.getElementById('tablaAnimales').classList.replace('d-block', 'd-none')
     document.getElementById('formulario').classList.replace('d-none', 'd-block')
     inicializarFechas()
     inicializarSelectContinentes()
@@ -277,43 +305,29 @@ function contadorVisitas() {
     }
 }
 
-function eliminarAnimal() {
-    document.getElementById('formulario').classList.replace('d-block', 'd-none')
-    document.getElementById('animales').classList.replace('d-none', 'd-block')
-    let botones = document.getElementsByClassName('botonEliminar')
-    for (let index = 0; index < botones.length; index++) {
-        botones[index].classList.replace('d-none', 'd-block')
+function eliminarAnimal(animalId) {
+    let animal = {
+        id: animalId
     }
-    for (let index = 0; index < botones.length; index++) {
-        botones[index].addEventListener('click', function () {
-            let animal = {
-                id: botones[index].value
+
+    fetch('http://localhost:3000/animal/eliminar', {
+        method: "POST",
+        body: JSON.stringify(animal),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error en la solicitud: ' + response.statusText);
             }
-            let lis = document.getElementsByTagName('li')
-            for (let i = 0; i < lis.length; i++) {
-                if (lis[i].value == botones[index].value)
-                    lis[i].remove()
-            }
-            console.log(animal)
-            fetch('http://localhost:3000/animal/eliminar', {
-                method: "POST",
-                body: JSON.stringify(animal),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
-            })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Error en la solicitud: ' + response.statusText);
-                    }
-                })
-                .then(json => {
-                    console.log(json);
-                    if (!json.error) {
-                        console.log(json.message)
-                    }
-                })
-                .catch(handleGeneralError);
         })
-    }
+        .then(json => {
+            console.log(json);
+            if (!json.error) {
+                console.log(json.message)
+            }
+        })
+        .catch(handleGeneralError);
+    getAnimales(true)
 }

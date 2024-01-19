@@ -27,7 +27,7 @@
             </div>
         </div>
         <!-- OL PARA LISTAR LOS ANIMALES -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center d-block" id="tablaAnimales">
             <div class="d-flex justify-content-center">
                 <table class="table table-striped">
                     <thead>
@@ -115,31 +115,33 @@
                             animal</button>
                     </div>
                 </div>
-                <div id="afegirInfo">
+                <div id="afegirInfo" class="text-center mt-4">
 
                 </div>
             </div>
         </div>
-        <div class="row mt-auto">
+        <div class="row mt-5">
             <div class="d-flex align-items-center">
                 <p id="visitas"></p>
                 <button class="ms-5 btn btn-danger fs-5 py-2 d-none" id="eliminarCookie">Eliminar
                     cookie</button>
             </div>
         </div>
-    </div>
+        <div class="row mt-4">
+            <div>
+                <button class="btn btn-danger fs-5 py-2 d-block" id="imprimirLocalStorage">Imprimir
+                    LocalStorage</button>
+            </div>
+            <p id="imprimir"></p>
+        </div>
 
-
-
-
-
-    <!-- Enlaces a jQuery y jQuery UI (localmente) -->
-    <!-- <script src="vendor/jquery-3.7.1.min.js"></script>
+        <!-- Enlaces a jQuery y jQuery UI (localmente) -->
+        <!-- <script src="vendor/jquery-3.7.1.min.js"></script>
     <script src="vendor/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script> -->
 
-    <!-- Files JS -->
-    <script src="./js/clases/Animal.js"></script>
-    <script src="./js/index.js"></script>
+        <!-- Files JS -->
+        <script src="./js/clases/Animal.js"></script>
+        <script src="./js/index.js"></script>
 </body>
 
 </html>
