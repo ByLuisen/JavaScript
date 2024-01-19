@@ -77,6 +77,7 @@ document.getElementById('buscarVuelo').addEventListener('click', function () {
     let select1 = document.getElementById('aeropuertoOrigen').value
     let select2 = document.getElementById('aeropuertoDestino').value
     if (select1 != 0 && select2 != 0) {
+        imprimirVuelo()
         resumirVuelo()
         document.getElementById('resumenVuelo').classList.replace('d-none', 'd-block')
     } else if (select1 == 0) {
@@ -87,19 +88,33 @@ document.getElementById('buscarVuelo').addEventListener('click', function () {
     }
 })
 
+document.getElementById('opcionTF').addEventListener('click', function () {
+    document.getElementById('radioTF').checked = true
+    actaulizarPrecioFinal('TF')
+})
+
+document.getElementById('opcionO').addEventListener('click', function () {
+    document.getElementById('radioO').checked = true
+    actaulizarPrecioFinal('O')
+})
+
+document.getElementById('opcionB').addEventListener('click', function () {
+    document.getElementById('radioB').checked = true
+    actaulizarPrecioFinal('B')
+})
+
 document.getElementById('cancelarBillete').addEventListener('click', function () {
     window.location.href = 'index.html';
     //history.back()
 })
 
-document.getElementById('aceptarBillete').addEventListener('click', function () {
-    document.getElementById('resumenVuelo').classList.replace('d-block', 'd-none')
-    let origen = document.getElementById('aeropuertoOrigen').value
-    let destino = document.getElementById('aeropuertoDestino').value
-    let ida = document.getElementById('ida').value
-    let vuelta = document.getElementById('vuelta').value
-    let pasajeros = document.getElementById('pasajeros').value
+document.getElementById('registrarse').addEventListener('click', function () {
+    window.location.href = 'loginRegister.html';
+})
 
-    let viaje = new Viaje(origen, destino, ida, vuelta, pasajeros)
-    document.getElementById('printingVuelo').innerHTML = viaje.printing()
+document.getElementById('login').addEventListener('click', function () {
+    window.location.href = 'loginRegister.html';
+})
+
+document.getElementById('continuar').addEventListener('click', function () {
 })

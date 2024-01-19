@@ -8,6 +8,7 @@
 const horasIda = ["10:30", "14:00"]
 const horasVuelta = ["20:00", "22:20"]
 let seleccionado
+let precio = 0
 
 /**
    * Genera los billetes de diferentes vuelos
@@ -218,13 +219,17 @@ function actualizarFechaMinima(fechaIda) {
 }
 
 function resumirVuelo() {
+    document.getElementById('aceptarBillete').classList.replace('d-block', 'd-none')
     document.getElementById('opcionesVuelo').classList.replace('d-block', 'd-none')
+    document.getElementById('precioFinal').classList.replace('d-block', 'd-none')
+    reiniciarOpcionesRadio()
     let soloIda = tipoVuelo()
     generarPlantillaVuelos(soloIda)
     origenDestinoVuelo()
     numeroPasajeros()
     fechaVuelo(soloIda)
     seleccionado = 0
+    precio = 0
     seleccionarVuelo('Ida', soloIda)
     if (!soloIda) {
         seleccionarVuelo('Vuelta', soloIda)
@@ -302,6 +307,8 @@ function seleccionarVuelo(tipoVuelo, soloIda) {
     let botonesVuelos = document.getElementsByClassName(`botonVuelos${tipoVuelo}`)
     Array.from(botonesVuelos).forEach(function (boton, index) {
         boton.addEventListener('click', function () {
+            boton.disabled = true
+            precio += parseFloat(boton.value)
             let cardsVuelos = document.getElementsByClassName(`cardVuelos${tipoVuelo}`)
             Array.from(cardsVuelos).forEach(function (card, i) {
                 if (i != index) {
@@ -315,11 +322,22 @@ function seleccionarVuelo(tipoVuelo, soloIda) {
 }
 
 function estadoOpcionesVuelo(soloIda) {
-    if (soloIda) {
-        document.getElementById('opcionesVuelo').classList.replace('d-none', 'd-block')
-    }
-    if (seleccionado == 2) {
-        document.getElementById('opcionesVuelo').classList.replace('d-none', 'd-block')
+    const precioString = precio.toFixed(2);  // Asegura que el precio tiene dos decimales
+
+    const parteEntera = parseInt(precioString);
+    const parteDecimal = precioString.split('.')[1].substring(0, 2) + ' EUR';
+
+    const calcularPrecio = (adicional) => parteEntera + adicional;
+
+    document.getElementById('parteEnteraTF').innerHTML = calcularPrecio(150);
+    document.getElementById('parteDecimalTF').innerHTML = parteDecimal;
+    document.getElementById('parteEnteraO').innerHTML = calcularPrecio(90);
+    document.getElementById('parteDecimalO').innerHTML = parteDecimal;
+    document.getElementById('parteEnteraB').innerHTML = parteEntera;
+    document.getElementById('parteDecimalB').innerHTML = parteDecimal;
+
+    if (soloIda || seleccionado === 2) {
+        document.getElementById('opcionesVuelo').classList.replace('d-none', 'd-block');
     }
 }
 
@@ -427,4 +445,28 @@ function actualizarLabelPasajeros() {
     let totalBebes = document.getElementById('totalBebe').textContent
     document.getElementsByClassName('recuentoPasajeros')[0].textContent = `${totalAdultos} Adulto${totalAdultos != 1 ? "s" : ""},
     ${totalNinos} Niño${totalNinos != 1 ? "s" : ""}, ${totalBebes} Bebé${totalBebes != 1 ? "s" : ""}`;
+}
+
+function actaulizarPrecioFinal($opcionVuelo) {
+    document.getElementById('precioFinal').classList.replace('d-none', 'd-block')
+    document.getElementById('aceptarBillete').classList.replace('d-none', 'd-block')
+    document.getElementById('euros').innerHTML = document.getElementById('parteEntera' + $opcionVuelo).textContent
+    document.getElementById('centimos').innerHTML = document.getElementById('parteDecimal' + $opcionVuelo).textContent
+}
+
+function reiniciarOpcionesRadio() {
+    document.getElementById('radioTF').checked = false
+    document.getElementById('radioO').checked = false
+    document.getElementById('radioB').checked = false
+}
+
+function imprimirVuelo() {
+    let origen = document.getElementById('aeropuertoOrigen').value
+    let destino = document.getElementById('aeropuertoDestino').value
+    let ida = document.getElementById('ida').value
+    let vuelta = document.getElementById('vuelta').value
+    let pasajeros = document.getElementById('pasajeros').value
+
+    let viaje = new Viaje(origen, destino, ida, vuelta, pasajeros)
+    document.getElementById('printingVuelo').innerHTML = viaje.printing()
 }

@@ -53,6 +53,18 @@
     </nav>
   </header>
 
+  <!---------------------------------------- POPUP COOKIE ------------------------------------------>
+  <div id="cookie-overlay" class="overlay"></div>
+  <div id="cookie-popup" class="popup p-5">
+    <div class="justify-content-center text-white">
+      <h4>Antes de continuar tienes que aceptar las cookies</h4>
+      <div class="mt-5">
+        <button id="aceptarCookie" class="btn btn-warning">Aceptar todas las cookies</button>
+        <button id="rechazarCookie" class="btn btn-warning mx-3">Rechazar cookies</button>
+        <button id="minimaCookie" class="btn btn-warning">Aceptar mínimas</button>
+      </div>
+    </div>
+  </div>
 
   <!---------------------------------------- BUSCADOR DE VUELOS ------------------------------------------>
   <section id="buscador">
@@ -198,6 +210,9 @@
     </div>
   </section>
 
+  <!-- Imprimir Objeto Viaje -->
+  <div id="printingVuelo" class="text-white text-center"></div>
+
   <!---------------------------------------- RESUMEN DEL VUELO ------------------------------------------>
 
   <div class="container-lg">
@@ -231,13 +246,13 @@
             </div>
           </div>
           <!---------------------------------------- OPCIONES DE VUELO ------------------------------------------>
-          <div id="opcionesVuelo" class="my-4 d-none">
+          <div id="opcionesVuelo" class="my-4 d-none mb-5">
             <div class="row text-muted text-center mb-4">
               <h4 class="fw-normal">¿Cómo quieres vaijar?</h4>
             </div>
             <div class="row justify-content-center">
               <!---------------------------------------- OPCION TIMEFLEX------------------------------------------>
-              <div class="col-xxl-3 p-0">
+              <div class="col-xxl-3 p-0" id="opcionTF">
                 <div class="border rounded" role="button">
                   <div class="px-4 py-2 text-white rounded-top" style="background-color: #732F96;">
                     <h4>TimeFlex</h4>
@@ -316,17 +331,17 @@
                     </ul>
                   </div>
                   <div class="d-flex justify-content-center py-4" style="background-color: #F3F3F3;">
-                    <input style="width: 20px;" type="radio" role="button" name="plan">
+                    <input id="radioTF" style="width: 20px;" type="radio" role="button" name="plan">
                     <div class="d-flex ms-2">
-                      <h3>28</h3>
-                      <small>99 EUR</small>
+                      <h3 id="parteEnteraTF"></h3>
+                      <small id="parteDecimalTF"></small>
                     </div>
                   </div>
                 </div>
               </div>
 
               <!---------------------------------------- OPCION OPTIMA ------------------------------------------>
-              <div class="col-xxl-3 p-0 mx-3">
+              <div class="col-xxl-3 p-0 mx-3" id="opcionO">
                 <div class="border rounded h-100 d-flex flex-column" role="button">
                   <div class="px-4 py-2 rounded-top" style="background-color: #FFCC00;">
                     <h4>Optima</h4>
@@ -363,17 +378,17 @@
                     </ul>
                   </div>
                   <div class="d-flex justify-content-center mt-auto py-4" style="background-color: #F3F3F3;">
-                    <input style="width: 20px;" type="radio" role="button" name="plan">
+                    <input id="radioO" style="width: 20px;" type="radio" role="button" name="plan">
                     <div class="d-flex ms-2">
-                      <h3>28</h3>
-                      <small>99 EUR</small>
+                      <h3 id="parteEnteraO"></h3>
+                      <small id="parteDecimalO"></small>
                     </div>
                   </div>
                 </div>
               </div>
 
               <!---------------------------------------- OPCION BASIC ------------------------------------------>
-              <div class="col-xxl-3 p-0">
+              <div class="col-xxl-3 p-0" id="opcionB">
                 <div class="border rounded h-100 d-flex flex-column" role="button">
                   <div class="px-4 py-2 rounded-top" style="background-color: #F3F3F3;">
                     <h4>Basic</h4>
@@ -393,10 +408,10 @@
                     </ul>
                   </div>
                   <div class="d-flex justify-content-center mt-auto py-4" style="background-color: #F3F3F3;">
-                    <input style="width: 20px;" type="radio" role="button" name="plan">
+                    <input id="radioB" style="width: 20px;" type="radio" role="button" name="plan">
                     <div class="d-flex ms-2">
-                      <h3>28</h3>
-                      <small>99 EUR</small>
+                      <h3 id="parteEnteraB"></h3>
+                      <small id="parteDecimalB"></small>
                     </div>
                   </div>
                 </div>
@@ -419,7 +434,7 @@
                 <span style="flex: 1;">Cancelar</span>
               </button>
             </div>
-            <div class="col-6 col-xxl-6 text-end">
+            <div class="col-6 col-xxl-6">
               <div class="d-flex text-white justify-content-end align-items-start">
                 <div class="mx-2">
                   <p id="precioIda" class="fw-bold m-0"></p>
@@ -429,36 +444,57 @@
                   <p id="precioVuelta" class="fw-bold m-0"></p>
                   <p id="calcularVuelta" class="m-0"></p>
                 </div>
-                <div>
-                  <span class="text-warning">PRECIO FINAL</span>
+                <div id="precioFinal" class="d-none">
+                  <div>
+                    <span class="text-warning">PRECIO FINAL</span>
+                  </div>
                   <div class="d-flex text-white">
                     <h3 id="euros" class="fw-bold m-0"></h3>
                     <p id="centimos" class="fw-bold m-0"></p>
+                  </div>
+                  <div>
+                    <small>X Persona</small>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="col-3 col-xxl-3 p-2">
-              <button id="aceptarBillete"
-                class="d-flex align-items-center justify-content-center btn fs-5 rounded-pill w-100"
-                style="min-height: 50px; background-color: #FFCC00;">
+              <button id="aceptarBillete" type="button"
+                class="d-flex align-items-center justify-content-center btn fs-5 rounded-pill w-100 d-none"
+                style="min-height: 50px; background-color: #FFCC00;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <span style="flex: 1;">Continuar</span>
                 <img src="img/flechaDerechaN.png" alt="flecha" width="15">
               </button>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div id="printingVuelo" class="text-white text-center">
-
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Para poder continuar con la compra acepte una de estas opciones
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button id="registrarse" type="button" class="btn" style="background-color: #FFCC00;" data-bs-dismiss="modal">Registrarse</button>
+          <button id="login" type="button" class="btn" style="background-color: #FFCC00;" data-bs-dismiss="modal">Login</button>
+          <button id="continuar" type="button" class="btn" style="background-color: #FFCC00;" data-bs-dismiss="modal">Continuar</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- File JS -->
-  <script src="./js/clases/viaje.js"></script>
+  <script src="./js/clases/Viaje.js"></script>
   <script src="./js/flight.js"></script>
   <script src="./js/functions.js"></script>
   <script src="./js/index.js"></script>
