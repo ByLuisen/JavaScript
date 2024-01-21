@@ -2,7 +2,7 @@
 
   <h2 class="mt-5 text-center">Editar Usuario</h2>
 
-  <form [formGroup]="login" (ngSubmit)="enviament()" class="mt-3">
+  <form [formGroup]="login" (ngSubmit)="enviar()" class="mt-3">
     <fieldset>
       <!--Nom-->
       <div class="form-group">
@@ -37,13 +37,8 @@
       </div>
 
       <div class="text-center mt-5">
-        <button type="submit" class="btn btn-primary" [disabled]="login.invalid">Editar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="login.invalid">Enviar</button>
       </div>
     </fieldset>
   </form>
-
-  <div *ngIf="mensaje" [ngClass]="mensaje.includes('Error') ? 'alert-danger' : 'alert-success'" class="alert mt-3">
-    {{ mensaje }}
-  </div>
-
 </div>

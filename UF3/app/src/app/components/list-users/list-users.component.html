@@ -13,14 +13,32 @@
           <tr *ngFor="let user of usuarios">
             <td>{{ user.nomUsuari }}</td>
             <td>{{ user.contrasenya }}</td>
-            <td (click)="editarUsuario(user)"><button class="btn btn-danger">Editar</button></td>
+            <td><button (click)="editarUsuario(user)" class="btn btn-danger">Editar</button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col" *ngIf="usuarioEditado.nomUsuari != '' && confirmar == false">
+      <div class="text-center">
+        <div>
+          <h3>Usuario editado</h3>
+          <p>Nombre de usuario: {{ usuarioEditado.nomUsuari }}</p>
+          <p>Contraseña: {{ usuarioEditado.contrasenya }}</p>
+        </div>
+        <div>
+          <p>Quieres confirmar los canvios?</p>
+          <button (click)="confirmarUsuario()" class="btn btn-danger">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<p *ngIf="usuarioAEditar != undefined">
-  <app-editar-usuario [usuario]="usuarioAEditar"></app-editar-usuario>
+<p *ngIf="usuarioAEditar.nomUsuari != '' && confirmar == false">
+  <app-editar-usuario [usuario]="usuarioAEditar" (enviarInformacio)="processarInformacion($event)"></app-editar-usuario>
 </p>
+
+<h3 *ngIf="mensaje" class="text-center">{{ mensaje }}</h3>

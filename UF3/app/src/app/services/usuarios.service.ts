@@ -7,15 +7,13 @@ import { User } from '../model/User';
 export class UsuariosService {
   usuarios: User[] = [];
 
-  constructor() {
-    this.initUsuarios();
-  }
+  constructor() {}
 
   getUsuarios(): User[] {
     return this.usuarios;
   }
 
-  private initUsuarios(): void {
+  initUsuarios(): void {
     for (let i = 0; i < 11; i++) {
       this.usuarios.push(new User('usuario' + i, 'con' + i));
     }
@@ -26,5 +24,12 @@ export class UsuariosService {
       (u) =>
         u.nomUsuari === user.nomUsuari && u.contrasenya === user.contrasenya
     );
+  }
+
+  actualizarUsuario(antiguoUsuario: User, nuevoUsuario: User) {
+    let indice = this.usuarios.indexOf(antiguoUsuario);
+    if (indice != -1) {
+      this.usuarios[indice] = nuevoUsuario
+    }
   }
 }
