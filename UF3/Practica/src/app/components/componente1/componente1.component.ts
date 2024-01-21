@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/model/User';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-componente1',
+  templateUrl: './componente1.component.html',
+  styleUrls: ['./componente1.component.css'],
 })
-export class LoginComponent {
+export class Componente1Component {
   // atributos de la clase
   login: FormGroup;
   newUser: User;
   mensaje: string;
 
-  constructor(private usuarioService: UsuariosService) {
+  constructor(private usuarioService: UsuarioService) {
     this.login = new FormGroup({
       nomUsuari: new FormControl('', [
         Validators.required,
