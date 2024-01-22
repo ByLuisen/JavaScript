@@ -1,43 +1,45 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/User';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
-  selector: 'app-componente1',
-  templateUrl: './componente1.component.html',
-  styleUrls: ['./componente1.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
-export class Componente1Component {
+export class LoginComponent {
   // atributos de la clase
   login: FormGroup;
   newUser: User;
   mensaje: string;
-
-  constructor(private usuarioService: UsuarioService) {
+  //constructor
+  constructor(private usuarioService: UsuariosService, private router: Router) {
     this.login = new FormGroup({
       nomUsuari: new FormControl('', [
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9 ]{6,}$'),
       ]),
-      contrasenya: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d).{4,}$/),
-      ]),
+      correo: new FormControl('', [Validators.required, Validators.email]),
     });
 
     this.newUser = new User('', '');
     this.mensaje = '';
   }
-
+  //envia el usuario
   enviament(): void {
     this.newUser = new User(
       this.login.value.nomUsuari,
-      this.login.value.contrasenya
+      this.login.value.correo
     );
-
+    //valida el usuario para crear la local storage y mostrar el mensaje de usuario
     if (this.usuarioService.validateUsers(this.newUser)) {
       this.mensaje = 'Usuario validado correctamente.';
+      localStorage.setItem('Logeado', 'true');
+      this.router.navigate(['/quisom']).then(() => {
+        window.location.reload();
+      });
     } else {
       this.mensaje = 'Error: Usuario no encontrado.';
     }

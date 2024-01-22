@@ -1,4 +1,5 @@
 export class User {
+  // propiedades objeto
   #nomUsuari: string;
   #contrasenya: string;
   #correuElectronic: string;

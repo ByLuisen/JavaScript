@@ -21,16 +21,16 @@
 
       <!--Contrasenya-->
       <div class="form-group">
-        <legend class="mt-4">Contrasenya* :</legend>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contrasenya"
-          autocomplete="off" formControlName="contrasenya">
-        <div *ngIf="this.login.get('contrasenya')?.errors?.['required'] && this.login.get('contrasenya')?.touched"
+        <legend class="mt-4">Correo electrónico* :</legend>
+        <input type="email" class="form-control" id="exampleInputCorreo" placeholder="paco32@gmail.com"
+          autocomplete="off" formControlName="correo">
+        <div *ngIf="this.login.get('correo')?.errors?.['required'] && this.login.get('correo')?.touched"
           class="alert alert-danger">
           Aquest camp és obligatori.
         </div>
-        <div *ngIf="this.login.get('contrasenya')?.errors?.['pattern'] && this.login.get('contrasenya')?.touched"
+        <div *ngIf="this.login.get('correo')?.errors?.['email'] && this.login.get('correo')?.touched"
           class="alert alert-danger">
-          Ha de contenir lletres i números i tenir un mínim de 4 caràcters.
+          Formato invalido
         </div>
 
       </div>
@@ -41,7 +41,8 @@
     </fieldset>
   </form>
 
-  <div *ngIf="mensaje" [ngClass]="mensaje.includes('Error') ? 'alert-danger' : 'alert-success'" class="alert mt-3">
+  <div *ngIf="mensaje" [ngClass]="mensaje.includes('Error') ? 'alert-danger' : 'alert-success'"
+    class="alert mt-3">
     {{ mensaje }}
   </div>
 

@@ -15,9 +15,13 @@ export class EditarUsuarioComponent implements OnInit {
   nuevoUsuario!: User;
   login!: FormGroup;
 
+  // Creamos el constructor
   constructor() {}
 
+
+  // Cuando se inicie...
   ngOnInit(): void {
+    // Declaro el formulario con sus campos
     this.login = new FormGroup({
       nomUsuari: new FormControl(this.usuario.nomUsuari, [
         Validators.required,
@@ -29,7 +33,9 @@ export class EditarUsuarioComponent implements OnInit {
       ]),
     });
   }
-
+  /**
+   * Función que actua como evento cuando se le de al botón submit()
+   */
   enviar(): void {
     this.nuevoUsuario = new User(
       this.login.value.nomUsuari,
