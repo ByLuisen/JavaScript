@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Producte } from 'src/app/model/Producte';
@@ -8,7 +9,7 @@ import { Producte } from 'src/app/model/Producte';
   styleUrls: ['./merchandising.component.css'],
 })
 export class MerchandisingComponent {
-  cesta: Producte[];;
+  cesta: string[];
   //añadimos los 4 productos
   productos: Producte[] = [
     new Producte('producto1.jpg', 'Producto1', 'Descripción1', 10, 2),
@@ -22,8 +23,8 @@ export class MerchandisingComponent {
   }
   //añadimos el producto
   afegirProducte(producto: Producte) {
-    this.cesta.push(producto);
+    this.cesta.push(producto.toObject());
     this.cookieService.set('cesta', JSON.stringify(this.cesta));
-    console.log(this.cesta)
+    console.log( JSON.parse(this.cookieService.get('cesta')))
   }
 }

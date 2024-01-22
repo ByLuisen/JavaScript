@@ -4,6 +4,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th scope="col">Imagen</th>
             <th scope="col">Nombre</th>
             <th scope="col">Precio</th>
             <th scope="col">Descripcion</th>
@@ -12,6 +13,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let producto of cesta">
+            <td><img src="assets/img/{{ producto.nomImatge }}" alt="" width="100px"></td>
             <td>{{ producto.nomProducte }}</td>
             <td>{{ producto.preu }}</td>
             <td>{{ producto.descripcio }}</td>

@@ -50,6 +50,7 @@ export class Producte {
   set disponibilitat(disponibilitat: number) {
     this.#disponibilitat = disponibilitat;
   }
+  
   toObject(): any {
     return {
       nomImatge: this.#nomImatge,
