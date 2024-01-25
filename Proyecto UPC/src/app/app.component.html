@@ -8,21 +8,25 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home
-            <span class="visually-hidden">(current)</span>
-          </a>
+          <a class="nav-link" routerLink="/quisom">Quienes somos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/formulari">Formulari de registre</a>
+          <a class="nav-link" routerLink="/equip">Equipo</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">About</a>
+        <li class="nav-item" *ngIf="logeado != 'true'">
+          <a class="nav-link" routerLink="/registro">Registrarse</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/list-users">Listar usuarios</a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="logeado != 'true'">
           <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="logeado == 'true'">
+          <a class="nav-link" routerLink="/merchandising">Merchandising</a>
+        </li>
+        <li class="nav-item" *ngIf="logeado == 'true'">
+          <a class="nav-link" routerLink="/compra">Compra</a>
+        </li>
+        <li class="nav-item" *ngIf="logeado == 'true'">
+          <a class="nav-link" routerLink="/logout">Logout</a>
         </li>
 
       </ul>
@@ -31,5 +35,3 @@
   </div>
 </nav>
 <router-outlet></router-outlet>
-<app-sharing1></app-sharing1>
-<app-sharing2></app-sharing2>

@@ -15,6 +15,8 @@ import { EjemplosComponent } from './components/ejemplos/ejemplos.component';
 import { LoginComponent } from './components/login/login.component';
 import { ListUsersComponent } from './components/list-users/list-users.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
+import { Sharing1Component } from './components/sharing1/sharing1.component';
+import { Sharing2Component } from './components/sharing2/sharing2.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
     LoginComponent,
     ListUsersComponent,
     EditarUsuarioComponent,
+    Sharing1Component,
+    Sharing2Component,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
   providers: [CookieService],

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Imagen</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Unidades Compradas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of cesta">
+            <td><img src="assets/img/{{ producto.nomImatge }}" alt="" width="100px"></td>
+            <td>{{ producto.nomProducte }}</td>
+            <td>{{ producto.preu }}</td>
+            <td>{{ producto.descripcio }}</td>
+            <td>0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
