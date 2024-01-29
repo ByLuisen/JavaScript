@@ -17,6 +17,7 @@ import { ListUsersComponent } from './components/list-users/list-users.component
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 import { Sharing1Component } from './components/sharing1/sharing1.component';
 import { Sharing2Component } from './components/sharing2/sharing2.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { Sharing2Component } from './components/sharing2/sharing2.component';
     Sharing1Component,
     Sharing2Component,
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule, NgxPaginationModule],
   providers: [CookieService],
   bootstrap: [AppComponent],
 })

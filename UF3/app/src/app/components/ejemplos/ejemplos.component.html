@@ -4,6 +4,14 @@
 <button (click)="deleteACookie()">Delete a cookie</button>
 <button (click)="deleteAllCookies()">Delete all cookie</button>
 
+<div>
+  <ul>
+    <li *ngFor="let item of frutas | paginate: { itemsPerPage: 5, currentPage: p }"> {{ item }} </li>
+  </ul>
+
+  <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+</div>
+
 <div *ngFor="let f of misFrutas">
   {{f}}
 </div>

@@ -1,65 +1,83 @@
 export class User {
   #nomUsuari: string;
+  #contrasenya: string;
   #correuElectronic: string;
-  #fechaNacimiento: string;
-  #edad: string;
+  #estatCivil: string;
+  #sexe: string;
   #informacio: string;
+  #condicions: boolean;
 
   constructor(
-    nomUsuari: string,
+    nomUsuari: string='',
+    contrasenya: string='',
     correuElectronic: string = '',
-    fechaNacimiento: string = '',
-    edad: string = '',
-    informacio: string = ''
+    estatCivil: string = '',
+    sexe: string = '',
+    informacio: string = '',
+    condicions: boolean = true
   ) {
     this.#nomUsuari = nomUsuari;
+    this.#contrasenya = contrasenya;
     this.#correuElectronic = correuElectronic;
-    this.#fechaNacimiento = fechaNacimiento;
-    this.#edad = edad;
+    this.#estatCivil = estatCivil;
+    this.#sexe = sexe;
     this.#informacio = informacio;
+    this.#condicions = condicions;
   }
 
   get nomUsuari(): string {
     return this.#nomUsuari;
   }
+  get contrasenya(): string {
+    return this.#contrasenya;
+  }
   get correuElectronic(): string {
     return this.#correuElectronic;
   }
-  get fechaNacimiento(): string {
-    return this.#fechaNacimiento;
+  get estatCivil(): string {
+    return this.#estatCivil;
   }
-  get edad(): string {
-    return this.#edad;
+  get sexe(): string {
+    return this.#sexe;
   }
   get informacio(): string {
     return this.#informacio;
+  }
+  get condicions(): boolean {
+    return this.#condicions;
   }
 
   set nomUsuari(nomUsuari: string) {
     this.#nomUsuari = nomUsuari;
   }
+  set contrasenya(contrasenya: string) {
+    this.#contrasenya = contrasenya;
+  }
   set correuElectronic(correuElectronic: string) {
     this.#correuElectronic = correuElectronic;
   }
-  set fechaNacimiento(fechaNacimiento: string) {
-    this.#fechaNacimiento = fechaNacimiento;
+  set estatCivil(estatCivil: string) {
+    this.#estatCivil = estatCivil;
   }
-  set edad(edad: string) {
-    this.#edad = edad;
+  set sexe(sexe: string) {
+    this.#sexe = sexe;
   }
   set informacio(informacio: string) {
     this.#informacio = informacio;
   }
-  // toObjectJS(): any {
-  //   let myObject = {
-  //     nomUsuari: this.#nomUsuari,
-  //     contrasenya: this.#contrasenya,
-  //     correuElectronic: this.#correuElectronic,
-  //     estatCivil: this.#estatCivil,
-  //     sexe: this.#sexe,
-  //     informacio: this.#informacio,
-  //     condicions: this.#condicions,
-  //   };
-  //   return myObject;
-  // }
+  set condicions(condicions: boolean) {
+    this.#condicions = condicions;
+  }
+  toObjectJS(): any {
+    let myObject = {
+      nomUsuari: this.#nomUsuari,
+      contrasenya: this.#contrasenya,
+      correuElectronic: this.#correuElectronic,
+      estatCivil: this.#estatCivil,
+      sexe: this.#sexe,
+      informacio: this.#informacio,
+      condicions: this.#condicions,
+    };
+    return myObject;
+  }
 }

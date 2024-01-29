@@ -18,6 +18,7 @@ export class EjemplosComponent implements OnInit {
   flag!: boolean;
   user!: User;
   misFrutas!: string[];
+  p: number = 1;
 
   //a partir de ahora usaremos el constructor
   //para llamar (=inyectar) a cookies, servicios,...
@@ -31,7 +32,28 @@ export class EjemplosComponent implements OnInit {
   ngOnInit(): void {
     this.nombre = 'Maite';
     this.edad = 20;
-    this.frutas = ['pera', 'manzana'];
+    this.frutas = [
+      'pera',
+      'manzana',
+      'sandia',
+      'melon',
+      'pera',
+      'manzana',
+      'sandia',
+      'melon',
+      'pera',
+      'manzana',
+      'sandia',
+      'melon',
+      'pera',
+      'manzana',
+      'sandia',
+      'melon',
+      'pera',
+      'manzana',
+      'sandia',
+      'melon',
+    ];
     this.arboles = ['peral', 'manzano'];
     this.flag = true;
     this.user = new User('', '', '', '', '', '', false);
