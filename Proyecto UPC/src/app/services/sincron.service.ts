@@ -12,9 +12,18 @@ export class SincronService {
   private usuariSubject: BehaviorSubject<boolean>;
   usuario: Observable<boolean>; //part public del Behabiour Subject
 
+  usuarios: User[] = [];
+
   constructor() {
     this.usuariSubject = new BehaviorSubject<boolean>(false); //estat inicial del BehaviorSubject
     this.usuario = this.usuariSubject.asObservable();
+    this.initUsuarios();
+  }
+
+  initUsuarios(): void {
+    for (let i = 0; i < 11; i++) {
+      this.usuarios.push(new User('usuario' + i, 'pass' + i));
+    }
   }
 
   changeMessage(message: string) {
@@ -25,20 +34,20 @@ export class SincronService {
     return this.usuariSubject.value;
   }
 
-  validateLogin() {
-    this.usuariSubject.next(true);
+  validateLogin(nombre: string, password: string) {
     //suposem que aquest mètode mira al servidor si hi és o no un usuari dins de la BBDD
     //recollim del servidor l'usuari sencer
-    let u: User = new User(
-      'Marta',
-      '123',
-      'marta@exemple.com',
-      'solter/a',
-      'Dona',
+    const usuarioEncontrado = this.usuarios.find(
+      (usuario) =>
+        usuario.nomUsuari == nombre && usuario.contrasenya == password
     );
-    //creem al localStorge aquest valor
-    localStorage.setItem('user', u.nomUsuari);
-    //enviem un OK a tothom
+    if (usuarioEncontrado) {
+      this.usuariSubject.next(true);
+      //creem al localStorge aquest valor
+      localStorage.setItem('user', usuarioEncontrado.nomUsuari);
+      return true;
+    }
+    return false;
   }
 
   logout() {

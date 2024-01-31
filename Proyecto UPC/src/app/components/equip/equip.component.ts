@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuariosService } from 'src/app/services/usuarios.service';
+import { SincronService } from 'src/app/services/sincron.service';
 
 @Component({
   selector: 'app-equip',
   templateUrl: './equip.component.html',
-  styleUrls: ['./equip.component.css']
+  styleUrls: ['./equip.component.css'],
 })
 export class EquipComponent implements OnInit {
-  message!: string;
+  message!: boolean;
 
-  constructor(private usuarioService: UsuariosService) {
-  }
+  constructor(private sincroService: SincronService) {}
   ngOnInit(): void {
-
-  
-  this.usuarioService.currentMessage.subscribe(
-    (message) => (this.message = message)
-  );
-}
+    this.sincroService.usuario.subscribe(
+      (message) => (this.message = message)
+    );
+  }
 }

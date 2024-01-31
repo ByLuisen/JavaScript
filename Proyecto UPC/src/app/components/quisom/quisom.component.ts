@@ -6,4 +6,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quisom.component.css']
 })
 export class QuisomComponent{
+
 }

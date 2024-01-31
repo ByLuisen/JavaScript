@@ -12,12 +12,11 @@ import { ValidarNomDirective } from './directives/validar-nom.directive';
 import { ValidarRepetirDirective } from './directives/validar-repetir.directive';
 import { LoginComponent } from './components/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { LogoutComponent } from './components/logout/logout.component';
 import { MerchandisingComponent } from './components/merchandising/merchandising.component';
 import { CompraComponent } from './components/compra/compra.component';
 import { Compo2Component } from './components/compo2/compo2.component';
 import { Compo1Component } from './components/compo1/compo1.component';
-import { Compo3Component } from './components/compo3/compo3.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +28,11 @@ import { Compo3Component } from './components/compo3/compo3.component';
     ValidarRepetirDirective,
     LoginComponent,
     NotfoundComponent,
-    LogoutComponent,
     MerchandisingComponent,
     CompraComponent,
     Compo1Component,
     Compo2Component,
-    Compo3Component,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

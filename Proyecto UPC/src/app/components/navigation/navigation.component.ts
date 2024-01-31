@@ -15,10 +15,9 @@ export class NavigationComponent {
     this.sincro.usuario.subscribe((resultat) => {
       this.isLogged = resultat;
     });
-    console.log(this.isLogged);
   }
   logout() {
     this.sincro.logout();
-    this.route.navigate(['/compo2']);
+    this.route.navigate(['/quisom']);
   }
 }
