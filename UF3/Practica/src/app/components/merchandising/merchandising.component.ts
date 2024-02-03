@@ -9,7 +9,7 @@ import { Producte } from 'src/app/model/Producte';
   styleUrls: ['./merchandising.component.css'],
 })
 export class MerchandisingComponent {
-  cesta: Producte[];
+  cesta: Producte[] = [];
   //añadimos los 4 productos
   productos: Producte[] = [
     new Producte('producto1.jpg', 'Producto1', 'Descripción1', 10, 2),
@@ -19,8 +19,11 @@ export class MerchandisingComponent {
   ];
   //constructor
   constructor(private cookieService: CookieService) {
-    this.cesta = [];
+    if (this.cookieService.check('cesta')) {
+      this.cesta = JSON.parse(this.cookieService.get('cesta'));
+    }
   }
+
   //añadimos el producto
   afegirProducte(producto: Producte) {
     if (this.cesta.some((p) => p.nomProducte == producto.nomProducte)) {
@@ -37,6 +40,5 @@ export class MerchandisingComponent {
       this.cesta.push(producto);
     }
     this.cookieService.set('cesta', JSON.stringify(this.cesta));
-    console.log(JSON.parse(this.cookieService.get('cesta')));
   }
 }

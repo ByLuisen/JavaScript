@@ -35,11 +35,8 @@ export class LoginComponent {
     );
     //valida el usuario para crear la local storage y mostrar el mensaje de usuario
     if (this.usuarioService.validateUsers(this.newUser)) {
-      this.mensaje = 'Usuario validado correctamente.';
       localStorage.setItem('Logeado', 'true');
-      this.router.navigate(['/quisom']).then(() => {
-        window.location.reload();
-      });
+      this.router.navigate(['/quisom']);
     } else {
       this.mensaje = 'Error: Usuario no encontrado.';
     }

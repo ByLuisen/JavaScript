@@ -11,8 +11,6 @@ export class LogoutComponent {
     //borramos la local storage si le da a logout
     localStorage.removeItem('Logeado');
     //redirigimos al home
-    this.router.navigate(['/quisom']).then(() => {
-      window.location.reload();
-    });
+    this.router.navigate(['/quisom'])
   }
 }

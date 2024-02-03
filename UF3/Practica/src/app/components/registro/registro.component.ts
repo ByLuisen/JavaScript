@@ -24,7 +24,10 @@ export class RegistroComponent {
         // Validators.pattern('^[a-zA-Z]{6,}$')
       ]),
       confirmarCorreo: new FormControl('', [Validators.required]),
-      correuElectronic: new FormControl('', [Validators.required]),
+      correuElectronic: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$'),
+      ]),
       opciones: new FormControl('', [Validators.required]),
       edad: new FormControl(''),
       fechaNacimiento: new FormControl('', [Validators.required]),
@@ -41,10 +44,14 @@ export class RegistroComponent {
   calcularEdad(): void {
     const nacimiento = new Date(this.formulari.value.fechaNacimiento);
     let edad = this.today.getFullYear() - nacimiento.getFullYear();
-    if (this.today.getMonth() < nacimiento.getMonth() || (this.today.getMonth() === nacimiento.getMonth() && this.today.getDate() < nacimiento.getDate())) {
+    if (
+      this.today.getMonth() < nacimiento.getMonth() ||
+      (this.today.getMonth() === nacimiento.getMonth() &&
+        this.today.getDate() < nacimiento.getDate())
+    ) {
       edad--;
     }
-    this.formulari.get('edad')?.patchValue(edad)
+    this.formulari.get('edad')?.patchValue(edad);
   }
   /**
    * Envia los datos para crear un nuevo Usuario

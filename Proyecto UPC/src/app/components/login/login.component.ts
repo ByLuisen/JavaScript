@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     ) {
       this.router.navigate(['/quisom']);
     } else {
-      this.mensaje = 'Credenciales incorrectas.';
+      this.mensaje = 'Error: Credenciales incorrectas.';
     }
   }
 }

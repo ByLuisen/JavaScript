@@ -50,6 +50,7 @@ export class User {
   set informacio(informacio: string) {
     this.#informacio = informacio;
   }
+  
   // toJSON(): any {
   //   let myObject = {
   //     nomUsuari: this.#nomUsuari,

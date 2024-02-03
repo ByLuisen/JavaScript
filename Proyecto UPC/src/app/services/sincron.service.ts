@@ -51,6 +51,7 @@ export class SincronService {
   }
 
   logout() {
+    localStorage.removeItem('user');
     this.usuariSubject.next(false);
   }
 }

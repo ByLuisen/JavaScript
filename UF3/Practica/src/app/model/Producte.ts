@@ -68,7 +68,7 @@ export class Producte {
       descripcio: this.#descripcio,
       preu: this.#preu,
       disponibilitat: this.#disponibilitat,
-      quantitat: this.#quantitat
+      quantitat: this.#quantitat,
     };
   }
 }

@@ -9,14 +9,13 @@
         <legend class="mt-4">Nom d'usuari* :</legend>
         <input type="text" class="form-control" id="nomUsuari" placeholder="Nom" formControlName="nomUsuari"
           appValidarNom>
-
         <div *ngIf="this.formulari.get('nomUsuari')?.errors?.['required'] && this.formulari.get('nomUsuari')?.touched"
           class="alert alert-danger">
-          Aquest camp és obligatori.
+          Este campo es obligatorio.
         </div>
         <div *ngIf="this.formulari.get('nomUsuari')?.errors?.['custom'] && this.formulari.get('nomUsuari')?.touched"
-          class="alert alert-danger">Només
-          admet lletres i números ha de tenir un mínim de 5 caràcters y un máxim de 8.
+          class="alert alert-danger">Sólo
+          admite letras y números debe tener un mínimo de 5 caracteres y un máximo de 8.
         </div>
       </div>
 
@@ -26,29 +25,32 @@
       <div class="form-group">
         <legend class="mt-4">Correo* :</legend>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          placeholder="Tu email" formControlName="correuElectronic" appValidarEmail>
+          placeholder="Tu email" formControlName="correuElectronic">
         <div
           *ngIf="this.formulari.get('correuElectronic')?.errors?.['required'] && this.formulari.get('correuElectronic')?.touched"
-          class="alert alert-danger">Aquest camp és obligatori.
+          class="alert alert-danger">Este campo es obligatorio.
+        </div>
+        <div
+          *ngIf="this.formulari.get('correuElectronic')?.errors?.['pattern'] && this.formulari.get('correuElectronic')?.touched"
+          class="alert alert-danger">Formato de correo inválido.
         </div>
       </div>
 
       <!--Repetir Correo-->
       <div class="form-group">
         <legend class="mt-4">Repetir el correo* :</legend>
-        <input type="email" appValidarRepetir=correuElectronic class="form-control" id="exampleInputCorreo2"
-          placeholder="Repetir Correo" autocomplete="off" formControlName="confirmarCorreo">
+        <input type="email" class="form-control" id="exampleInputCorreo2" placeholder="Repetir Correo"
+          autocomplete="off" formControlName="confirmarCorreo" appValidarRepetir=correuElectronic>
         <div
           *ngIf="this.formulari.get('confirmarCorreo')?.errors?.['required'] && this.formulari.get('confirmarCorreo')?.touched"
           class="alert alert-danger">
-          Aquest camp és obligatori.
+          Este campo es obligatorio.
         </div>
         <div
           *ngIf="this.formulari.get('confirmarCorreo')?.errors?.['custom'] && this.formulari.get('confirmarCorreo')?.touched"
           class="alert alert-danger">
           Los emails no coinciden
         </div>
-
       </div>
 
       <div class="form-group">
@@ -59,26 +61,26 @@
 
       <div class="form-group">
         <legend class="mt-4">Edad *:</legend>
-        <input type="text" class="form-control" id="Edad" autocomplete="off"
-          formControlName="edad" readonly>
+        <input type="text" class="form-control" id="Edad" autocomplete="off" formControlName="edad" readonly>
       </div>
 
-        <!--opciones juego-->
-        <fieldset class="form-group">
-          <legend class="mt-4">Te gusta este juego? *:</legend>
-          <div class="form-check">
+      <!--opciones juego-->
+      <fieldset class="form-group">
+        <legend class="mt-4">Te gusta este juego? *:</legend>
+        <div class="form-check">
 
-            <div *ngFor="let item of opciones">
-              <input formControlName="opciones" type="radio" [value]="item" />
-              <label for="opciones">{{item}}</label>
-            </div>
-
-            <div *ngIf="this.formulari.get('opciones')?.errors?.['required'] && this.formulari.get('opciones')?.touched">Aquest
-              camp
-              és obligatori.
-            </div>
+          <div *ngFor="let item of opciones">
+            <input formControlName="opciones" type="radio" [value]="item" />
+            <label for="opciones">{{item}}</label>
           </div>
-        </fieldset>
+
+          <div *ngIf="this.formulari.get('opciones')?.errors?.['required'] && this.formulari.get('opciones')?.touched">
+            Aquest
+            camp
+            és obligatori.
+          </div>
+        </div>
+      </fieldset>
 
       <button type="submit" class="btn btn-primary" [disabled]="formulari.invalid">Enviar dades</button>
     </fieldset>
