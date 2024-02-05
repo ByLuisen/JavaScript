@@ -1,8 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootswatch/dist/cyborg/bootstrap.min.css";
-body{
-    background-image: url("src/assets/img/Captura.PNG");
-    background-repeat: no-repeat;
-    background-size:cover;
 
+body {
+  background-image: url("src/assets/img/fondo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+body * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
