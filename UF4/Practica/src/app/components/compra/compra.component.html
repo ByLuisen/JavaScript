@@ -1,0 +1,53 @@
+<div class="container" *ngIf="cesta.length > 0">
+  <div class="row mt-5">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Imatge</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Descripció</th>
+            <th scope="col">Unitats Comprades</th>
+            <th scope="col">Preu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of cesta">
+            <td><img src="assets/img/{{ producto.nomImatge }}" alt="" width="100px"></td>
+            <td>{{ producto.nomProducte }}</td>
+            <td>{{ producto.descripcio }}</td>
+            <td>{{ producto.quantitat }}</td>
+            <td>{{ producto.preu }}€</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>Total: {{ precio }}€</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-end pb-4">
+    <div class="d-flex justify-content-between col-3">
+      <button class="btn btn-primary" (click)="confirmarCompra()">Compra final</button>
+      <button class="btn btn-danger" (click)="cancelarCompra()">Cancel·lació</button>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="cesta.length == 0">
+  <div class="row text-center mt-5">
+    <h2>La teva cistella és buida</h2>
+  </div>
+</div>
+
+<div class="container" *ngIf="mensaje != undefined">
+  <div class="row text-center">
+    <h2>{{ mensaje }}</h2>
+  </div>
+</div>

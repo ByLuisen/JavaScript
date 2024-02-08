@@ -1,0 +1,49 @@
+<div class="container">
+
+  <h2 class="mt-5 text-center">Login</h2>
+
+  <form [formGroup]="login" (ngSubmit)="enviament()" class="mt-5">
+    <fieldset>
+      <!--Nom-->
+      <div class="form-group">
+        <legend class="mt-4">Nom d'usuari* :</legend>
+        <input type="text" class="form-control" id="nomUsuari" placeholder="Nom" formControlName="nomUsuari">
+
+        <div *ngIf="this.login.get('nomUsuari')?.errors?.['required'] && this.login.get('nomUsuari')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+        <div *ngIf="this.login.get('nomUsuari')?.errors?.['pattern'] && this.login.get('nomUsuari')?.touched"
+          class="alert alert-danger">Només
+          admet lletres i números ha de tenir un mínim de 6 caràcters.
+        </div>
+      </div>
+
+      <!--Contrasenya-->
+      <div class="form-group">
+        <legend class="mt-4">Correo electrónico* :</legend>
+        <input type="email" class="form-control" id="exampleInputCorreo" placeholder="paco32@gmail.com"
+          autocomplete="off" formControlName="correo">
+        <div *ngIf="this.login.get('correo')?.errors?.['required'] && this.login.get('correo')?.touched"
+          class="alert alert-danger">
+          Aquest camp és obligatori.
+        </div>
+        <div *ngIf="this.login.get('correo')?.errors?.['email'] && this.login.get('correo')?.touched"
+          class="alert alert-danger">
+          Formato invalido
+        </div>
+
+      </div>
+
+      <div class="text-center mt-5">
+        <button type="submit" class="btn btn-primary" [disabled]="login.invalid">Login</button>
+      </div>
+    </fieldset>
+  </form>
+
+  <div *ngIf="mensaje" [ngClass]="mensaje.includes('Error') ? 'alert-danger' : 'alert-success'"
+    class="alert mt-3">
+    {{ mensaje }}
+  </div>
+
+</div>
