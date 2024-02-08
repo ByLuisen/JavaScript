@@ -5,8 +5,10 @@ const bodyParser = require('body-parser')
 const mysql = require('mysql')
 const cors = require('cors')
 const path = require('path')
+const history = require('connect-history-api-fallback');
 
 const app = express()
+app.use(history());
 app.use(cors())// todos los accesos estan "protegidos" de error de CORS
 //configuració del bodyParser perquè admeti entrades json i
 app.use(bodyParser.urlencoded({ extended: false }))
