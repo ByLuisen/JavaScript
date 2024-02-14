@@ -9,6 +9,8 @@ import { ConnectarService } from 'src/app/services/connectar.service';
 export class ProvesConnectarComponent implements OnInit {
   posts!: any[];
   users!: any[];
+  password!: any;
+  message!: string;
 
   constructor(private connectarService: ConnectarService) {}
   ngOnInit(): void {
@@ -18,8 +20,17 @@ export class ProvesConnectarComponent implements OnInit {
       console.log(this.posts);
     });
     this.connectarService.getUsers().subscribe((result) => {
-      this.users = result['data'];
+      this.users = result['resultats'];
       console.log(this.users);
+    });
+
+    this.connectarService.getPassword().subscribe((result) => {
+      this.password = result['resultats'][0].userpass;
+      console.log(this.password);
+    });
+
+    this.connectarService.insertUser().subscribe((result) => {
+      console.log(result);
     });
   }
 }

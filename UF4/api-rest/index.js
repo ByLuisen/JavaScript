@@ -43,7 +43,7 @@ app.post('/api/login', function (req, res) {
     // recojo valores enviados desde 
     const { user, password } = req.body
     console.log("Usuario: " + user + ", contraseña: " + password)
-    connection.query('SELECT username FROM users WHERE username = ? AND userpass = ?', [ user, password ], function (error, results, field) {
+    connection.query('SELECT username FROM users WHERE username = ? AND userpass = ?', [user, password], function (error, results, field) {
         console.log(error)
         if (error) {
             res.status(400).send({ resultats: null })
@@ -59,13 +59,66 @@ app.get('/api/select/:userName', function (req, res) {
     // recojo valores enviados desde 
     const { userName } = req.params
     console.log(userName)
-    connection.query('SELECT * FROM users WHERE username = ?', [ userName ], function (error, results, field) {
+    connection.query('SELECT * FROM users WHERE username = ?', [userName], function (error, results, field) {
         console.log(error)
         if (error) {
             res.status(400).send({ resultats: null })
         } else {
             res.status(200).send({ resultats: results })
         }
+    });
+})
+
+app.get('/users', function (req, res) {
+    connection.query('SELECT * FROM users', function (error, results, field) {
+        console.log(error)
+        if (error) {
+            res.status(400).send({ resultats: null })
+        } else {
+            res.status(200).send({ resultats: results })
+        }
+    });
+})
+
+app.get('/password/:userName', function (req, res) {
+    console.log("estem al select");
+    // recojo valores enviados desde 
+    const { userName } = req.params
+
+    connection.query('SELECT userpass FROM users WHERE username = ?', [userName], function (error, results, field) {
+        console.log(error)
+        if (error) {
+            res.status(400).send({ resultats: null })
+        } else {
+            res.status(200).send({ resultats: results })
+        }
+    });
+})
+
+app.put('/insertUser', function (req, res) {
+    console.log("estem al select");
+    // recojo valores enviados desde 
+    const { username, userpass } = req.body
+
+    // Verificar si el usuario ya existe
+    connection.query('SELECT * FROM users WHERE username = ?', [username], function (error, resultados) {
+        if (error) {
+            return res.status(500).json({ error: true, message: 'Error al verificar usuario existente.' });
+        }
+
+        if (resultados.length > 0) {
+            // Ya existe un usuario con el mismo nombre o correo
+            return res.status(400).json({ error: true, message: 'El usuario ya existe.' });
+        }
+
+        connection.query('INSERT INTO users VALUES (?, ?)', [username, userpass], function (error, results, field) {
+            console.log(error)
+            if (error) {
+                res.status(500).send({ error: true, message: 'Error al insertar usuario.' })
+            } else {
+                res.status(201).send({ error: false, message: 'Usuario insertado correctamente.' })
+            }
+        });
     });
 })
 
