@@ -9,6 +9,7 @@ import { ConnectarService } from 'src/app/services/connectar.service';
 export class ProvesConnectarComponent implements OnInit {
   posts!: any[];
   users!: any[];
+  name!: any;
   password!: any;
   message!: string;
 
@@ -19,18 +20,34 @@ export class ProvesConnectarComponent implements OnInit {
       this.posts = result; // recojo para mostrarlo en el html
       console.log(this.posts);
     });
+
+    this.connectarService.insertUser().subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.error("Error al insertar el usuario: " , error);
+      }
+    );
+  }
+
+  getUsers(): void {
     this.connectarService.getUsers().subscribe((result) => {
-      this.users = result['resultats'];
-      console.log(this.users);
+      this.users = result.resultats;
     });
+  }
 
-    this.connectarService.getPassword().subscribe((result) => {
-      this.password = result['resultats'][0].userpass;
-      console.log(this.password);
-    });
-
-    this.connectarService.insertUser().subscribe((result) => {
-      console.log(result);
-    });
+  getPassword(): void {
+    this.connectarService.getPassword(this.name).subscribe(
+      (result) => {
+        if (result.resultats.lenght > 0) {
+          this.password = result.resultats[0].userpass;
+          console.log(this.password);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

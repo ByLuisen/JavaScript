@@ -1,9 +1,15 @@
 <h1>Componenete de prueba para connexión</h1>
+<div>
+  <button class="btn btn-primary" (click)="getUsers()">All users</button>
+</div>
 <div *ngFor="let user of users">
   {{ user.username }} --- {{ user.userpass }}
 </div>
 
-<h2>Password</h2>
-<p>{{ password }}</p>
+<div>
+  <input type="text" [(ngModel)]="name">
+  <button class="btn btn-primary" (click)="getPassword()">Obtener password</button>
+  {{ password }}
+</div>
 
 <h2>{{ message }}</h2>
