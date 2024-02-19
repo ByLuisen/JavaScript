@@ -1,0 +1,16 @@
+<p>compo2 works!</p>
+<div>{{message}}</div>
+
+<div>
+  <ul>
+    <li *ngFor="let item of fruits |
+    paginate: { itemsPerPage: 5, currentPage: p }">
+    {{item}}
+  </li>
+  </ul>
+  <pagination-controls (pageChange)="p = $event"
+                      previousLabel="Anterior"
+                      nextLabel="Posterior">
+  </pagination-controls>
+
+</div>

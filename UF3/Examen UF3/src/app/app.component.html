@@ -1,0 +1,14 @@
+<app-navigation></app-navigation>
+<router-outlet></router-outlet>
+<div *ngIf="!hermes">
+  <div class="overlay"></div>
+  <div class="popup pt-4">
+    <div class="justify-content-center text-white">
+      <h4>Antes de continuar tienes que aceptar las cookies</h4>
+      <div class="mt-3">
+        <button class="btn btn-warning" (click)="aceptarCookies()">Acceptar</button>
+        <button class="btn btn-warning mx-3" (click)="rebutjarCookies()">Rebutjar</button>
+      </div>
+    </div>
+  </div>
+</div>

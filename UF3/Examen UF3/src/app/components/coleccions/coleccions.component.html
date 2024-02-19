@@ -1,0 +1,12 @@
+
+<div>
+  <ul>
+    <li *ngFor="let item of articulos |
+    paginate: { itemsPerPage: 5, currentPage: p }">
+      {{item.nom}} --- {{item.descripcio}} -- {{item.preu}}€
+    </li>
+  </ul>
+  <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Posterior">
+  </pagination-controls>
+
+</div>
