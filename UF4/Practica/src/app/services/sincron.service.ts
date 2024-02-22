@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '../app/model/User';
+import { User } from '../model/User';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SincronService {
-
-
   private messageSource = new BehaviorSubject('default message');
   currentMessage = this.messageSource.asObservable();
 
@@ -31,13 +29,9 @@ export class SincronService {
     this.usuariSubject.next(true)
     //suposem que aquest mètode mira al servidor si hi és o no un usuari dins de la BBDD
     //recollim del servidor l'usuari sencer
-    let u:User=new User("Marta", "123","marta@exemple.com","solter/a","Dona","Videojocs", true);
     //creem al localStorge aquest valor
-    localStorage.setItem("user",u.nomUsuari);
+    localStorage.setItem("user",'lucho');
     //enviem un OK a tothom
-
-
-
 
   }
   logout(){

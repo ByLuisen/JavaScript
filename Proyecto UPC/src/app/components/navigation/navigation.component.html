@@ -13,6 +13,9 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/equip">Equipo</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/compo2">Compo 2</a>
+        </li>
         <li class="nav-item" *ngIf="!isLogged">
           <a class="nav-link" routerLink="/registro">Registrarse</a>
         </li>
@@ -25,6 +28,10 @@
         <li class="nav-item" *ngIf="isLogged">
           <a class="nav-link" routerLink="/compra">Compra</a>
         </li>
+        <li class="nav-item" *ngIf="isLogged">
+          <a class="nav-link" routerLink="/compo1">Compo 1</a>
+        </li>
+
         <li class="nav-item" *ngIf="isLogged">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>
