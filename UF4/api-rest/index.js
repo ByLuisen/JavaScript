@@ -2,6 +2,8 @@
 //importacions i creació de constants per a la seva utiliutzació
 const express = require('express')
 const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken');
+const accessTokenSecret = 'youraccesstokensecret';// variable entorno/palabra más seria
 const mysql = require('mysql')
 const cors = require('cors')
 const path = require('path')
@@ -16,25 +18,120 @@ app.use(bodyParser.json())
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 
-var connection = mysql.createConnection({
-    host: 'localhost',// servidor de BBDD
-    database: 'm06',
-    user: 'userangular',// usuario con los minimos privilegios posibles
-    password: 'alumne123'
-});
+// var connection = mysql.createConnection({
+//     host: 'localhost',// servidor de BBDD
+//     database: 'm06',
+//     user: 'userangular',// usuario con los minimos privilegios posibles
+//     password: 'alumne123'
+// });
 
-connection.connect(function (err) {
-    console.log(err);
-    if (err) {
-        console.error('Error connecting: ' + err.stack);
-        return;
+// connection.connect(function (err) {
+//     console.log(err);
+//     if (err) {
+//         console.error('Error connecting: ' + err.stack);
+//         return;
+//     }
+//     console.log('Connected as id ' + connection.threadId);// Llego si no hay error
+// });
+
+const users = [
+    {
+        username: 'john',
+        password: 'password123admin',
+        role: 'admin'
+    }, {
+        username: 'anna',
+        password: 'password123member',
+        role: 'member'
     }
-    console.log('Connected as id ' + connection.threadId);// Llego si no hay error
-});
+];
+
+const books = [
+    {
+        "author": "Chinua Achebe",
+        "country": "Nigeria",
+        "language": "English",
+        "pages": 209,
+        "title": "Things Fall Apart",
+        "year": 1958
+    },
+    {
+        "author": "Hans Christian Andersen",
+        "country": "Denmark",
+        "language": "Danish",
+        "pages": 784,
+        "title": "Fairy tales",
+        "year": 1836
+    },
+    {
+        "author": "Dante Alighieri",
+        "country": "Italy",
+        "language": "Italian",
+        "pages": 928,
+        "title": "The Divine Comedy",
+        "year": 1315
+    },
+];
 
 app.get('/', (req, res) => {
     res.send({ message: 'Hola món' })
 })
+
+app.post('/login', (req, res) => {
+    // Read username and password from request body
+    const { username, password } = req.body;
+
+    // Filter user from the users array by username and password
+    const user = users.find(u => { return u.username === username && u.password === password });
+
+    if (user) {
+        // Generate an access token
+        const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret);
+
+        res.json({
+            accessToken
+        });
+    } else {
+        res.send('Username or password incorrect');
+    }
+});
+
+const authenticateJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
+
+        jwt.verify(token, accessTokenSecret, (err, user) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
+
+            req.user = user;
+            next();
+        });
+    } else {
+        res.sendStatus(401);
+    }
+};
+
+app.get('/books', authenticateJWT, (req, res) => {
+    res.json(books);
+});
+
+app.post('/books', authenticateJWT, (req, res) => {
+    const { role } = req.user.role;
+
+    if (role !== 'admin') {
+        return res.sendStatus(403);
+    }
+
+
+    const book = req.body;
+    books.push(book);
+
+    res.send('Book added successfully');
+});
 
 // consultas a mi BBDD
 // servimos por GET el recurso /api/login

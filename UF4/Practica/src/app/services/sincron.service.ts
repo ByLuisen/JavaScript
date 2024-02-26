@@ -15,7 +15,7 @@ export class SincronService {
 
   constructor() {
 
-    this.usuariSubject= new BehaviorSubject<boolean>(false);//estat inicial del BehaviorSubject
+    this.usuariSubject= new BehaviorSubject<any>(localStorage.getItem('user')!);//estat inicial del BehaviorSubject
     this.usuario=this.usuariSubject.asObservable();
   }
 
