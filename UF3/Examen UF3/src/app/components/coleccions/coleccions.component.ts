@@ -11,23 +11,33 @@ import { ArticlesService } from 'src/app/services/articles.service';
   styleUrls: ['./coleccions.component.css'],
 })
 export class ColeccionsComponent {
-  value: number = 5;
-  pagination!: FormGroup;
-  articulos!: Article[];
+  itemsPerPage: number = 5;
+  filterByName: string = '';
+  articulos: Article[];
+  filteredArticulos: Article[];
   p: number = 1;
 
-  constructor(private router: Router, private articles: ArticlesService) {
-    if (localStorage.getItem('user') == null) {
-      this.router.navigate(['/home']);
-    }
+  constructor(private articles: ArticlesService) {
     this.articulos = this.articles.getArticles();
+    this.filteredArticulos = this.articulos;
   }
 
-  ngOnInit(): void {
-    this.pagination = new FormGroup({
-      elements: new FormControl('', []),
-    });
+  onItemsPerPageChange(): void {
+    this.p = 1;
   }
 
-  enviament(): void {}
+  onFilterByNameChange(): void {
+    this.p = 1;
+    this.updateFilteredArticulos();
+  }
+
+  updateFilteredArticulos(): void {
+    if (this.filterByName != ''){
+    this.filteredArticulos = this.articulos
+      .filter(item => item.nom.toLowerCase().includes(this.filterByName.toLowerCase()));
+    }
+    else {
+      this.filteredArticulos = this.articulos;
+    }
+  }
 }

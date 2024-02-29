@@ -1,7 +1,0 @@
-.fondoLogin {
-  height: calc(100% - 56px);
-  background-image: url("src/assets/img/fondoLogin.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}

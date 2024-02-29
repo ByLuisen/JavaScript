@@ -1,12 +1,21 @@
-
 <div>
+  <label for="itemsPerPage">Mostrar</label>
+  <select [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+  </select>
+
+  <label for="filterByName">Filtrar por Nombre</label>
+  <input type="text" [(ngModel)]="filterByName" (input)="onFilterByNameChange()" />
+
   <ul>
-    <li *ngFor="let item of articulos |
-    paginate: { itemsPerPage: 5, currentPage: p }">
+    <li *ngFor="let item of filteredArticulos |
+    paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
       {{item.nom}} --- {{item.descripcio}} -- {{item.preu}}€
     </li>
   </ul>
+
   <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Posterior">
   </pagination-controls>
-
 </div>

@@ -10,7 +10,7 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 export class ValidarDNIDirective implements Validator {
   constructor() {}
   validate(control: AbstractControl): ValidationErrors | null {
-    let lletra = control.value[8];
+    let lletra = control.value[8]?.toUpperCase();
     let num = control.value.slice(0, 8);
     let letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
 
