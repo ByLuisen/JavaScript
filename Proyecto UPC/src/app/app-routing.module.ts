@@ -8,6 +8,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { MerchandisingComponent } from './components/merchandising/merchandising.component';
 import { CompraComponent } from './components/compra/compra.component';
 import { Compo1Component } from './components/compo1/compo1.component';
+import { Compo2Component } from './components/compo2/compo2.component';
 
 const routes: Routes = [
   {path: 'quisom', component: QuisomComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'merchandising', component: MerchandisingComponent},
   {path: 'compra', component: CompraComponent},
   {path: 'compo1', component: Compo1Component},
+  {path: 'compo2', component: Compo2Component},
   {path: '', redirectTo:'/quisom', pathMatch:'full'},
   {path: '**', component: NotfoundComponent} //la darrera!!!
 ];

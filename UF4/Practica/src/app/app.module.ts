@@ -16,6 +16,9 @@ import { MerchandisingComponent } from './components/merchandising/merchandising
 import { CompraComponent } from './components/compra/compra.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProvesConnectarComponent } from './components/proves-connectar/proves-connectar.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { SiblingComponent } from './components/sibling/sibling.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { ProvesConnectarComponent } from './components/proves-connectar/proves-c
     MerchandisingComponent,
     CompraComponent,
     ProvesConnectarComponent,
+    PaginationComponent,
+    SiblingComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +43,7 @@ import { ProvesConnectarComponent } from './components/proves-connectar/proves-c
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent],

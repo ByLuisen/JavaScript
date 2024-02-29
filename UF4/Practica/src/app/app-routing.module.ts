@@ -9,16 +9,21 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { MerchandisingComponent } from './components/merchandising/merchandising.component';
 import { CompraComponent } from './components/compra/compra.component';
 import { ProvesConnectarComponent } from './components/proves-connectar/proves-connectar.component';
+import { myGuardLoginGuard } from './guard/my-guard-login.guard';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { SiblingComponent } from './components/sibling/sibling.component';
 
 const routes: Routes = [
   {path: 'quisom', component: QuisomComponent},
-  {path: 'equip', component: EquipComponent},
+  {path: 'equip', component: EquipComponent, canActivate:[myGuardLoginGuard]},
   {path: 'registro', component: RegistroComponent},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'merchandising', component: MerchandisingComponent},
   {path: 'compra', component: CompraComponent},
   {path: 'proves', component: ProvesConnectarComponent},
+  {path: 'pagination', component: PaginationComponent},
+  {path: 'sibling', component: SiblingComponent},
   {path: '', redirectTo:'/quisom', pathMatch:'full'},
   {path: '**', component: NotfoundComponent} //la darrera!!!
 ];
