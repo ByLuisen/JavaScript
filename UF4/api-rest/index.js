@@ -24,12 +24,12 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function (err) {
-    console.log(err);
     if (err) {
         console.error('Error connecting: ' + err.stack);
+        res.status(500).send({ error: true, message: 'Error al conectar con la base de datos.' });
         return;
     }
-    console.log('Connected as id ' + connection.threadId);// Llego si no hay error
+    console.log('Connected as id ' + connection.threadId);
 });
 
 app.get('/', (req, res) => {
