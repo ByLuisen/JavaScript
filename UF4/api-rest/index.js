@@ -19,8 +19,8 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 var connection = mysql.createConnection({
     host: 'localhost',// servidor de BBDD
     database: 'm06',
-    user: 'userangular',// usuario con los minimos privilegios posibles
-    password: 'alumne123'
+    user: 'root',// usuario con los minimos privilegios posibles
+    password: ''
 });
 
 connection.connect(function (err) {
